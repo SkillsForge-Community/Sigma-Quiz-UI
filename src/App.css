@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+body {
+  background: linear-gradient(90.01deg, #000000 -8.03%, rgba(0, 0, 0, 0) 104.09%), url("./Images/Home background.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 3%;
+  height: 100vh; /* Ensure the body takes up the full height of the viewport */
+  margin: 0; /* Remove any default margins */
 }
+.logo-text{
+  color: #8F19E7;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logos{
+  display: flex;
+  flex-direction: row;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.homeBlog{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-template-areas: "title . ."
+ "dropdown . ."
+ "quizes . video";
+  color: #FFFFFF;
+  row-gap: 20px;
+}
+.title{
+  grid-area: title;
+}
+.dropdown{
+  grid-area: dropdown
+}
+.video{
+  grid-area: video;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10px;
+  overflow: show;
 }
-
-.App-link {
-  color: #61dafb;
+.video-main{
+  display: flex;
+  flex-direction: row;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.img-info img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.info-text{
+  grid-area: info-text;
+}
+.info-button{
+  grid-area: info-button;
+}
+.info-button button{
+  width: 100%;
+}
+.quizes{
+  display: flex;
+  flex-direction: row;
+  grid-area: quizes;
 }
