@@ -1,4 +1,4 @@
-import logo from "./Images/logo.png"
+import logo from "./Images/logo.svg"
 import infor from "./Images/info.png"
 import { IoPlayCircleOutline } from "react-icons/io5"
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -8,7 +8,7 @@ const Homepage = () => {
         <div className="Home">
             <div className="logos">
                 <img src={logo} className="logo" alt="logo" />
-                <div>
+                <div className="logo-texts">
                     <h4 className="logo-text">Sigma Club</h4>
                     <h5 className="logo-text">Since 1950</h5>
                 </div>
