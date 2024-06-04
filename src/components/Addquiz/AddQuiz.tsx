@@ -13,6 +13,7 @@ const AddQuiz = () => {
         </Link>
         <h2>Add Quiz</h2>
       </header>
+
       <div className="form">
         <div className="form-field">
           <label htmlFor="">Title</label>
@@ -25,6 +26,12 @@ const AddQuiz = () => {
         <div className="form-field">
           <label htmlFor="">Date</label>
           <input type="text" defaultValue={'2024 Sigma Quiz'}/>
+        </div>
+      </div>
+      <div className="review">
+        <h3>Review</h3>
+        <div className="row">
+          
         </div>
       </div>
     </div>
