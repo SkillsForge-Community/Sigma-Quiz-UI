@@ -1,4 +1,4 @@
-import logo from "../Images/logo.png"
+import logo from "../Images/logo.svg"
 import { IoMdHome } from "react-icons/io";
 import "./About.css"
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ function About() {
         <div className="about">
             <div className="about-navbar">
                 <div className="logos">
-                    <img src={logo} className="about-logo" alt="logo" />
+                    <img src={logo} className="logo" alt="logo" />
                     <div className="logo-texts">
                         <h4 className="logo-text">Sigma Club</h4>
                         <h5 className="logo-text">Since 1950</h5>
@@ -24,7 +24,7 @@ function About() {
                     <img src={logo} className="youTube-logo" alt="logo" />
                     <h4>Sigma club</h4>
                 </div>
-                <iframe width="100%" height="415"
+                <iframe
                     src="https://www.youtube.com/embed/0kChM02MPOU?si=B3ZRQfOQ7dFVKsjx"
                     title="YouTube video player"
                     className="youTube-video"
@@ -32,7 +32,7 @@ function About() {
                     referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                 />
-                <div >
+                <div className="youTube-content">
                     <h4>What inspired the initiative of the Roseline Etuokwu Sigma National Secondary School Quiz
                         Competition❓Listen to the Sigma Chief as he explains how the idea of the Quiz Competition
                         came to be .

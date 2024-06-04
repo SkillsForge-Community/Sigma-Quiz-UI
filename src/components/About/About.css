@@ -13,11 +13,18 @@
     height: 150px;
 }
 .back-home{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     display: flex;
     flex-direction: row;
     align-items: center;
     cursor: pointer;
     gap: 10px;
+    width: 163px;
+    font-size: 18px;
+    color: #333333B2;
+    height: 27px;
 }
 .aspectRatio{
     display: flex;
@@ -33,15 +40,16 @@
 .Youtube{
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width:918px;
    margin: 0 auto;
    gap: 10px;
-   padding-top: 2%;
+   padding-top: 5%;
+   height:  675px;
 }
 .youTube-title{
     display: flex;
     flex-direction: row;
-    
+    align-items: center;
 }
 .Youtube h4{
     font-family: "Poppins", sans-serif;
@@ -51,12 +59,19 @@
   line-height: 24px;
 }
 .youTube-video{
-    border-radius: 0.5cm;
+    border-radius: 15px;
     border: 0;
+    height:485px;
+    width: 918px;
+    
+}
+.youTube-content{
+   width:  752px;
 }
 .youTube-Link{
     color: #03B9E1;
 }
 .youTube-logo{
-    height: 50%;
+    width: 58.34px;
+    height: 39.65px;
 }
