@@ -1,10 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import Homepage from './components/Homepage/Homepage';
 import { ChakraProvider } from '@chakra-ui/react'
 import { Routes, Route } from 'react-router-dom';
 import SelectQuiz from './components/Selectquiz/SelectQuiz';
-import AddQuiz from './components/Addquiz/AddQuiz';
 
 function App() {
   return (
