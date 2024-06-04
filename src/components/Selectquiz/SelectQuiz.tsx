@@ -2,6 +2,7 @@ import React from 'react'
 import logo from './image/Group 1171275826.png'
 import './selectquiz.css'
 import { CiCirclePlus } from "react-icons/ci";
+import { LuPlusCircle } from "react-icons/lu";
 import { GoPencil } from "react-icons/go";
 import { Link } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
@@ -30,7 +31,7 @@ const SelectQuiz = ({option} : selectQuizProps) => {
 
         <div className="add-edit-btns">
           <Link to='/add-quiz'>
-            <CiCirclePlus size={20} color='#555555' />
+            <LuPlusCircle size={24} color='#555555' />
             Add Quiz
           </Link>
           <Link to=''>
