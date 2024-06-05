@@ -1,0 +1,85 @@
+.form{
+    margin: 50px auto;
+    width: 849px;
+    height: 874px;
+    border-radius: 30px;
+    background-color: #EDEDED;
+    padding: 20px 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+::placeholder {
+    color: #33333380;
+    opacity: 1; /* Firefox */
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  padding-left: 10px;
+
+  }
+.input{
+    width: 761px;
+    height: 60px;
+    border: 1px;
+    border-radius: 10px;
+    outline: 0;
+    border:1px solid #33333380;
+}
+.login{
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.login-title{
+    color:#8F19E7;
+    font-size: 24px;
+    font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.time{
+    
+    color: #33333399;
+    font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size:  18px;
+}
+input{
+    color: #33333380;
+    opacity: 1; /* Firefox */
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  padding-left: 10px;
+}
+a{
+    color:#8F19E7;
+}
+.login-button{
+    background-color: #8F19E7;
+    width: 593px;
+    height: 67px;
+    border-radius: 10px;
+    border: 0;
+    color: #FFFFFF;
+    font-size: 20px;
+    cursor: pointer;
+}
+.account{
+    text-align: center;
+}
+.password-button{
+    border: 0;
+background-color: transparent;
+}
+.showIcon{
+    width: 30px;
+    height: 30px;
+    padding-top: 30px;
+    cursor: pointer;
+}
