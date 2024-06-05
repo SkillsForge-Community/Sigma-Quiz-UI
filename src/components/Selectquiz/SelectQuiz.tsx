@@ -11,9 +11,11 @@ import EditQuiz from '../Editquiz/EditQuiz';
 type selectQuizProps = {
   option: string
 }
+
 const SelectQuiz = ({option} : selectQuizProps) => {
   return (
     <div className='select-quiz-page'>
+
       <div className="select-quiz-container">
 
         <div className="logo">
@@ -31,10 +33,10 @@ const SelectQuiz = ({option} : selectQuizProps) => {
 
         <div className="add-edit-btns">
           <Link to='/add-quiz'>
-            <LuPlusCircle size={24} color='#555555' />
+            <LuPlusCircle size={24} color='#555555' className='icons' />
             Add Quiz
           </Link>
-          <Link to='/edit-quiz'>
+          <Link to='/edit-quiz' className='icons'>
             <GoPencil size={20} color='#555555' />
             Edit Quiz
           </Link>

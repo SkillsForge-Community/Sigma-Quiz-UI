@@ -9,12 +9,12 @@
 .edit-quiz-container header{
     margin-bottom: 15px;
 }
-.edit-quiz-body h3{
+.edit-quiz-form h3{
     font-size: 16px;
     font-weight: 500;
     color: #333333;
 }
-.edit-quiz-body .quiz-list{
+.edit-quiz-form .quiz-list{
     margin-top: 20px;
 }
 button.edit{
