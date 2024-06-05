@@ -1,3 +1,7 @@
+body{
+    transition-duration:1s ;
+    
+}
 .form{
     margin: 50px auto;
     width: 849px;
@@ -72,6 +76,8 @@ a{
 }
 .account{
     text-align: center;
+    color: #33333399;
+
 }
 .password-button{
     border: 0;
