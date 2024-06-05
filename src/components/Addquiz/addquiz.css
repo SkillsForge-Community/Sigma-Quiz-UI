@@ -6,13 +6,13 @@
     border-radius: 15px;
     transform: scale(0.91);
 }
-.add-quiz-container header{
+ header{
     display: flex;
     justify-content: center;
     position: relative;
     margin-bottom: 60px;
 }
-.add-quiz-container header a.back{
+ header a.back{
     position: absolute;
     left: 0;
     top: 7px;
@@ -24,10 +24,10 @@
     text-decoration: none;
     transition: .15s;
 }
-.add-quiz-container header a.back:hover{
+ header a.back:hover{
     color: #8F19E7;
 }
-.add-quiz-container header h2{
+ header h2{
     color: #8F19E7;
     font-size: 24px;
 }

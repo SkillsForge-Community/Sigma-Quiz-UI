@@ -1,12 +1,12 @@
 import React from 'react'
 import logo from './image/Group 1171275826.png'
 import './selectquiz.css'
-import { CiCirclePlus } from "react-icons/ci";
 import { LuPlusCircle } from "react-icons/lu";
 import { GoPencil } from "react-icons/go";
 import { Link } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import AddQuiz from '../Addquiz/AddQuiz';
+import EditQuiz from '../Editquiz/EditQuiz';
 
 type selectQuizProps = {
   option: string
@@ -34,7 +34,7 @@ const SelectQuiz = ({option} : selectQuizProps) => {
             <LuPlusCircle size={24} color='#555555' />
             Add Quiz
           </Link>
-          <Link to=''>
+          <Link to='/edit-quiz'>
             <GoPencil size={20} color='#555555' />
             Edit Quiz
           </Link>
@@ -54,6 +54,12 @@ const SelectQuiz = ({option} : selectQuizProps) => {
       <>
       <div className="modal-background"></div>
       <AddQuiz />
+      </>}
+
+      {option === 'edit' && 
+      <>
+      <div className="modal-background"></div>
+      <EditQuiz />
       </>}
       
     </div>

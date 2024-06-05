@@ -12,6 +12,7 @@ function App() {
         <Route element={<Homepage/>} path='/'/>
         <Route element={<SelectQuiz option='select' />} path='/select-quiz'/>
         <Route element={<SelectQuiz option='add' />} path='/add-quiz'/>
+        <Route element={<SelectQuiz option='edit' />} path='/edit-quiz'/>
       </Routes>
     </div>
   );

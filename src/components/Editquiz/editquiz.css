@@ -1,0 +1,8 @@
+.edit-quiz-container{
+    position: absolute;
+    background-color: #fff;
+    width: 850px;
+    padding: 20px 30px;
+    border-radius: 15px;
+    transform: scale(0.91);
+}
