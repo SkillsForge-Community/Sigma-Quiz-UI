@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+.about{
+    padding: 2% 5% 5% 5%;
+}
+.about-navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.about-logo{
+    height: 150px;
+}
+.back-home{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+    width: 163px;
+    font-size: 18px;
+    color: #333333B2;
+    height: 27px;
+}
+.aspectRatio{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.video-text{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.Youtube{
+    display: flex;
+    flex-direction: column;
+    width:918px;
+   margin: 0 auto;
+   gap: 10px;
+   padding-top: 5%;
+   height:  675px;
+}
+.youTube-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.Youtube h4{
+    font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+.youTube-video{
+    border-radius: 15px;
+    border: 0;
+    height:485px;
+    width: 918px;
+    
+}
+.youTube-content{
+   width:  752px;
+}
+.youTube-Link{
+    color: #03B9E1;
+}
+.youTube-logo{
+    width: 58.34px;
+    height: 39.65px;
+}

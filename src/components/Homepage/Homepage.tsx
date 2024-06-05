@@ -1,18 +1,15 @@
-import logo from "./Images/logo.svg"
-import infor from "./Images/info.png"
+import logo from "../Images/logo.svg"
+import infor from "../Images/info.png"
 import { IoPlayCircleOutline } from "react-icons/io5"
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import "./Homepage.css"
+import Logo from "../Logo";
 const Homepage = () => {
+    const navigate=useNavigate()
     return (
         <div className="Home">
-            <div className="logos">
-                <img src={logo} className="logo" alt="logo" />
-                <div className="logo-texts">
-                    <h4 className="logo-text">Sigma Club</h4>
-                    <h5 className="logo-text">Since 1950</h5>
-                </div>
-            </div>
+            <Logo/>
             <div className="title">
                 <h1>Sigma Roseline Etuokwu Quiz Competition</h1>
                 <h3>Quiz competition involving secondary schools from all over Nigeria. Instilling the spirit of knowledge. Held @ the premier University; University of Ibadan</h3>
@@ -32,16 +29,17 @@ const Homepage = () => {
             <div className="video">
                 <div className="video-main">
                     <div className="img-info">
-                        <img src={infor} alt="" />
+                        <img src={infor} className="info-img" alt="" />
                     </div>
                     <div className="info-text">
-                        <h3>Watch our documentary on the Quiz Competition</h3>
-                        <p>Sigma Club</p>
+                       
+                            <h3>Watch our documentary on the Quiz Competition</h3>
+                            <p>Sigma Club</p>
+         
                     </div>
                 </div>
-
                 <div className="info-button">
-                    <button><IoPlayCircleOutline />Play Video</button>
+                    <button onClick={()=>navigate("/About")}><IoPlayCircleOutline />Play Video</button>
                 </div>
 
             </div>
