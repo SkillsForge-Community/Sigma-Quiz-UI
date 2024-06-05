@@ -6,6 +6,7 @@ import { GoPencil } from "react-icons/go";
 import { Link } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import AddQuiz from '../Addquiz/AddQuiz';
+import EditQuiz from '../Editquiz/EditQuiz';
 
 type selectQuizProps = {
   option: string
@@ -55,7 +56,12 @@ const SelectQuiz = ({option} : selectQuizProps) => {
       <AddQuiz />
       </>}
 
-      
+      {option === 'edit' && 
+      <>
+      <div className="modal-background"></div>
+      <EditQuiz />
+      </>}
+
     </div>
   )
 }
