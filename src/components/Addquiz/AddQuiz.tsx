@@ -34,7 +34,7 @@ const AddQuiz = () => {
               </div>
               <div className="form-field">
                 <label htmlFor="">Date</label>
-                <input type="text" placeholder='05   /   11   /   2024' />
+                <input type="date" placeholder='05   /   11   /   2024' />
               </div>
             </div>
 
