@@ -19,7 +19,7 @@ const Homepage = () => {
                     <h5>Select quiz to view</h5>
                     <MdKeyboardArrowDown />
                 </button>
-                <button className="submit" type="submit">View Quiz</button>
+                <button className="submit" onClick={()=>navigate('/login')} type="submit">View Quiz</button>
             </div>
             <div className="quizes">
                 <h4>2024 Quiz</h4>
