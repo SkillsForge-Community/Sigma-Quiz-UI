@@ -65,7 +65,7 @@ function Signin() {
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event?.preventDefault();
         if (firstName && lastName && input && passwordInput && ValidateEmail(input)) {
-            navigate('/');
+            navigate('/Login');
             return true;
         }
         if (!firstName || !lastName || !input) {
