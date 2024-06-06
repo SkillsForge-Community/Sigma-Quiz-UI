@@ -1,14 +1,29 @@
 import React, { useState } from 'react'
 import './addquiz.css'
 import { IoIosArrowBack } from "react-icons/io";
-import { Link, useNavigate } from 'react-router-dom';
-import successImg from './image/teenyicons_tick-circle-solid.png'
-
+import { Link } from 'react-router-dom';
+import QuizForm from '../quiz-form/QuizForm';
+import Success from '../success-page/Success';
 const AddQuiz = () => {
 
-  const [added, setAdded] = useState<boolean>(false);
+  const [addQuizPage, setAddQuizPage] = useState<number>(1);
+  const [title, setTitle] = useState<string>('')
+  const [description, setDescription] = useState<string>('')
+  const [date, setDate] = useState<Date>(new Date())
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
-  const navigate = useNavigate();
+  // fire when the add quiz button is clicked 
+  const handleAddQuiz = () => {
+    if (title === ""){
+      setErrorMsg('Quiz Title is required');
+      return;
+    } else if (description === ''){
+      setErrorMsg('Quiz Description is required');
+      return;
+    }
+    setAddQuizPage(2);
+    setErrorMsg(null);
+  }
 
   return (
     <div className="add-quiz-container">
@@ -17,63 +32,20 @@ const AddQuiz = () => {
           <IoIosArrowBack />
           Back
         </Link>
-        {!added && <h2>Add Quiz</h2>}
+        {(addQuizPage === 1) && <h2>Add Quiz</h2>}
       </header>
 
-      {!added &&
+      {/* first page */}
+      {(addQuizPage === 1) &&
         <>
-          <div className="add-quiz-body">
-            <div className="form">
-              <div className="form-field">
-                <label htmlFor="">Title</label>
-                <input type="text" placeholder='2024 Sigma Quiz' />
-              </div>
-              <div className="form-field">
-                <label htmlFor="">Description</label>
-                <textarea name="" id="" placeholder='2024 Roseline Etuokwu Sigma Quiz Competion' rows={4}></textarea>
-              </div>
-              <div className="form-field">
-                <label htmlFor="">Date</label>
-                <input type="date" placeholder='05   /   11   /   2024' />
-              </div>
-            </div>
-
-            <div className="review-section">
-              <h3>Review</h3>
-              <div className="review-container">
-                <div className="review-row">
-                  <span>Title</span>
-                  <span>2024 Sigma Quiz</span>
-                </div>
-
-                <div className="review-row">
-                  <span>Description</span>
-                  <span>2024 Roseline Etuokwu Sigma Quiz Competition </span>
-                </div>
-
-                <div className="review-row">
-                  <span>Date</span>
-                  <span>2024 - 05 - 30</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <button className="add-quiz-btn" onClick={() => setAdded(true)}>
-            Add Quiz
-          </button>
+          {errorMsg && <p className='error-msg'>{errorMsg}</p>}
+          <QuizForm title={title} setTitle={setTitle} description={description} setDescription={setDescription} date={date} setDate={setDate}/>
+          <button className="add-quiz-btn" onClick={handleAddQuiz}>Add Quiz</button>
         </>}
 
-      {added &&
-        <div className='add-success'>
-          <h2>Quiz Successfully Added</h2>
-          <img src={successImg} alt="" />
-          <p>You have successfully added that quiz</p>
-          <button className="finish" onClick={() => navigate('/select-quiz')}>
-            FINISH
-          </button>
-        </div>
+      {/* second page */}
+      {(addQuizPage === 2) &&
+        <Success mode='add'/>
       }
 
     </div>

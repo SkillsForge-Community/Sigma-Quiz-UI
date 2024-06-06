@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     position: relative;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
  header a.back{
     position: absolute;
@@ -31,66 +31,11 @@
     color: #8F19E7;
     font-size: 24px;
 }
-.add-quiz-container .add-quiz-body{
-    display: flex;
-}
-.add-quiz-container .add-quiz-body .form{
-    width: 50%;
-}
-.add-quiz-container .add-quiz-body .form .form-field{
-    width: 100%;
-}
-.add-quiz-container .add-quiz-body .form .form-field label{
+.error-msg{
+    text-align: center;
+    color: red;
     display: block;
-    font-size: 16px;
-    font-weight: 500;
-    color: #333333;
-    margin-bottom: 8px;
-}
-.add-quiz-container .add-quiz-body .form .form-field input, .add-quiz-container .add-quiz-body .form .form-field textarea{
-    background-color: #EDEDED;
-    width: 90%;
-    font-size: 14px;
-    color: #333333;
-    border: none;
-    outline: none;
-    padding: 15px 20px;
-    border-radius: 10px;
-    font-family: 'Poppins';
-    resize: none;
-    margin-bottom: 10px;
-}
-.add-quiz-container .add-quiz-body .form .form-field input::placeholder, .add-quiz-container .add-quiz-body .form .form-field textarea::placeholder{
-    opacity: 0.6;
-}
-.add-quiz-container .add-quiz-body .review-section{
-    width: 50%;
-}
-.add-quiz-container .add-quiz-body .review-section h3{
-    font-size: 16px;
-    font-weight: 500;
-    color: #333333;
-    margin-bottom: 8px;
-}
-.add-quiz-container .add-quiz-body .review-section .review-container{
-    width: 100%;
-    background-color: #EDEDED;
-    height: 87%;
-    border-radius: 10px;
-    padding: 30px 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.add-quiz-container .add-quiz-body .review-section .review-container .review-row{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 15px;
-    gap: 15px;
-}
-.add-quiz-container .add-quiz-body .review-section .review-container .review-row span:nth-child(2){
-    text-align: right;
+    margin-bottom: 20px;
 }
 .add-quiz-btn{
     float: right;

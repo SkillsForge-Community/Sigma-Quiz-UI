@@ -1,0 +1,34 @@
+.quizCard{
+    background-color: #EDEDED;
+    width: 100%;
+    height: 51px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    padding: 14px 15px;
+    transition: .1s;
+    cursor: default;
+}
+.quizCard:hover, .quizCard.active{
+    background-color: #8F19E7;
+}
+.quizCard.active{
+    animation-name: click;
+    animation-duration: .15s;
+}
+@keyframes click {
+    0%{
+        transform: scale(0.99);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+.quizCard span{
+    color: #333333;
+    opacity: 0.8;
+    transition: .1s;
+}
+.quizCard:hover span, .quizCard.active span{
+    color: #ffffff;
+}
