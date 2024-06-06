@@ -85,7 +85,7 @@ function Signin() {
         <>        
             <VerticallyCenter message={errormessage} isOpen={isOpen} onClose={onClose}/>
             <div className="form">
-                <SimpleGrid className="signin" minChildWidth='120px' spacing='40px'>
+                <SimpleGrid className="signin" minChildWidth='120px' alignItems="center" spacing='40px'>
                     <Box>
                         <Logo />
                     </Box>
