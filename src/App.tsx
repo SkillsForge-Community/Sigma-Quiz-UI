@@ -10,7 +10,8 @@ import Signin from './components/Registration/Signin/Signin';
 
 function App() {
   return (
-    <div className="App">
+    <ChakraProvider>    
+      <div className="App">
       
       <Routes>
         <Route element={<Homepage/>} path='/'/>
@@ -24,7 +25,10 @@ function App() {
         <Route element={<NotFound/>} path='*'/>
 
       </Routes>
+      
+
     </div>
+    </ChakraProvider>
   );
 }
 

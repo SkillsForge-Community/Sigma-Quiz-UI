@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../../Logo";
+import Logo from "../../Logo/Logo";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Select, SimpleGrid } from '@chakra-ui/react'
@@ -7,7 +7,7 @@ import "./Signin.css"
 import VerticallyCenter from "../../Validation/ValidationMessage";
 import {
     
-   
+   useDisclosure,
     Stack,
     HStack,
     Box,
@@ -24,8 +24,8 @@ import { BiShow, BiHide } from "react-icons/bi";
 import CountDown from "../../CountDown";
 
 function Signin() {
-    const [ errorMessage,setErrorMessage ] = useState(false); // Initialize useDisclosure hook
-
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [errormessage,setErrorMessage]=useState<string>("")
     const [show, setShow] = useState(false);
     const [input, setInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
@@ -35,7 +35,6 @@ function Signin() {
     const [isPasswordError, setisPasswordError] = useState(true);
     const [isFirstNameError, setisFirstNameError] = useState(true);
     const [isLastNameError, setsetLastNameError] = useState(true);
-    const [submit, setSubmit] = useState<boolean>(true);
     const navigate = useNavigate();
 
     const handleFirstNameChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
@@ -70,15 +69,21 @@ function Signin() {
             navigate('/');
             return true;
         }
+        if (!firstName || !lastName || !input) {
+            onOpen()
+            setErrorMessage("Please fill all input fields")
+        }
         else {
-            setErrorMessage(true)
+           onOpen()
+           setErrorMessage("inputs must contain alpha-numeric characters")
+
             return false;
         }
     }
 
     return (
         <>        
-            {errorMessage && <VerticallyCenter />}
+            <VerticallyCenter message={errormessage} isOpen={isOpen} onClose={onClose}/>
             <div className="form">
                 <SimpleGrid className="signin" minChildWidth='120px' spacing='40px'>
                     <Box>
@@ -91,15 +96,14 @@ function Signin() {
                         </div>
                     </Box>
                 </SimpleGrid>
-                <form onSubmit={event => setSubmit(handleSubmit(event))}>
+                <form onSubmit={event => handleSubmit(event)}>
                     <Stack
-                        divider={<StackDivider borderColor='gray.200' />}
-                        spacing={20}
+                        spacing={4}
                         align="center"
                     >
                         
-                        <HStack className="names" spacing={10}>
-                            <Box>
+                        <HStack className="names" width="761px" spacing={10}>
+                            <Box width= "353px">
                                 <FormControl isInvalid={isFirstNameError}>
                                     <FormLabel className="FormLabel">First Name</FormLabel>
                                     <Input
@@ -118,7 +122,7 @@ function Signin() {
                                     )}
                                 </FormControl>
                             </Box>
-                            <Box >
+                            <Box width= "353px">
                                 <FormControl isInvalid={isLastNameError}>
                                     <FormLabel className="FormLabel">Last Name</FormLabel>
                                     <Input
@@ -129,6 +133,8 @@ function Signin() {
                                         className="lastName"
                                         style={{ borderColor: isLastNameError ? "red" : "#33333380" }}
                                         placeholder="Type Here"
+                                        height="60px"
+
                                     />
                                     {isLastNameError && (
                                         <FormErrorMessage style={{ color: isLastNameError ? "red" : "#333333" }}>
@@ -148,6 +154,7 @@ function Signin() {
                                 className="input"
                                 style={{ borderColor: isEmailError ? "red" : "#33333380" }}
                                 placeholder="Type Here"
+                                height="60px"
                             />
                             {isEmailError && (
                                 <FormErrorMessage style={{ color: isEmailError ? "red" : "#333333" }}>
@@ -165,6 +172,7 @@ function Signin() {
                                     onChange={handlePasswordInputChange}
                                     className="input"
                                     placeholder="Type Here"
+                                    height="60px"
                                 />
                                 <InputRightElement width='4.5rem' alignItems="center">
                                     <Button className="password-button" h='1.75rem' size='sm' onClick={() => setShow(!show)}>
@@ -180,17 +188,17 @@ function Signin() {
                         </FormControl> 
                         <FormControl>                
                             <FormLabel className="FormLabel">Role</FormLabel>
-                            <select className="dropdown">
+                            <Select border="2px" height="60px" variant="outline" className="dropdown">
                                 <option className="dropdown-item"></option>
                                 <option className="dropdown-item">United Arab Emirates</option>
                                 <option className="dropdown-item">Nigeria</option>
-                            </select>
+                            </Select>
                         </FormControl>
                         <button className="login-button" type="submit">Sign Up</button>
                     </Stack>
                 </form>
                 <div>
-                    <h5 className="account">Already Have an account?&nbsp; <NavLink to="/login">Log In</NavLink> </h5>
+                    <h5 className="account">Already Have an account?&nbsp; <NavLink style={{color:"#8F19E7", textDecoration:"underline"}} to="/login">Log In</NavLink> </h5>
                 </div>
             </div>
         </>

@@ -1,5 +1,5 @@
 .signin{
-    padding: 0 40px 0 40px;
+    padding: 40px 0px 0 0px;
     color: #33333380;
     font-family: "Poppins", sans-serif;
   font-weight: 500;
@@ -32,7 +32,8 @@
 .dropdown{
     width: 761px;
     height: 60px;
-    outline: 0;
+  
+    outline-color:#33333380;
     border:1px solid #33333380;
     color: #33333380;
     border:1px solid #33333380;

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../../Logo";
+import Logo from "../../Logo/Logo";
 import "./Login.css"
 import { RiLockPasswordLine } from "react-icons/ri";
 import { NavLink, useNavigate } from "react-router-dom";
 
+import VerticallyCenter from "../../Validation/ValidationMessage";
 import {
+    
+   useDisclosure,
     Stack,
     HStack,
     VStack,
@@ -25,12 +28,13 @@ import {
 import { BiShow, BiHide } from "react-icons/bi";
 import CountDown from "../../CountDown";
 function Login() {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [errormessage, setErrorMessage]=useState<string>("")
     const [show, setShow] = useState(false);
     const [input, setInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
     const [isEmailError, setisEmailError] = useState(true)
     const [isPasswordError, setisPasswordError] = useState(true)
-    const [submit, setSubmit] = useState<boolean>(true)
     const navigate = useNavigate()
 
     const handleInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
@@ -57,7 +61,13 @@ function Login() {
             navigate('/');
             return true
         }
+        if(!input || !passwordInput){
+            onOpen()
+            setErrorMessage("Please fill all input fields")
+        }
         else {
+            setErrorMessage("inputs must contain alpha-numeric characters")
+            onOpen()
             return false
             
         }
@@ -67,6 +77,8 @@ function Login() {
         console.log(handleSubmit)
     }
     return (
+        <>            <VerticallyCenter message={errormessage} isOpen={isOpen} onClose={onClose}/>
+       
         <div className="form">
             <div className="login">
                 <Logo />
@@ -77,17 +89,12 @@ function Login() {
 
             </div>
 
-            <form onSubmit={event => setSubmit(handleSubmit(event))}>
+            <form onSubmit={event => handleSubmit(event)}>
                 <Stack
-                    divider={<StackDivider borderColor='gray.200' />}
-                    spacing={20}
+                    spacing={4}
                     align="center"
                 >
-                    {!submit && (
-                        <p
-                            style={{ color: !submit ? "red" : "#333333" }}
-                        >Email is not in the required format.</p>
-                    )}
+                    
                     <FormControl isInvalid={isEmailError}>
                         <FormLabel className="FormLabel">Email</FormLabel>
                         <Input
@@ -98,6 +105,8 @@ function Login() {
                             className="input"
                             style={{ borderColor: isEmailError ? "red" : "#33333380" }}
                             placeholder="Type Here"
+                            height="60px"
+
                         />
                         {isEmailError && (
                             <FormErrorMessage
@@ -116,6 +125,8 @@ function Login() {
                                 onChange={handlePasswordInputChange}
                                 className="input"
                                 placeholder="Type Here"
+                                height="60px"
+
                             />
                             <InputRightElement width='4.5rem' alignItems="center">
                                 <Button className="password-button" h='1.75rem' size='sm' onClick={() => setShow(!show)}>
@@ -132,9 +143,10 @@ function Login() {
                 </Stack>
             </form>
             <div>
-                <h5 className="account">Don't have an account?&nbsp; <NavLink to="/Signin">Sign Up</NavLink> </h5>
+                <h5 className="account">Don't have an account?&nbsp; <NavLink style={{color:"#8F19E7", textDecoration:"underline"}} to="/Signin">Sign Up</NavLink> </h5>
             </div>
         </div>
+        </>
     );
 }
 
