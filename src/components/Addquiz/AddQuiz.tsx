@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import './addquiz.css'
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import QuizForm from '../quiz-form/QuizForm';
 import Success from '../success-page/Success';
 const AddQuiz = () => {
 
@@ -39,7 +38,6 @@ const AddQuiz = () => {
       {(addQuizPage === 1) &&
         <>
           {errorMsg && <p className='error-msg'>{errorMsg}</p>}
-          <QuizForm title={title} setTitle={setTitle} description={description} setDescription={setDescription} date={date} setDate={setDate}/>
           <button className="add-quiz-btn" onClick={handleAddQuiz}>Add Quiz</button>
         </>}
 
