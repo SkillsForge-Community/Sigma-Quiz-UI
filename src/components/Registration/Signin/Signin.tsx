@@ -11,7 +11,6 @@ import {
     Stack,
     HStack,
     Box,
-    StackDivider,
     Input,
     InputRightElement,
     InputGroup,

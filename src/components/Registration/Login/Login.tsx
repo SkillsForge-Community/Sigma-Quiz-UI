@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../../Logo/Logo";
 import "./Login.css"
 import { RiLockPasswordLine } from "react-icons/ri";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -9,10 +8,7 @@ import {
     
    useDisclosure,
     Stack,
-    HStack,
-    VStack,
-    Box,
-    StackDivider,
+    
     Input,
     InputRightElement,
     InputGroup,
@@ -20,13 +16,11 @@ import {
     FormControl,
     FormLabel,
     FormErrorMessage,
-    FormHelperText,
-    InputLeftElement,
-    Center,
-    Wrap,
+    
 } from '@chakra-ui/react';
 import { BiShow, BiHide } from "react-icons/bi";
 import CountDown from "../../CountDown";
+import Logo from "../../Logo/Logo";
 function Login() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [errormessage, setErrorMessage]=useState<string>("")
