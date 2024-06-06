@@ -1,0 +1,52 @@
+.signin{
+    padding: 40px 0px 0 0px;
+    color: #33333380;
+    font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.Signin-title, .Signin-time{
+    text-align: right;
+}
+.Signin-title{
+    color:#8F19E7;
+    font-size: 24px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+.names{
+    width: 761px;
+}
+.FormLabel{
+    color: #33333380;
+    font-size: 16px;
+}
+.firstName, .lastName{
+    width: 353px;
+    height: 60px;
+    border:1px solid #33333380;
+    border-radius: 10px;
+    outline: 0;
+}
+.dropdown{
+    width: 761px;
+    height: 60px;
+  
+    outline-color:#33333380;
+    border:1px solid #33333380;
+    color: #33333380;
+    border:1px solid #33333380;
+    border-radius: 10px;
+    outline: 0;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  padding: 0px 0px 15px 10px;
+}
+.password{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
