@@ -8,7 +8,7 @@ const AddQuiz = () => {
   const [addQuizPage, setAddQuizPage] = useState<number>(1);
   const [title, /* setTitle */] = useState('');
 const [description, /* setDescription */] = useState('');
-const [date, /* setDate */] = useState(new Date());
+const [/* date */, /* setDate */] = useState(new Date());
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   // fire when the add quiz button is clicked 
