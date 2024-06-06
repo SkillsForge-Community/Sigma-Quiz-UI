@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     position: relative;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
  header a.back{
     position: absolute;
@@ -30,6 +30,12 @@
  header h2{
     color: #8F19E7;
     font-size: 24px;
+}
+.error-msg{
+    text-align: center;
+    color: red;
+    display: block;
+    margin-bottom: 20px;
 }
 .add-quiz-btn{
     float: right;

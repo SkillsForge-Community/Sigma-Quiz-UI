@@ -7,12 +7,12 @@ type quizCardProps = {
         description: string
     }
     index: number,
-    setActiveIndex: (index: number) => void, 
+    setselectedQuizIndex: (index: number) => void, 
     isActive: boolean
 }
-const QuizCard = ({quiz, index, setActiveIndex, isActive}: quizCardProps) => {
+const QuizCard = ({quiz, index, setselectedQuizIndex, isActive}: quizCardProps) => {
   return (
-    <div className={`quizCard ${(isActive)? 'active' : ''}`} onClick={() => setActiveIndex(index)} >
+    <div className={`quizCard ${(isActive)? 'active' : ''}`} onClick={() => setselectedQuizIndex(index)} >
         <span>{quiz.title}</span>
     </div>
   )

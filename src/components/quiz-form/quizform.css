@@ -14,7 +14,7 @@
     color: #333333;
     margin-bottom: 8px;
 }
-.quiz-form .form .form-field input, .quiz-form .form .form-field textarea{
+.quiz-form .form .form-field input.input-field, .quiz-form .form .form-field textarea.input-field{
     background-color: #EDEDED;
     width: 90%;
     font-size: 14px;
@@ -28,7 +28,8 @@
     margin-bottom: 10px;
     border: 1px solid #EDEDED;
 }
-.quiz-form .form .form-field input:focus, .quiz-form .form .form-field textarea:focus{
+
+.quiz-form .form .form-field input.input-field:focus, .quiz-form .form .form-field textarea.input-field:focus{
     border: 1px solid #8F19E7;
 }
 .quiz-form .form .form-field input::placeholder, .quiz-form .form .form-field textarea::placeholder{
@@ -46,7 +47,7 @@
 .quiz-form .review-section .review-container{
     width: 100%;
     background-color: #EDEDED;
-    height: 88%;
+    height: 91%;
     border-radius: 10px;
     padding: 30px 25px;
     display: flex;
@@ -62,4 +63,14 @@
 }
 .quiz-form .review-section .review-container .review-row span:nth-child(2){
     text-align: right;
+}
+.custom-date-picker{
+    width: 90%;
+    padding: 15px 20px;
+    border: none;
+    background-color: #EDEDED;
+    color: #333;
+}
+.custom-date-picker:focus{
+    border: 1px solid #8F19E7;
 }
