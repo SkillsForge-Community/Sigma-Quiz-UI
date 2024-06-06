@@ -5,6 +5,7 @@ import { LuPlusCircle } from "react-icons/lu";
 import { GoPencil } from "react-icons/go";
 import { Link } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
+import AddQuiz from '../Addquiz/AddQuiz';
 
 type selectQuizProps = {
   option: string
@@ -47,6 +48,13 @@ const SelectQuiz = ({option} : selectQuizProps) => {
         </div>
 
       </div>
+      
+      {option === 'add' && 
+      <>
+      <div className="modal-background"></div>
+      <AddQuiz />
+      </>}
+
       
     </div>
   )
