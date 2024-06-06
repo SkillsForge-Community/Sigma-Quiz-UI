@@ -116,7 +116,11 @@ function Login() {
                     </FormControl>
 
                     <FormControl isInvalid={isPasswordError}>
-                        <FormLabel className="FormLabel">Password<RiLockPasswordLine /></FormLabel>
+                        <FormLabel className="FormLabel"> <div  className="password">
+                            <p> Password</p>
+                           
+                        <RiLockPasswordLine />
+                            </div></FormLabel>
                         <InputGroup>
                             <Input
                                 style={{ borderColor: isPasswordError ? "red" : "#33333380" }}
@@ -129,8 +133,8 @@ function Login() {
 
                             />
                             <InputRightElement width='4.5rem' alignItems="center">
-                                <Button className="password-button" h='1.75rem' size='sm' onClick={() => setShow(!show)}>
-                                    {show ? <BiHide className="showIcon" /> : <BiShow className="showIcon" />}
+                                <Button className="password-button" bg="none" pt="10px"  h='1.75rem' size='md' onClick={() => setShow(!show)}>
+                                    {show ? <BiShow width="1000px"   />: <BiHide width="10px"  /> }
                                 </Button>
                             </InputRightElement>
                         </InputGroup>

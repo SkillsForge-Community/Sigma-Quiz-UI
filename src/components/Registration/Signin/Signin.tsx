@@ -107,10 +107,12 @@ function Signin() {
                                 <FormControl isInvalid={isFirstNameError}>
                                     <FormLabel className="FormLabel">First Name</FormLabel>
                                     <Input
+                                    variant="unstyled"
                                         type='text'
                                         value={firstName}
                                         onChange={handleFirstNameChange}
                                         errorBorderColor='red.300'
+                                        height="60px"
                                         style={{ borderColor: isFirstNameError ? "red" : "#33333380" }}
                                         placeholder="Type Here"
                                         className="firstName"
@@ -163,7 +165,12 @@ function Signin() {
                             )}
                         </FormControl>
                         <FormControl isInvalid={isPasswordError}>
-                            <FormLabel className="FormLabel">Password <RiLockPasswordLine /></FormLabel>
+                            <FormLabel className="FormLabel">
+                                <div  className="password">
+                            <p> Password</p>
+                           
+                        <RiLockPasswordLine />
+                            </div></FormLabel>
                             <InputGroup>
                                 <Input
                                     style={{ borderColor: isPasswordError ? "red" : "#33333380" }}
@@ -175,9 +182,9 @@ function Signin() {
                                     height="60px"
                                 />
                                 <InputRightElement width='4.5rem' alignItems="center">
-                                    <Button className="password-button" h='1.75rem' size='sm' onClick={() => setShow(!show)}>
-                                        {show ? <BiHide className="showIcon" /> : <BiShow className="showIcon" />}
-                                    </Button>
+                                <Button variant="unstyled" className="password-button" bg="none" pt="10px"  h='1.75rem' size='md' onClick={() => setShow(!show)}>
+                                    {show ? <BiShow width="1000px"   />: <BiHide width="10px"  /> }
+                                </Button>
                                 </InputRightElement>
                             </InputGroup>
                             {isPasswordError && (
