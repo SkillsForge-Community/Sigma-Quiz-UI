@@ -3,7 +3,7 @@ import logo from "../Images/logo.svg";
 import { IoMdHome } from "react-icons/io";
 import "./About.css";
 import { useNavigate } from "react-router-dom";
-import Logo from "../Logo";
+import Logo from "../Logo/Logo";
 import { Spinner } from '@chakra-ui/react';
 
 const YouTubeVideo = lazy(() => import('./YouTubeVideo'));
