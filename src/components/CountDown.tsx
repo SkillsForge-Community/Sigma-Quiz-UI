@@ -11,7 +11,7 @@ function CountDown(){
             navigate('/')
         }
         return () => clearInterval(intervalId);
-    },[timeLeft])
+    },[timeLeft,navigate])
 
     return(
         <>{timeLeft}</>

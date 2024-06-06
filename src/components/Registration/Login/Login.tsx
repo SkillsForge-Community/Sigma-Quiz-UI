@@ -37,8 +37,8 @@ function Login() {
         setisEmailError(false)
     };
     useEffect(() => {
-        setisEmailError(input == '' && true)
-        setisPasswordError(passwordInput == '' && true)
+        setisEmailError(input ==='' && true)
+        setisPasswordError(passwordInput === '' && true)
 
     }, [input, passwordInput])
     const handlePasswordInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
@@ -46,7 +46,7 @@ function Login() {
         setisPasswordError(false)
     }
     function ValidateEmail(inputText: string) {
-        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const mailformat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
         return mailformat.test(inputText);
     }
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {

@@ -1,4 +1,3 @@
-import logo from "../Images/logo.svg"
 import infor from "../Images/info.png"
 import { IoPlayCircleOutline } from "react-icons/io5"
 import { MdKeyboardArrowDown } from "react-icons/md";
