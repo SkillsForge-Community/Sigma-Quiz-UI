@@ -1,0 +1,91 @@
+.add-quiz-container{
+    position: absolute;
+    background-color: #fff;
+    width: 850px;
+    padding: 20px 30px;
+    border-radius: 15px;
+    transform: scale(0.91);
+}
+ header{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 30px;
+}
+ header a.back{
+    position: absolute;
+    left: 0;
+    top: 7px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333333;
+    font-weight: 400;
+    text-decoration: none;
+    transition: .15s;
+}
+ header a.back:hover{
+    color: #8F19E7;
+}
+ header h2{
+    color: #8F19E7;
+    font-size: 24px;
+}
+.error-msg{
+    text-align: center;
+    color: red;
+    display: block;
+    margin-bottom: 20px;
+}
+.add-quiz-btn{
+    float: right;
+    margin-top: 50px;
+    margin-bottom: 35px;
+    width: 150px;
+    height: 45px;
+    font-size: 17px;
+    color: #fff;
+    background-color: #8F19E7;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: .25s;
+    font-family: 'Poppins';
+}
+.add-quiz-btn:hover{
+    background-color: #a551e6;
+}
+
+.add-success{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.add-success h2{
+    font-size: 28px;
+    font-weight: 600;
+    color: #8F19E7;
+    margin-bottom: 30px;
+}
+.add-success img{
+    width: 129px;
+    margin-bottom: 35px;
+}
+.add-success p{
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 35px;
+}
+.add-success button.finish{
+    width: 170px;
+    height: 50px;
+    font-size: 17px;
+    color: #fff;
+    background-color: #8F19E7;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: .25s;
+    margin-bottom: 40px;
+}
