@@ -4,4 +4,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Live URL
 
-View the live [URL](https://main--sigma-quiz.netlify.app/)
+View the live [URL](https://sigma-quiz.netlify.app/)
