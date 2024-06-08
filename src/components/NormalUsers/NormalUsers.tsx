@@ -1,5 +1,6 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import Sidebar from './Sidebar/Sidebar'
+import { Outlet } from 'react-router-dom'
 function NormalUsers(){
     return(
         <Grid
@@ -14,7 +15,7 @@ function NormalUsers(){
     <Sidebar/>
   </GridItem>
   <GridItem pl='2' bg='#FFFFFF' area={'main'}>
-   Main
+   <Outlet/>
   </GridItem>
   
 </Grid>

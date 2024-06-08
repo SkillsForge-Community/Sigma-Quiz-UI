@@ -1,4 +1,4 @@
-import { Stack, HStack, VStack, Box } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { Select } from '@chakra-ui/react'
 import { GiGraduateCap } from "react-icons/gi";
 import { BsPercent } from "react-icons/bs";
@@ -28,33 +28,33 @@ function Sidebar() {
                             Schools
                         </h5>
                     </Box>
-                    <NavLink to="" className='links'>
+                    <NavLink to="/users/Ambassadors" className='links'>
                         <h5 style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
                             Ambassadors
     
                         </h5>
                     </NavLink>
-                    <NavLink  className='links' to=""   >
+                    <NavLink  className='links' to="/users/School-Two"   >
                         <h5>
                             School Two
                         </h5>
                     </NavLink>
-                    <NavLink  className='links' to="" >
+                    <NavLink  className='links' to="/users/School-Three" >
                         <h5 >
                             School Three
                         </h5>
                     </NavLink>
-                    <NavLink  className='links' to="" >
+                    <NavLink  className='links' to="/users/School-Four" >
                         <h5 >
                             School Four
                         </h5>
                     </NavLink>
-                    <NavLink  className='links' to="" >
+                    <NavLink  className='links' to="/users/School-Five" >
                         <h5 >
                             School Five
                         </h5>
                     </NavLink>
-                    <NavLink className='links' to="" >
+                    <NavLink className='links' to="/users/School-Six" >
                         <h5 >
                             School Six
                         </h5>
@@ -67,7 +67,7 @@ function Sidebar() {
                             Score
                         </h5>
                     </Box>
-                    <NavLink  className='links' to="" >
+                    <NavLink  className='links' to="/users/All-Schools" >
                         <h5 style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
                             <LuSchool />
                             All Schools
