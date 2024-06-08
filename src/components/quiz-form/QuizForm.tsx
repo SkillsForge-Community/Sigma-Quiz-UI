@@ -25,7 +25,7 @@ const QuizForm = ({title, setTitle, description, setDescription, date, setDate} 
 
     return (
         <div className="quiz-form">
-            <div className="form">
+            <div className="form-container">
                 <div className="form-field">
                     <label htmlFor="">Title</label>
                     <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='2024 Sigma Quiz' className='input-field'/>

@@ -13,9 +13,9 @@ body{
     padding: 40px 40px 40px 40px;
     gap: 30px;
 }
-::placeholder {
+.form ::placeholder {
     color: #33333380;
-    opacity: 1; /* Firefox */
+    opacity: 1; 
     font-size: 16px;
     font-family: "Poppins", sans-serif;
   font-weight: 400;

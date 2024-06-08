@@ -9,7 +9,7 @@ const Success = ({mode}: successProps) => {
     const navigate = useNavigate();
     return (
         <div className='add-success'>
-            <h2>Quiz Successfully Added</h2>
+            <h2>Quiz Successfully {(mode === 'add') && "Added"} {(mode === 'edit') && "Edited"}</h2>
             <img src={successImg} alt="" />
             <p>You have successfully {(mode === 'add') && "added"} {(mode === 'edit') && "edited"} that quiz</p>
             <button className="finish" onClick={() => navigate('/select-quiz')}>FINISH</button>
