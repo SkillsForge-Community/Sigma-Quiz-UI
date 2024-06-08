@@ -19,7 +19,7 @@ const EditQuiz = () => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [date, setDate] = useState<Date>(new Date());
-  const [quizList, setQuizList] = useState<quizListType>([
+  const [quizList, /* setQuizList */] = useState<quizListType>([
     {
       title: '2024 Roseline Etuokwu Sigma Quiz Competition',
       description: '---'
