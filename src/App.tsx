@@ -7,7 +7,7 @@ import About from './components/About/About';
 import NotFound from './components/NotFound';
 import Login from './components/Registration/Login/Login';
 import Signin from './components/Registration/Signin/Signin';
-
+import NormalUsers from './components/NormalUsers/NormalUsers';
 function App() {
   return (
     <ChakraProvider>    
@@ -15,7 +15,7 @@ function App() {
       
       <Routes>
         <Route element={<Homepage/>} path='/'/>
-
+        <Route element={<NormalUsers/>} path="/users"/>
         <Route element={<SelectQuiz option='select' />} path='/select-quiz'/>
         <Route element={<SelectQuiz option='add' />} path='/add-quiz'/>
         <Route element={<SelectQuiz option='edit' />} path='/edit-quiz'/>
