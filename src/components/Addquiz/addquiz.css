@@ -30,6 +30,7 @@
  header h2{
     color: #8F19E7;
     font-size: 24px;
+    font-weight: 600;
 }
 .error-msg{
     text-align: center;
