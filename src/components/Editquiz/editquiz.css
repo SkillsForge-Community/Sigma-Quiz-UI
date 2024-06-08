@@ -1,0 +1,33 @@
+.edit-quiz-container{
+    position: absolute;
+    background-color: #fff;
+    width: 850px;
+    padding: 20px 30px;
+    border-radius: 15px;
+    transform: scale(0.91);
+}
+.edit-quiz-container header{
+    margin-bottom: 15px;
+}
+.edit-quiz-form h3{
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+}
+.edit-quiz-form .quiz-list{
+    margin-top: 10px;
+}
+button.edit{
+    float: right;
+    margin: 10px 0 30px;
+    width: 150px;
+    height: 45px;
+    font-size: 17px;
+    color: #fff;
+    background-color: #8F19E7;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: .25s;
+    font-family: 'Poppins';
+}
