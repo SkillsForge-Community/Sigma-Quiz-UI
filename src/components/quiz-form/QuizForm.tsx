@@ -1,7 +1,5 @@
 import React from 'react'
 import './quizform.css'
-import { DatePicker } from 'antd';
-import moment, { Moment } from 'moment';
 
 type QuizFormProps = {
     title: string,
