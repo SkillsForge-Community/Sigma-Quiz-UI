@@ -1,6 +1,7 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import Sidebar from './Sidebar/Sidebar'
 import { Outlet } from 'react-router-dom'
+import "./NormalUsers.css"
 function NormalUsers(){
     return(
         <Grid
