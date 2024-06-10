@@ -11,7 +11,9 @@
     gap: 30px;
     padding: 0px
 }
-
+.school-detailsPages{
+    padding-right: 100px;
+}
 .Answered{
     color: #FF0000;
     font-family: "Poppins", sans-serif;
@@ -70,4 +72,7 @@
     font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
+}
+.test-details{
+    padding: 20px;
 }
