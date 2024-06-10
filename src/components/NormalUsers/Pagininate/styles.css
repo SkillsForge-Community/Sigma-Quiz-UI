@@ -8,17 +8,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2px 0px 0px -50px;
+    margin: 2px 0px 0px 00px;
     cursor: pointer;
   }
   .page-icons{
     border-radius: 0;
+    width: 9px;
+    height: 14px;
+    background-color: #EDEDED;
   }
-  .actives {
-    background-color: #8F19E7;
-    color: white;
+  .page-icons-container{
+    background-color: #EDEDED;
+    width: 20px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  
   .page-item {
     list-style: none;
     padding: 2px 11px;
@@ -31,5 +37,9 @@
     margin-top: 2px;
     background-color: #EDEDED;
     color: #333333;
+  }
+  .actives {
+    background-color: #8F19E7;
+    color: white;
   }
   

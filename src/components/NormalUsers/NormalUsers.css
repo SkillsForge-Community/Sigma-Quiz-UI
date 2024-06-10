@@ -1,9 +1,28 @@
-.school-name{
+.school-name {
     text-align: right;
 }
-.test-details{
+
+.test-details {
     padding: 20px;
 }
-.round-button{
+
+.round-button {
     cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    width: 104px;
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 19px 10px 15px;
+    font-size: 15px;
+    transition: background-color 0.3s, border-radius 0.3s;
+}
+
+.round-button:active,
+.round-button.active {
+    background-color: #EDEDED;
+    border-radius: 10px;
 }
