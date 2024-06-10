@@ -40,7 +40,8 @@ function SchoolDetails() {
             </SimpleGrid>
             <SimpleGrid spacing={10}>
                 <div>
-                    <h5>Questions</h5>
+                    <br />
+                    <h5 className="questions">Questions</h5>
                     <PaginatedItems numOfPages={30} />
                     <br />
                     <HStack spacing={554}>
@@ -49,7 +50,7 @@ function SchoolDetails() {
                         </Box>
                         <Box w='171px' h='27px'>
                             <Link to="#">
-                                <h4 className="school-name">Manage Questions</h4>
+                                <h4 className="manage">Manage Questions</h4>
                             </Link>
                         </Box>
                     </HStack>
@@ -92,8 +93,8 @@ function SchoolDetails() {
                                 <Td className="Score second">2nd</Td>
                             </Tr>
                             <Tr>
-                                <Td><span className="Score">50</span></Td>
-                                <Td><span className="Score">150</span></Td>
+                                <Td><span className="Score actual-score">50</span></Td>
+                                <Td><span className="Score actual-score">150</span></Td>
                             </Tr>
                         </Tbody>
                     </Table>

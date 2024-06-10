@@ -19,6 +19,7 @@
     padding: 10px 19px 10px 15px;
     font-size: 15px;
     transition: background-color 0.3s, border-radius 0.3s;
+    color: rgba(51, 51, 51, 1);
 }
 
 .round-button:active,

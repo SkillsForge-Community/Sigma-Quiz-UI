@@ -8,11 +8,10 @@
     padding: 5px 20px 5px 20px;
 }
 .filter-buttons{
-    gap: 30px
+    gap: 30px;
+    padding: 0px
 }
-.test-details{
-   
-}
+
 .Answered{
     color: #FF0000;
     font-family: "Poppins", sans-serif;
@@ -54,4 +53,21 @@
 .school-name{
     animation-name: right;
     animation-duration: 3s;
+    color: rgba(51, 51, 51, 1);
+    font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.manage{
+    color: rgba(51, 51, 51, 0.6);
+    text-decoration: underline;
+    font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.questions{
+    color:rgba(51, 51, 51, 1);
+    font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
