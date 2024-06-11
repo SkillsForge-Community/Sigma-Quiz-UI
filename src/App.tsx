@@ -10,6 +10,8 @@ import Signin from './components/Registration/Signin/Signin';
 import NormalUsers from './components/NormalUsers/NormalUsers';
 import SchoolDetails from './components/NormalUsers/SchoolDetails/SchoolDetails';
 import TestDetails from './components/TestDetails/TestDetails';
+import MainSubAdmin from './components/Subadmin/main/Main';
+import ManageUsers from './components/Subadmin/ManageUsers/ManageUsers';
 function App() {
   return (
     <ChakraProvider>    
@@ -17,6 +19,11 @@ function App() {
       
       <Routes>
         <Route element={<Homepage/>} path='/'/>
+        <Route element={<MainSubAdmin/>} path="/subadmin">
+            <Route index element={<ManageUsers/>}/>
+              <Route path=':schools' element={<SchoolDetails/>}/>
+
+        </Route>
         <Route element={<NormalUsers/>} path="/users">
                 <Route path=':schools' element={<SchoolDetails/>}/>
           </Route>
