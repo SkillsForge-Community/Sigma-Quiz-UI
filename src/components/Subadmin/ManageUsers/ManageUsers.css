@@ -1,0 +1,81 @@
+#search-button{
+    background-color: rgba(237, 237, 237, 1);
+    cursor: pointer;
+}
+#search-users{
+    
+    outline: 0;
+    background-color: rgba(237, 237, 237, 1);
+    border: 0;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.input-group{
+    
+}
+.profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    color:rgba(51, 51, 51, 1);
+    font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.search-profile{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.ManageUsers{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 30px;
+}
+.addMembers{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.table-title{
+    font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 20px;
+  color: rgba(51, 51, 51, 1);
+}
+.table-button{
+    color:rgba(51, 51, 51, 1);
+    background-color: rgba(237, 237, 237, 1);
+    border-radius: 10px;
+    padding: 10px;
+}
+.mange-users-table{
+    background-color: rgba(143, 25, 231, 1);
+    color: rgba(255, 255, 255, 1);
+    height: 53px;
+}
+.mange-users-data{
+    height: 42px;
+    cursor: pointer;
+    transition-duration: 0.1s;
+    font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+.active-status{
+    text-decoration: underline;
+}
+.active-mange-users-data{
+    background-color: rgba(143, 25, 231, 1);
+    color: rgba(255, 255, 255, 1);
+}
+.mange-users-data:hover{
+    background-color: rgba(143, 25, 231, 1);
+    color: rgba(255, 255, 255, 1);
+    
+}

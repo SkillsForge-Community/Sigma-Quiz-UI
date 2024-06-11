@@ -25,6 +25,11 @@
   font-weight: 500;
   font-style: normal;
 }
+.details-two{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .Score{
     display: flex;
     flex-direction: row;

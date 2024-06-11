@@ -21,7 +21,7 @@ function TestDetails() {
         <SimpleGrid spacing={10} className="testDetails">
 
             <SimpleGrid spacing={1}>
-                <SimpleGrid width="1285px" justifyItems={"space-between"}>
+                <SimpleGrid width="1285px" alignItems={"center"} justifyItems={"space-between"}>
                     <Box className="back-button">
                         <IoIosArrowBack className="go-back" onClick={() => navigate(-1)} />
                         <h4>Test Details</h4>

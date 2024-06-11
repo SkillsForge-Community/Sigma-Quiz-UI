@@ -23,7 +23,7 @@ function Sidebar() {
                     spacing={4}
                 >
                     <Box h='40px' className='link'>
-                        <h5 style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
+                        <h5 className='sidebar-schools' style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
                             <GiGraduateCap />
                             Schools
                         </h5>
