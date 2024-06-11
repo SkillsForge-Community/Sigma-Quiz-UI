@@ -18,7 +18,7 @@ const AccountSettings = () => {
         <Sidebar />
         <Outlet />
         <div className="right-section">
-            <button className={(location.pathname === '/account-settings/profile-settings') ? 'active' : ''}  onClick={() => naviagte('/account-settings/profile-settings')}><FiUser size={20}/> Profile Settings <IoIosArrowForward size={20}/></button>
+            <button className={(location.pathname === '/account-settings/profile-settings' || location.pathname === '/account-settings') ? 'active' : ''}  onClick={() => naviagte('/account-settings/profile-settings')}><FiUser size={20}/> Profile Settings <IoIosArrowForward size={20}/></button>
             <button className={(location.pathname === '/account-settings/password-settings') ? 'active' : ''} onClick={() => naviagte('/account-settings/password-settings')}><RiLockPasswordLine size={20} /> Password Settings <IoIosArrowForward size={20}/></button>
             <button><MdLogout size={20} /> logout <IoIosArrowForward size={20}/></button>
         </div>
