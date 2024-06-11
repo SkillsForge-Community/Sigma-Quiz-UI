@@ -74,7 +74,7 @@ function Sidebar() {
                             </span>
                             
                         </h5>
-                        <span>/</span>
+                        <span style={{color:"white"}}>/</span>
                         <h5 className='crud'>
                             Add 
                             <span className='crud-icons'>
