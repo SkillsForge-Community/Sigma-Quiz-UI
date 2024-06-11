@@ -74,11 +74,13 @@ function Sidebar() {
                             </span>
                             
                         </h5>
-                        <span style={{color:"white"}}>/</span>
+                        <span style={{color:"white", display:"flex", alignItems:"center"}}>/</span>
                         <h5 className='crud'>
                             Add 
                             <span className='crud-icons'>
+                               
                             <FaPlus />
+                           
                             </span>
                            
                         </h5>

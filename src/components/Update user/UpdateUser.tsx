@@ -1,6 +1,6 @@
-import { Box, SimpleGrid } from "@chakra-ui/react"
-import { useNavigate } from "react-router-dom"
-import { NavLink, Outlet } from "react-router-dom"
+import { Box } from "@chakra-ui/react"
+import { useNavigate, Outlet } from "react-router-dom"
+import { NavLink} from "react-router-dom"
 import "./update.css"
 import { RiArrowLeftWideLine } from "react-icons/ri";
 export default function UpdateUser(){
@@ -9,7 +9,7 @@ export default function UpdateUser(){
         <div>
            <div className="update-header">
                     <Box className="update-header-inner">
-                        <div className="update-back-button" onClick={()=>navigate(-1)}>
+                        <div className="update-back-button" onClick={()=>navigate("/subadmin")}>
                             <RiArrowLeftWideLine />
 
                             <h5>Back</h5>
@@ -17,14 +17,12 @@ export default function UpdateUser(){
                         <NavLink className="update-link" to="/subadmin/update-user">
                             Personal
                         </NavLink>
-                        <NavLink className="update-link" to="/">
+                        <NavLink className="update-link" to="/subadmin/update-user/user-functions">
                             Functions
                         </NavLink>
                     </Box>
            </div>
-           <form action="">
-            
-           </form>
+           <Outlet/>
         </div>
     )
 }

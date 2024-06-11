@@ -13,6 +13,8 @@ import TestDetails from './components/TestDetails/TestDetails';
 import MainSubAdmin from './components/Subadmin/main/Main';
 import ManageUsers from './components/Subadmin/ManageUsers/ManageUsers';
 import UpdateUser from './components/Update user/UpdateUser';
+import UserProfile from './components/Update user Profile/UserProfile';
+import UserFunctions from './components/User Functions/UserFunctions';
 function App() {
   return (
     <ChakraProvider>    
@@ -25,7 +27,9 @@ function App() {
               <Route path=':schools' element={<SchoolDetails/>}/>
         </Route>
         <Route element={<UpdateUser/>} path="/subadmin/update-user">
-                  <Route index element={<UpdateUser/>}/>
+                  <Route index element={<UserProfile/>}/>
+                  <Route path='/subadmin/update-user/user-functions' element={<UserFunctions/>}/>
+
         </Route>
         <Route element={<NormalUsers/>} path="/users">
                 <Route path=':schools' element={<SchoolDetails/>}/>
