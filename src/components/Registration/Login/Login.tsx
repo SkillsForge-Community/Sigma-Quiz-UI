@@ -52,7 +52,7 @@ function Login() {
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event?.preventDefault()
         if (input && passwordInput && ValidateEmail(input)) {
-            navigate('/users/');
+            navigate('/select-quiz');
             return true
         }
         if(!input || !passwordInput){
