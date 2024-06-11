@@ -1,6 +1,5 @@
 import { Box } from '@chakra-ui/react'
 import { Select } from '@chakra-ui/react'
-import { GiGraduateCap } from "react-icons/gi";
 import { BsPercent } from "react-icons/bs";
 import { LuSchool } from "react-icons/lu";
 import "./Sidebar.css"
@@ -9,7 +8,11 @@ import { NavLink } from 'react-router-dom';
 import { FaPlus } from "react-icons/fa";
 import { FaPen } from "react-icons/fa6";
 import { IconContext } from 'react-icons';
-import { color } from 'framer-motion';
+import { MdAccountCircle } from "react-icons/md";
+import { FaUsers } from "react-icons/fa";
+import { CiSettings } from "react-icons/ci";
+import { CiCircleQuestion } from "react-icons/ci";
+
 function Sidebar() {
     return (
         <div>
@@ -27,7 +30,7 @@ function Sidebar() {
                     spacing={5}
                 >
                     <Box h='40px' className='link'>
-                        <h5 style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
+                        <h5 className='sidebar-schools' style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
                             Schools
                         </h5>
                     </Box>
@@ -63,7 +66,7 @@ function Sidebar() {
                         </h5>
                     </NavLink>
                     <Box w="156px" className='crud-operations'>
-                        <IconContext.Provider value={{color:"black"}}>
+                        <IconContext.Provider value={{color:"rgba(0, 0, 0, 1)"}}>
                         <h5 className='crud'>
                             Edit 
                             <span className='crud-icons'>
@@ -86,37 +89,40 @@ function Sidebar() {
                 <SimpleGrid spacing={5}>
                     <Box h='40px' className='link'>
                         <h5 style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
-                            <BsPercent />
+                            <BsPercent size={"26px"}/>
                             Score
                         </h5>
                     </Box>
                     <NavLink  className='links' to="/subadmin/All-Schools" >
                         <h5 style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
-                            <LuSchool />
+                            <LuSchool size={"26px"}/>
                             All Schools
                         </h5>
                     </NavLink>
                     <NavLink  className='links' to="/select-quiz">
                         <h5 style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
-                            <LuSchool />
-                            Manage Questions
+                        <CiCircleQuestion size={"26px"}/>
+                        Manage Questions
                         </h5>
                     </NavLink>
                     <Box h='40px' className='link'>
                         <h5 style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
-                            <BsPercent />
+                        <MdAccountCircle size={"26px"}/>
+
                             Account
                         </h5>
                     </Box>
                     <NavLink  className='links' to="/subadmin" >
                         <h5 style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
-                            <LuSchool />
-                            Manage Users
+                        <FaUsers size={"26px"}/>
+                        Manage Users
                         </h5>
                     </NavLink>
                     <NavLink  className='links' to="/subadmin/My-Account" >
                         <h5 style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
-                            <LuSchool />
+                            
+                        <CiSettings size={"26px"}/>
+
                             My Account
                         </h5>
                     </NavLink>

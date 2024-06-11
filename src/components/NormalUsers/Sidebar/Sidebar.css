@@ -14,7 +14,9 @@
   color: rgba(51, 51, 51, 0.6);
   transition: 10ms;
 }
-
+.sidebar-schools{
+    font-size: 20px;
+}
 .link{
     text-align: center;
     display: flex;

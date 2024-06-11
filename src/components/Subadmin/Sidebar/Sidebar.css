@@ -27,6 +27,7 @@
 .crud-operations:hover{
     background-color: purple;
 }
+
 .crud-operations{
     cursor: pointer;
     transition: 1s;
