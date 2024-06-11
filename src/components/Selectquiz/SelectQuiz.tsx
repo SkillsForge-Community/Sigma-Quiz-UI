@@ -6,13 +6,16 @@ import { GoPencil } from "react-icons/go";
 import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import AddQuiz from '../Addquiz/AddQuiz';
+import EditQuiz from '../Editquiz/EditQuiz';
 
 type selectQuizProps = {
   option: string
 }
 
+
 const SelectQuiz = ({option} : selectQuizProps) => {
-  const navigate=useNavigate()
+const navigate=useNavigate()
+
   return (
     <div className='select-quiz-page'>
 
@@ -45,23 +48,24 @@ const SelectQuiz = ({option} : selectQuizProps) => {
         <div className="get-started-btn">
           <button onClick={()=>{navigate("/users")}}>Get Started</button>
         </div>
-        
+
         <div className="logout">
           <Link to=''>Log Out</Link>
         </div>
 
       </div>
-      
-      {option === 'add' && 
-      <>
-      <div className="modal-background"></div>
-      <AddQuiz />
-      </>}
 
-      {option === 'edit' && 
-      <>
-      <div className="modal-background"></div>
-      </>}
+      {option === 'add' &&
+        <>
+          <div className="modal-background"></div>
+          <AddQuiz />
+        </>}
+
+      {option === 'edit' &&
+        <>
+          <div className="modal-background"></div>
+          <EditQuiz />
+        </>}
 
     </div>
   )
