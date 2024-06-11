@@ -16,8 +16,8 @@ function SchoolDetails() {
     return (
         <main className="test-details">
             <SimpleGrid spacing={5}>
-                <HStack spacing={414}>
-                    <Box w='auto' h='30px'>
+                <HStack className="details-two">
+                    <Box >
                         <h4 className="testDetails">Test Details</h4>
                     </Box>
                     <Box w='334px' h='30px'>
@@ -47,7 +47,7 @@ function SchoolDetails() {
                     </Box>
                     
                     <br />
-                    <HStack spacing={574}>
+                    <Box className="details-two">
                         <Box w='221px' h='27px'>
                             <h4 className="Answered">Answered by School two</h4>
                         </Box>
@@ -56,9 +56,9 @@ function SchoolDetails() {
                                 <h4 className="manage">Manage Questions</h4>
                             </Link>
                                 </Box>
-                            </HStack>
+                    </Box>
                         </div>
-                        <HStack alignItems={"center"} spacing={450}>
+                        <HStack className="details-two">
                             <Box w={"auto"}>
                                 <h5 className="answer">Answered Questions</h5>
                                 <PaginatedItems numOfPages={10} />
