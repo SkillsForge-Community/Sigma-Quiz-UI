@@ -120,7 +120,7 @@ function Sidebar() {
                         Manage Users
                         </h5>
                     </NavLink>
-                    <NavLink  className='links' to="/subadmin/My-Account" >
+                    <NavLink  className='links' to="account-settings" >
                         <h5 style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
                             
                         <CiSettings size={"26px"}/>

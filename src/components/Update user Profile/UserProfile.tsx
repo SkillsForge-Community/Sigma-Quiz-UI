@@ -1,7 +1,6 @@
-import { Box, Button, FormControl, FormHelperText, FormLabel, HStack, Input, Select, Stack, VStack, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormLabel, HStack, Input, Select, Stack, VStack, useDisclosure } from '@chakra-ui/react'
 import { SimpleGrid } from '@chakra-ui/react'
 import "./UserProfile.css"
-import VerticallyCenter from '../Validation/ValidationMessage'
 import Confirmation from '../Confirmation/Confirmation'
 import { FormEvent, SetStateAction, useState } from 'react'
 function UserProfile() {
