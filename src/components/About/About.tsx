@@ -30,7 +30,7 @@ function About() {
                     emptyColor='gray.200'
                     color='blue.500'
                     size='xl'
-                    style={{position:"absolute", margin: "0 auto"}}
+                    style={{position:"absolute", margin: "30px auto"}}
                     />}
                 >
                     <YouTubeVideo />

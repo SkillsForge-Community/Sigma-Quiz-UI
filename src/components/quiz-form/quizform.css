@@ -1,0 +1,76 @@
+.quiz-form{
+    display: flex;
+}
+.quiz-form .form-container{
+    width: 50%;
+}
+.quiz-form .form-container .form-field{
+    width: 100%;
+}
+.quiz-form .form-container .form-field label{
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+    margin-bottom: 8px;
+}
+.quiz-form .form-container .form-field input.input-field, .quiz-form .form-container .form-field textarea.input-field{
+    background-color: #EDEDED;
+    width: 90%;
+    font-size: 14px;
+    color: #333333;
+    border: none;
+    outline: none;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-family: 'Poppins';
+    resize: none;
+    margin-bottom: 10px;
+    border: 1px solid #EDEDED;
+}
+
+.quiz-form .form-container .form-field input.input-field:focus, .quiz-form .form-container .form-field textarea.input-field:focus{
+    border: 1px solid #8F19E7;
+}
+.quiz-form .form-container .form-field input::placeholder, .quiz-form .form-container .form-field textarea::placeholder{
+    opacity: 0.6;
+}
+.quiz-form .review-section{
+    width: 50%;
+}
+.quiz-form .review-section h3{
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+    margin-bottom: 8px;
+}
+.quiz-form .review-section .review-container{
+    width: 100%;
+    background-color: #EDEDED;
+    height: 91%;
+    border-radius: 10px;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.quiz-form .review-section .review-container .review-row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    gap: 15px;
+}
+.quiz-form .review-section .review-container .review-row span:nth-child(2){
+    text-align: right;
+}
+.custom-date-picker{
+    width: 90%;
+    padding: 15px 20px;
+    border: none;
+    background-color: #EDEDED;
+    color: #333;
+}
+.custom-date-picker:focus{
+    border: 1px solid #8F19E7;
+}

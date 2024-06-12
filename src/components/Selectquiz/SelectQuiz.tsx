@@ -1,22 +1,19 @@
 import React from 'react'
 import logo from './image/Group 1171275826.png'
 import './selectquiz.css'
+import { useNavigate } from "react-router-dom";
 import { LuPlusCircle } from "react-icons/lu";
 import { GoPencil } from "react-icons/go";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import AddQuiz from '../Addquiz/AddQuiz';
+import EditQuiz from '../Editquiz/EditQuiz';
 
 type selectQuizProps = {
   option: string
 }
-<<<<<<< Updated upstream
-
-const SelectQuiz = ({option} : selectQuizProps) => {
-=======
 const SelectQuiz = ({option} : selectQuizProps) => {
   const navigate=useNavigate()
->>>>>>> Stashed changes
   return (
     <div className="select-quiz-page">
       <div className="select-quiz-container">
@@ -45,32 +42,12 @@ const SelectQuiz = ({option} : selectQuizProps) => {
         </div>
 
         <div className="get-started-btn">
-<<<<<<< Updated upstream
-          <button>Get Started</button>
-        </div>
-        
-=======
           <button onClick={() => navigate("/AddSchool")}>Get Started</button>
         </div>
->>>>>>> Stashed changes
         <div className="logout">
           <Link to="">Log Out</Link>
         </div>
       </div>
-<<<<<<< Updated upstream
-      
-      {option === 'add' && 
-      <>
-      <div className="modal-background"></div>
-      <AddQuiz />
-      </>}
-
-      {option === 'edit' && 
-      <>
-      <div className="modal-background"></div>
-      </>}
-
-=======
       {option === "add" && (
         <>
           <div className="modal-background"></div>
@@ -84,7 +61,6 @@ const SelectQuiz = ({option} : selectQuizProps) => {
           <EditQuiz />
         </>
       )}
->>>>>>> Stashed changes
     </div>
   );
 }
