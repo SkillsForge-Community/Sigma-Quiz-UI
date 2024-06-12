@@ -1,9 +1,11 @@
 import React from 'react';
+import "./App.css";
 import Homepage from './components/Homepage/Homepage';
 import { ChakraProvider } from '@chakra-ui/react'
 import { Routes, Route } from 'react-router-dom';
 import SelectQuiz from './components/Selectquiz/SelectQuiz';
 import About from './components/About/About';
+import AddSchool from './components/Addschool/AddSchool';
 import NotFound from './components/NotFound';
 import Login from './components/Registration/Login/Login';
 import Signin from './components/Registration/Signin/Signin';
@@ -16,19 +18,17 @@ import PasswordSettings from './components/account_settings/password_settings/Pa
 import ProfileSettings from './components/account_settings/profile_settings/ProfileSettings';
 import MainSubAdmin from './components/Subadmin/main/Main';
 import ManageUsers from './components/Subadmin/ManageUsers/ManageUsers';
-
 function App() {
   return (
-    <ChakraProvider>    
-      <div className="App">
-      
+    <ChakraProvider>
+      <div className="App">      
       <Routes>
         <Route element={<Homepage/>} path='/'/>
         <Route element={<MainSubAdmin/>} path="/subadmin">
             <Route index element={<ManageUsers/>}/>
               <Route path=':schools' element={<SchoolDetails/>}/>
-
         </Route>
+        <Route element={<AddSchool quizName="2024 Roseline Etuokwu Quiz Competition" dateCreated="2024 - 05 - 30"/>}path="/Addschool"/>
         <Route element={<NormalUsers/>} path="/users">
                 <Route path=':schools' element={<SchoolDetails/>}/>
           </Route>
@@ -45,10 +45,7 @@ function App() {
           <Route path='profile-settings' element={<ProfileSettings />} />
           <Route index element={<ProfileSettings />} />
         </Route>
-
-      </Routes>
-      
-
+      </Routes>     
     </div>
     </ChakraProvider>
   );
