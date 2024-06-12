@@ -2,16 +2,22 @@
     display: inline-flex;
     align-items: center;
     gap: 20px;
+    font-family: "Poppins", sans-serif;
+
 }
 .profile-form{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-family: "Poppins", sans-serif;
+
 }
 .profile-password{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    font-family: "Poppins", sans-serif;
+
 }
 .update-button{
     background-color: rgba(143, 25, 231, 1);
@@ -24,7 +30,11 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+    font-family: "Poppins", sans-serif;
+
 }
 .updateProfileUser{
     padding: 30px;
+    font-family: "Poppins", sans-serif;
+
 }

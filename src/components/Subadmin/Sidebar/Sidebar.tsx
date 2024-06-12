@@ -114,7 +114,7 @@ function Sidebar() {
                             Account
                         </h5>
                     </Box>
-                    <NavLink  className='links' to="/subadmin" >
+                    <NavLink  className='links' to="manage-users" >
                         <h5 style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
                         <FaUsers size={"26px"}/>
                         Manage Users

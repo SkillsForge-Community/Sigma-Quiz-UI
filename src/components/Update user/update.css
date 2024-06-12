@@ -20,3 +20,6 @@
     gap: 10px;
     cursor: pointer;
 }
+.update-back-button:hover{
+    color: #8F19E7;
+}

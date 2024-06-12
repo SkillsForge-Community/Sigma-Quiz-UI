@@ -14,10 +14,10 @@ export default function UpdateUser(){
 
                             <h5>Back</h5>
                         </div>
-                        <NavLink className="update-link" to="/subadmin/update-user">
+                        <NavLink className="update-link" to="profile">
                             Personal
                         </NavLink>
-                        <NavLink className="update-link" to="/subadmin/update-user/user-functions">
+                        <NavLink className="update-link" to="user-functions">
                             Functions
                         </NavLink>
                     </Box>

@@ -1,7 +1,8 @@
-import { Box, FormControl, FormHelperText, FormLabel, HStack, Input, Select, Stack, VStack, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormHelperText, FormLabel, HStack, Input, Select, Stack, VStack, useDisclosure } from '@chakra-ui/react'
 import { SimpleGrid } from '@chakra-ui/react'
 import "./UserProfile.css"
 import VerticallyCenter from '../Validation/ValidationMessage'
+import Confirmation from '../Confirmation/Confirmation'
 import { FormEvent, SetStateAction, useState } from 'react'
 function UserProfile() {
     const [checked,setChecked]=useState<boolean>(false)
@@ -23,34 +24,36 @@ function UserProfile() {
       function handleSubmit(e: FormEvent<HTMLFormElement>){
             e.preventDefault()
             if (!firstname || ! lastname || !email || !password || !created || !loginDate || (checked || !inputValue)){
-                onOpen()
+                return false
             }
                
 
       }
+      function handlePasswordReset(){
+        onOpen()
+      }
     return (
         <div className='updateProfileUser'>
-            <VerticallyCenter message='Please fill all input boxes!' isOpen={isOpen} onClose={onClose}/>
+            <Confirmation isOpen={isOpen} onClose={onClose} />
             <SimpleGrid>
                 <Box>
                     <h5>Personal Information</h5>
                 </Box>
                 <form onSubmit={e=> handleSubmit(e)}>
                     
-            <input type="checkbox" onChange={()=>setChecked(!checked)}  id="checkbox" checked={checked}/>
-            <label htmlFor="checkbox">{checked?"Enabled":"Disable"}</label>
+            <input type="checkbox" onChange={()=>setChecked(!checked)}  id="checkbox" checked={checked}/> 
+            <label htmlFor="checkbox">&nbsp;{checked?"Enabled":"Disable"}</label>
                     <div className='profile-form'>
-                    
-                        <Stack>
+                        <Stack spacing={5}>
                             
                             <FormControl>
 
-                                <SimpleGrid    gridTemplateColumns={'115px 1fr'} alignItems={"center"}>
+                                <SimpleGrid gridTemplateColumns={'115px 1fr'} alignItems={"center"}>
                                     <FormLabel>Name:</FormLabel>
 
                                     <HStack spacing="62px">
-                                        <Input type='text' value={firstname} onChange={(e)=>setfirstName(e.target.value)} width="320px" height="49px" placeholder='First' />
-                                        <Input type='text' value={lastname} onChange={(e)=>setlastName(e.target.value)} width="320px" height="49px" placeholder='Last' />
+                                        <Input type='text' value={firstname} onChange={(e)=>setfirstName(e.target.value)} width="320px" height="49px" placeholder='First' required/>
+                                        <Input type='text' value={lastname} onChange={(e)=>setlastName(e.target.value)} width="320px" height="49px" placeholder='Last' required/>
                                     </HStack>
                                 </SimpleGrid>
 
@@ -59,7 +62,7 @@ function UserProfile() {
                             <FormControl>
                                 <SimpleGrid spacing={4} gridTemplateColumns={'100px 1fr'} alignItems={"center"}>
                                     <FormLabel>Email:</FormLabel>
-                                    <Input width="702px" value={email} onChange={(e)=>setEmail(e.target.value)} height="49px" type='email' />
+                                    <Input width="702px" value={email} onChange={(e)=>setEmail(e.target.value)} height="49px" type='email' required/>
                                 </SimpleGrid>
 
 
@@ -72,6 +75,7 @@ function UserProfile() {
                                     height="49px" value={checked?inputValue: "Disabled"} 
                                     type='text' style={{transitionDuration:"1s",color: !checked ?"red":""}}   
                                     readOnly={!checked}
+                                    required
                                     />
                                 </SimpleGrid>
 
@@ -84,8 +88,6 @@ function UserProfile() {
                             </FormControl>
                            <br />
                            <br />
-                           <br />
-                           <br />
                             <button type="submit" className='update-button' style={{display:'flex', }}>Update</button>
                         </Stack>
                         <Stack>
@@ -95,8 +97,8 @@ function UserProfile() {
                                         <FormLabel>Password:</FormLabel>
 
                                         <div className='profile-password'>
-                                            <Input type='password' value={password} onChange={(e)=>setPassword(e.target.value)} width="289px" height="49px" />
-                                            <Input type='reset' width="289px" height="49px" value="Reset Password" />
+                                            <Input type='password' value={password} onChange={(e)=>setPassword(e.target.value)} width="289px" height="49px" required/>
+                                            <Button type='reset' width="289px" height="49px" onClick={handlePasswordReset}>Reset Password</Button>
                                         </div>
                                     </SimpleGrid>
 
@@ -107,7 +109,7 @@ function UserProfile() {
                                 <FormControl>
                                     <SimpleGrid spacing={4} gridTemplateColumns={'130px 1fr'} alignItems={"center"}>
                                         <FormLabel>Date Created:</FormLabel>
-                                        <Input width="289px" value={created} onChange={(e)=>setCreated(e.target.value)} height="49px" placeholder='Select Date and Time' type='datetime-local' />
+                                        <Input width="289px" value={created} onChange={(e)=>setCreated(e.target.value)} height="49px" placeholder='Select Date and Time' type='datetime-local' required/>
                                     </SimpleGrid>
 
 
@@ -115,7 +117,7 @@ function UserProfile() {
                                 <FormControl>
                                     <SimpleGrid spacing={4} gridTemplateColumns={'130px 1fr'} alignItems={"center"}>
                                         <FormLabel>Last Login Date:</FormLabel>
-                                        <Input value={loginDate} onChange={(e)=>setLoginDate(e.target.value)} width="289px" height="49px" placeholder='Select Date and Time' type='datetime-local' />
+                                        <Input value={loginDate} onChange={(e)=>setLoginDate(e.target.value)} width="289px" height="49px" placeholder='Select Date and Time' type='datetime-local' required/>
                                     </SimpleGrid>
 
 
