@@ -1,7 +1,6 @@
 import React from 'react'
 import logo from './image/Group 1171275826.png'
 import './selectquiz.css'
-import { useNavigate } from "react-router-dom";
 import { LuPlusCircle } from "react-icons/lu";
 import { GoPencil } from "react-icons/go";
 import { Link, useNavigate } from 'react-router-dom';

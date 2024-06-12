@@ -13,7 +13,6 @@ import NormalUsers from './components/NormalUsers/NormalUsers';
 import SchoolDetails from './components/NormalUsers/SchoolDetails/SchoolDetails';
 import TestDetails from './components/TestDetails/TestDetails';
 import AccountSettings from './components/account_settings/AccountSettings';
-import path from 'path';
 import PasswordSettings from './components/account_settings/password_settings/PasswordSettings';
 import ProfileSettings from './components/account_settings/profile_settings/ProfileSettings';
 import MainSubAdmin from './components/Subadmin/main/Main';
