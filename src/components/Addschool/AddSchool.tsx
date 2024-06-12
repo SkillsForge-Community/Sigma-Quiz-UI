@@ -69,6 +69,7 @@ const AddSchool: React.FC<AddSchoolProps> = ({ quizName, dateCreated }) => {
                     ))}
                 </div>
                 <button className="addschool-btn" onClick={handleOpenModal}>
+                    <LuPlusCircle size={24} className="plus-icon" />
                     Add School
                 </button>
             </div>

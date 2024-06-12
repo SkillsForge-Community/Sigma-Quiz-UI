@@ -46,7 +46,10 @@ const AddSchoolModal: React.FC<AddSchoolModalProps> = ({ onClose, onAddSchool })
                         <input type="date" value='2024 - 05 - 30' readOnly className='input-field' />
                     </div>
                 </div>
-                <button type="submit" onClick={handleSubmit} className="add-school-btn">Add School</button>
+                <button type="submit" onClick={handleSubmit} className="add-school-btn">
+                    <LuPlusCircle size={24} className="plus-icon" />
+                    Add School
+                </button>
             </div>
         </div>
     );

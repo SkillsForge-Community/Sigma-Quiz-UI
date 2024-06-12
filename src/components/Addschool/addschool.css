@@ -166,6 +166,10 @@
     transition: background 0.3s;
     width: 215px;
     height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .addschool-btn:hover {
