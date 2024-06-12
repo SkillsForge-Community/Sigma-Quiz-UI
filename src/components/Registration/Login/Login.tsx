@@ -127,7 +127,7 @@ function Login() {
 
                             />
                             <InputRightElement width='4.5rem' alignItems="center">
-                                <Button className="password-button" bg="none" pt="10px"  h='1.75rem' size='md' onClick={() => setShow(!show)}>
+                                <Button variant={"none"} className="password-button" bg="none" pt="10px"  h='1.75rem' size='md' onClick={() => setShow(!show)}>
                                     {show ? <BiShow width="1000px"   />: <BiHide width="10px"  /> }
                                 </Button>
                             </InputRightElement>
