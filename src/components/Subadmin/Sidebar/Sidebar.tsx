@@ -74,11 +74,13 @@ function Sidebar() {
                             </span>
                             
                         </h5>
-                        <span>/</span>
+                        <span style={{color:"white", display:"flex", alignItems:"center"}}>/</span>
                         <h5 className='crud'>
                             Add 
                             <span className='crud-icons'>
+                               
                             <FaPlus />
+                           
                             </span>
                            
                         </h5>
@@ -112,7 +114,7 @@ function Sidebar() {
                             Account
                         </h5>
                     </Box>
-                    <NavLink  className='links' to="/subadmin" >
+                    <NavLink  className='links' to="manage-users" >
                         <h5 style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
                         <FaUsers size={"26px"}/>
                         Manage Users

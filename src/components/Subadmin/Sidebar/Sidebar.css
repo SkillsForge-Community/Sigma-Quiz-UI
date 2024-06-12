@@ -53,7 +53,7 @@
     align-items: center;
     justify-content: center;
 }
-a.active{
+.links.active{
     color: #8F19E7;
     box-shadow: 2px 2px 15px 1px #00000040;
     border: 5px;
@@ -66,7 +66,7 @@ a.active{
     border-left-color: #8F19E7;
     
 }
-a.active:hover{
+.links.active:hover{
     color: purple;
 
 }

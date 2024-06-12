@@ -8,6 +8,7 @@ import { useDisclosure } from '@chakra-ui/react';
 import pfp from "../Ellipse 35.svg"
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { SimpleGrid } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import {
     Table,
     Thead,
@@ -22,6 +23,7 @@ export default function ManageUsers() {
     const [search, setSearch] = useState<string>("");
     const [name,/* setName */] = useState<string>("Jenner")
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
+    const navigate=useNavigate()
     function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
         if (e.key === "Enter") {
             if (!search) {
@@ -134,9 +136,13 @@ export default function ManageUsers() {
             status: true
         }
     ]
+   const handleUser= (index:number)=>{
+        setActiveIndex(activeIndex === index ? null : index)
+        navigate("/subadmin/update-user")
+   }
     const manage_users = users.map((user, index) => {
         return (
-            <Tr onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+            <Tr onClick={()=>handleUser(index)}
                 className={`mange-users-data ${activeIndex === index ? "active-mange-users-data" : ""}`} key={index}>
                 <Td>{user.name}</Td>
                 <Td>{user.email}</Td>

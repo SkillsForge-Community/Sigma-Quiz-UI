@@ -18,6 +18,9 @@ import PasswordSettings from './components/account_settings/password_settings/Pa
 import ProfileSettings from './components/account_settings/profile_settings/ProfileSettings';
 import MainSubAdmin from './components/Subadmin/main/Main';
 import ManageUsers from './components/Subadmin/ManageUsers/ManageUsers';
+import UpdateUser from './components/Update user/UpdateUser';
+import UserProfile from './components/Update user Profile/UserProfile';
+import UserFunctions from './components/User Functions/UserFunctions';
 function App() {
   return (
     <ChakraProvider>
@@ -26,7 +29,13 @@ function App() {
         <Route element={<Homepage/>} path='/'/>
         <Route element={<MainSubAdmin/>} path="/subadmin">
             <Route index element={<ManageUsers/>}/>
+            <Route path='manage-users' element={<ManageUsers/>}/>
               <Route path=':schools' element={<SchoolDetails/>}/>
+        </Route>
+        <Route element={<UpdateUser/>} path="/subadmin/update-user">
+                  <Route index element={<UserProfile/>}/>
+                  <Route path='profile' element={<UserProfile/>}/>
+                  <Route path='user-functions' element={<UserFunctions/>}/>
         </Route>
         <Route element={<AddSchool quizName="2024 Roseline Etuokwu Quiz Competition" dateCreated="2024 - 05 - 30"/>}path="/Addschool"/>
         <Route element={<NormalUsers/>} path="/users">
