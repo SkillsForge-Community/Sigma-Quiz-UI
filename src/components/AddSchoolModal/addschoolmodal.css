@@ -1,0 +1,105 @@
+.modal {
+    position: absolute;
+    background-color: #fff;
+    padding: 30px;
+    width: 1040.8px;
+    height: 630px;
+    border-radius: 10px;
+    top: 30px;
+    left: 160px;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+    gap: 50px;
+    margin-bottom: 35px;
+}
+
+.head h2 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: left;
+}
+
+.back {
+    text-decoration: none;
+    color: var(--black-color);
+    transition: color 0.3s;
+}
+
+.back:hover {
+    color: var(--primary-color);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.school-field input {
+    width: 567px;
+    background: #EDEDED;
+    border: 1px solid #33333380;
+    padding-left: 40px;
+}
+
+.date-field input{
+    width: 250px;
+    background: #EDEDED;
+    border: 1px solid #33333380;
+}
+
+.modal-form {
+    margin-bottom: 15px;
+}
+
+.modal-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    color: #333333;
+}
+
+.date-field label {
+    text-align: right;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cac9d9;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #555555;
+    outline: none;
+}
+
+.add-school-btn {
+    float: right;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 215px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.add-school-btn:hover {
+    background: var(--hover-color);
+}
