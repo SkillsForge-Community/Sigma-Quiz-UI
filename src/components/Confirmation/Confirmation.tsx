@@ -7,6 +7,7 @@ import {
   VStack,
   Box,
   HStack,
+  Button
 } from '@chakra-ui/react'
 import { RiArrowLeftWideFill } from "react-icons/ri";
 import { FaCheck } from "react-icons/fa";
@@ -48,20 +49,20 @@ export default function Confirmation({ isOpen, onClose }: ConfirmationProps) {
              ( <VStack spacing={20}>
                 <Box className='confirmation-message'>Are you sure you want to reset password ?</Box>
                 <HStack spacing={10}>
-                  <button className='confirmation-button yes' onClick={() => setReset(true)}>Yes</button>
-                  <button className='confirmation-button no' onClick={onClose}>No</button>
+                  <Button  _hover={{opacity:"0.8", transitionDuration:"0.5s"}}  className='confirmation-button yes' onClick={() => setReset(true)}>Yes</Button>
+                  <Button _hover={{opacity:"0.8", transitionDuration:"0.5s"}} className='confirmation-button no' onClick={onClose}>No</Button>
                 </HStack>
               </VStack>)
               :
               (<VStack spacing={5}>
                 <Box className='confirmation-message'>Password Reset Successful</Box>
-                <Box className='congratulatory-check'>
+                <Box  _hover={{opacity:"0.8", transitionDuration:"0.5s"}} className='congratulatory-check'>
                   <FaCheck color='white' size={100}/>
 
                 </Box>
 
                 <Box className='congratulatory-confirmation'>You have successfully reset this user's password.</Box>
-                <button className='confirmation-button no' onClick={handleClose}>FINISH</button>
+                <Button  _hover={{opacity:"0.8", transitionDuration:"0.5s"}} className='confirmation-button no' onClick={handleClose}>FINISH</Button>
               </VStack>)}
             </div>
           </ModalBody>

@@ -19,7 +19,11 @@
     font-family: "Poppins", sans-serif;
 
 }
-.update-button{
+.updateProfileForm{
+    margin: 0;
+    padding: 0;
+}
+.update-buttonA{
     background-color: rgba(143, 25, 231, 1);
     width: 289px;
     height: 49px;

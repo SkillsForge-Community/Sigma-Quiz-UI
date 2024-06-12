@@ -34,19 +34,16 @@ function UserProfile() {
     return (
         <div className='updateProfileUser'>
             <Confirmation isOpen={isOpen} onClose={onClose} />
-            <SimpleGrid>
+            <SimpleGrid spacing={2}>
                 <Box>
                     <h5>Personal Information</h5>
                 </Box>
-                <form onSubmit={e=> handleSubmit(e)}>
-                    
+                <form className='updateProfileForm' onSubmit={e=> handleSubmit(e)}>
             <input type="checkbox" onChange={()=>setChecked(!checked)}  id="checkbox" checked={checked}/> 
             <label htmlFor="checkbox">&nbsp;{checked?"Enabled":"Disable"}</label>
                     <div className='profile-form'>
                         <Stack spacing={5}>
-                            
                             <FormControl>
-
                                 <SimpleGrid gridTemplateColumns={'115px 1fr'} alignItems={"center"}>
                                     <FormLabel>Name:</FormLabel>
 
@@ -85,9 +82,8 @@ function UserProfile() {
                                     <Select variant='outline' width="289px" height="49px" placeholder='Super admin' />
                                 </SimpleGrid>
                             </FormControl>
-                           <br />
-                           <br />
-                            <button type="submit" className='update-button' style={{display:'flex', }}>Update</button>
+                           
+                            <Button  className='update-buttonA' variant={"none"}  _hover={{opacity:"0.8", transitionDuration:"0.5s"}} type="submit" style={{display:'flex', }}>Update</Button>
                         </Stack>
                         <Stack>
                             <VStack>
