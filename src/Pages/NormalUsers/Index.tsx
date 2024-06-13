@@ -2,6 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import Sidebar from '../../Global Components/Sidebar/Sidebar';
 import { Outlet } from 'react-router-dom'
 import './styles.css';
+
 function NormalUsers(){
     return(
         <Grid
@@ -13,7 +14,7 @@ function NormalUsers(){
         fontWeight='bold'
         >
   <GridItem height="1024px" bg='#EDEDED'  area={'sidebar'}>
-    <Sidebar/>
+    <Sidebar isLoggedIn = {false}/>
   </GridItem>
   <GridItem pl='2' bg='#FFFFFF' area={'main'}>
    <Outlet/>
