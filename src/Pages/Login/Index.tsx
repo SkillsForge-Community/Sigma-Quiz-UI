@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles.css"
 import { RiLockPasswordLine } from "react-icons/ri";
 import { NavLink, useNavigate } from "react-router-dom";
-import VerticallyCenter from "../../Global Components/Validation/ValidationMessage";
+import VerticallyCenter from "../../Global Components/Modals/Validation/ValidationMessage";
 import {
     
    useDisclosure,

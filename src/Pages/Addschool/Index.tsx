@@ -4,7 +4,7 @@ import { LuPlusCircle } from "react-icons/lu";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiTrash } from "react-icons/ci";
-import AddSchoolModal from '../../Global Components/AddSchoolModal/AddSchoolModal';
+import AddSchoolModal from '../../Global Components/Modals/AddSchoolModal/AddSchoolModal';
 import './styles.css'; 
 
 type AddSchoolProps = {
