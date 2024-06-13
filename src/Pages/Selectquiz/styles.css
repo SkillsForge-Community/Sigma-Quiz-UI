@@ -1,0 +1,124 @@
+.select-quiz-page{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 30px 0;
+    position: relative;
+}
+.select-quiz-page .select-quiz-container{
+    padding: 44px;
+    width: 761px;
+    background-color: #EDEDED;
+    border-radius: 30px;
+    transform: scale(0.82);
+}
+.select-quiz-page .select-quiz-container .logo{
+    width: 185px;
+}
+.select-quiz-page .select-quiz-container h3{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #8F19E7;
+    margin: 0;
+}
+.select-quiz-page .select-quiz-container p{
+    color: #333333;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    margin: 0;
+    opacity: 0.6;
+}
+.select-field{
+    position: relative;
+    margin-top: 57px;
+}
+.select-quiz-page .select-quiz-container select{
+    width: 100%;
+    padding: 22px 50px;
+    border: 1px solid #cac9d9;
+    border-radius: 10px;
+    appearance: none;
+    font-size: 18px;
+    color: #555555;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+}
+.select-quiz-page .select-quiz-container select:focus{
+    border: 1px solid #8F19E7;
+}
+.arrow-down{
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 400;
+}
+.select-quiz-page .select-quiz-container .add-edit-btns{
+    margin-top: 40px;
+}
+.select-quiz-page .select-quiz-container .add-edit-btns a{
+    width: 174px;
+    height: 60px;
+    background-color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    color: #555555;
+    font-weight: 500;
+    margin-right: 30px;
+    text-decoration: none;
+    transition: .3s;
+}
+.select-quiz-page .select-quiz-container .add-edit-btns a:hover{
+    transform: scale(1.02);
+}
+.get-started-btn{
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+}
+.get-started-btn button{
+    background-color: #8F19E7;
+    width: 593px;
+    color: #fff;
+    padding: 20px 0;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    transition: .15s;
+}
+.get-started-btn button:hover{
+    background-color: #9d48df;
+}
+.logout{
+    margin-top: 100px;
+    text-align: center;
+}
+.logout a{
+    font-size: 16px;
+    color: #333333;
+    text-decoration: none;
+}
+.logout a:hover{
+    color: #8F19E7;
+    text-decoration: underline;
+}
+.modal-background{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #000;
+    opacity: 0.5;
+}

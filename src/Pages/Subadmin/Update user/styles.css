@@ -1,0 +1,25 @@
+
+.update-link.active{
+    color: #8F19E7;
+}
+.update-header{
+    background-color: rgba(228, 227, 227, 1);
+    padding-left: 30px;
+}
+.update-header-inner{
+    display: flex;
+    flex-direction: row;
+    height: 73px;
+    align-items: center;
+    gap: 30px;
+}
+.update-back-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+.update-back-button:hover{
+    color: #8F19E7;
+}

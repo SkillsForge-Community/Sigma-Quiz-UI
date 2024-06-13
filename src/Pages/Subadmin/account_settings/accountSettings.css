@@ -1,0 +1,46 @@
+.account-setting-container{
+    display: flex;
+}
+.right-section{
+    width: calc(54% - 255px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 175px;
+    padding: 50px;
+    height: fit-content;
+    margin: auto;
+}
+.right-section button{
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    gap: 25px;
+    height: 75px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333333;
+    border-radius: 10px;
+    position: relative;
+    border: 1px solid rgb(51, 51, 51, 0.5);
+}
+.right-section button.active{
+    width: 100%;
+    background-color: #8F19E7;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    gap: 25px;
+    height: 75px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 10px;
+    position: relative;
+}
+.right-section button svg:nth-child(2){
+    position: absolute;
+    right: 20px;
+}
