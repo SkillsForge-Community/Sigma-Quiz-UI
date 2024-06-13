@@ -1,4 +1,4 @@
-import infor from "../../Assests/Images/info.png"
+import infor from "../../assets/Images/info.png"
 import { IoPlayCircleOutline } from "react-icons/io5"
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";

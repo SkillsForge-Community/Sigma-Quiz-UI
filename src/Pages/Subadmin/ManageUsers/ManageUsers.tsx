@@ -5,7 +5,7 @@ import { IconContext } from 'react-icons';
 import { useState } from 'react';
 import VerticallyCenter from '../../../Global Components/Validation/ValidationMessage';
 import { useDisclosure } from '@chakra-ui/react';
-import pfp from "../../../Assests/Images/Ellipse 35.svg"
+import pfp from "../../../assets/Images/Profile picture.svg"
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { SimpleGrid } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';

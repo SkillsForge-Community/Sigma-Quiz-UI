@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import logo from "../../Assests/Images/logo.svg"
+import logo from "../../assets/Images/logo.svg"
 import { IoMdHome } from "react-icons/io";
 import './styles.css'; 
 import { useNavigate } from "react-router-dom";

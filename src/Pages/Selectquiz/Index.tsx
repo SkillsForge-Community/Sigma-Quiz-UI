@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../Assests/Images/Group 1171275826.png'
+import logo from '../../assets/Images/Group 1171275826.png'
 import "./styles.css"
 import { LuPlusCircle } from "react-icons/lu";
 import { GoPencil } from "react-icons/go";
