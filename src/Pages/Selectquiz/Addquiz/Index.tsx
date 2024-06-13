@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './styles.css'; 
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import Success from '../../../Global Components/Modals/success-page/Success';
+import Success from '../../../Global Components/Modals/success-modal/Success';
 import QuizForm from '../quiz-form/QuizForm';
 const AddQuiz = () => {
 
