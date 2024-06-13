@@ -6,6 +6,7 @@ import QuizCard from '../quiz-card/QuizCard';
 import QuizForm from '../quiz-form/QuizForm';
 import Success from '../../../Global Components/Modals/success-modal/Success';
 
+
 type quizListType = {
   title: string,
   description: string,
