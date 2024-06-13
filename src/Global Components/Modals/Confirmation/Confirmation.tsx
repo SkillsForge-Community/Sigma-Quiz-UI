@@ -57,7 +57,7 @@ export default function Confirmation({ isOpen, onClose }: ConfirmationProps) {
               (<VStack spacing={5}>
                 <Box className='confirmation-message'>Password Reset Successful</Box>
                 <Box  _hover={{opacity:"0.8", transitionDuration:"0.5s"}} className='congratulatory-check'>
-                  <FaCheck color='white' size={100}/>
+                  <FaCheck color='white' size={90}/>
 
                 </Box>
 

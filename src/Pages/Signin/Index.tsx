@@ -4,7 +4,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Select, SimpleGrid } from '@chakra-ui/react'
 import "./styles.css"
-import VerticallyCenter from "../../Global Components/Validation/ValidationMessage";
+import VerticallyCenter from "../../Global Components/Modals/Validation/ValidationMessage";
 import {
     
    useDisclosure,
