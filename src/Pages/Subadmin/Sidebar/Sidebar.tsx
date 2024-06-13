@@ -1,8 +1,8 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Flex, border } from '@chakra-ui/react'
 import { Select } from '@chakra-ui/react'
 import { BsPercent } from "react-icons/bs";
 import { LuSchool } from "react-icons/lu";
-import "./Sidebar.css"
+// import "./Sidebar.css"
 import { SimpleGrid } from '@chakra-ui/react'
 import { NavLink } from 'react-router-dom';
 import { FaPlus } from "react-icons/fa";
@@ -13,42 +13,69 @@ import { FaUsers } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 
+const linkStyles = {
+    textAlign: "center"
+}
+const linksStyles = {
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    padding: "5px",
+   height: "47px",
+    overflow: "visible",
+    fontFamily: `"Poppins", sans-serif`,
+  fontWeight: 400,
+  fontStyle: "normal",
+  fontSize: "16px",
+  color: "rgba(51, 51, 51, 0.6)",
+  transition: "10ms",
+  border: "1px solid red"
+}
+
 function Sidebar() {
     return (
         <div>
             <SimpleGrid
                 spacing={10}
-
             >
-                <Box h='40px'  className='link'>
-                    <Select width="158px"  placeholder='QUIZ 2024' >
-
+                <Box h='40px' className='link'>
+                    <Flex sx={linkStyles}>
+                    <Select width="158px" placeholder='QUIZ 2024' >
                     </Select>
+                    </Flex>
                 </Box>
 
                 <SimpleGrid
                     spacing={5}
                 >
-                    <Box h='40px' className='link'>
+                    <Box h='40px' className='link' sx={linksStyles}>
+                        <Flex>
                         <h5 className='sidebar-schools' style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
                             Schools
                         </h5>
+                        </Flex>
                     </Box>
                     <NavLink to="/subadmin/Ambassadors" className='links'>
-                        <h5 style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
+                    <Flex sx={linksStyles}>
+                        <h5 >
                             Ambassadors
-    
                         </h5>
+                        </Flex>
                     </NavLink>
                     <NavLink  className='links' to="/subadmin/School-Two"   >
+                    <Flex sx={linksStyles}>
                         <h5>
                             School Two
                         </h5>
+                        </Flex>
                     </NavLink>
                     <NavLink  className='links' to="/subadmin/School-Three" >
+                    <Flex sx={linksStyles}>
                         <h5 >
                             School Three
                         </h5>
+                        </Flex>
                     </NavLink>
                     <NavLink  className='links' to="/subadmin/School-Four" >
                         <h5 >
