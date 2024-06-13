@@ -1,8 +1,7 @@
-import { Box, Flex, Heading, Text, background, border } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text} from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
 import { BsPercent } from "react-icons/bs";
 import { LuSchool } from "react-icons/lu";
-// import "./Sidebar.css"
 import { SimpleGrid } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
@@ -43,10 +42,18 @@ const linksStyles = {
     borderBottom: 0,
     borderLeft: "5px",
     borderstyle: "solid",
-    ":hover": {
-        color: "purple"
-    }
   },
+    _active:{
+    color: "#8F19E7",
+    boxShadow: " 2px 2px 15px 1px #00000040",
+    border: "5px",
+    borderLeftColor: "#8F19E7",
+    borderTop: 0,
+    borderRight: 0,
+    borderBottom: 0,
+    borderLeft: "5px",
+    borderstyle: "solid",
+  }
 };
 const crudOperationsStyles = {
     cursor: "pointer",
