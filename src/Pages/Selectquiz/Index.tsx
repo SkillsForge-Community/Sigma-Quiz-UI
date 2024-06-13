@@ -5,7 +5,7 @@ import { LuPlusCircle } from "react-icons/lu";
 import { GoPencil } from "react-icons/go";
 import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
-import AddQuiz from '../Addquiz/Index';
+import AddQuiz from './Addquiz/Index';
 import EditQuiz from './Editquiz/EditQuiz';
 
 type selectQuizProps = {

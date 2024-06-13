@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import './styles.css'; 
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import Success from '../../Global Components/success-page/Success';
-import QuizForm from '../../Global Components/quiz-form/QuizForm';
+import Success from '../../../Global Components/success-page/Success';
+import QuizForm from '../quiz-form/QuizForm';
 const AddQuiz = () => {
 
   const [addQuizPage, setAddQuizPage] = useState<number>(1);
