@@ -1,5 +1,5 @@
 import { Box, HStack, VStack } from "@chakra-ui/react"
-import logo from "../../Assests/Images/logo.svg"
+import logo from "../../assets/Images/logo.svg"
 import "./Logo.css"
 function Logo() {
     return (

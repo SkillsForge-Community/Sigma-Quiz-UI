@@ -1,7 +1,7 @@
 import { Box, Button, FormControl, FormLabel, HStack, Input, Select, Stack, VStack, useDisclosure } from '@chakra-ui/react'
 import { SimpleGrid } from '@chakra-ui/react'
 import "./UserProfile.css"
-import Confirmation from '../Confirmation/Confirmation'
+import Confirmation from '../../../../Global Components/Modals/Confirmation/Confirmation'
 import { FormEvent, SetStateAction, useState } from 'react'
 function UserProfile() {
     const [checked,setChecked]=useState<boolean>(false)

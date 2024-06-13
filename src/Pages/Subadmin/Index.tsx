@@ -1,5 +1,5 @@
 import { Grid, GridItem } from '@chakra-ui/react'
-import Sidebar from './Sidebar/Sidebar'
+import Sidebar from '../../Global Components/Sidebar/Sidebar'
 import { Outlet } from 'react-router-dom'
 
 export default function MainSubAdmin(){
