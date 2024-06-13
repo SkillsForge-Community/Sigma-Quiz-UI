@@ -7,7 +7,7 @@ body{
 }
 .Home {
   
-  background: linear-gradient(90.01deg, #000000 -8.03%, rgba(0, 0, 0, 0) 104.09%), url("../../Assests/Images/Home background.jpg");
+  background: linear-gradient(90.01deg, #000000 -8.03%, rgba(0, 0, 0, 0) 104.09%), url("../../assets/Images/Home background.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
