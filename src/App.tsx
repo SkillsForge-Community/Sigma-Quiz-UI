@@ -30,6 +30,11 @@ function App() {
             <Route index element={<ManageUsers />} />
             <Route path='manage-users' element={<ManageUsers />} />
             <Route path=':schools' element={<SchoolDetails />} />
+            <Route element={<AccountSettings />} path={'account-settings'}>
+              <Route index element={<ProfileSettings />} />
+              <Route path='password-settings' element={<PasswordSettings />} />
+              <Route path='profile-settings' element={<ProfileSettings />} />
+            </Route>
           </Route>
           <Route element={<UpdateUser />} path="/subadmin/update-user">
             <Route index element={<UserProfile />} />
@@ -48,11 +53,7 @@ function App() {
           <Route element={<Login />} path='/Login' />
           <Route element={<Signin />} path='/Signin' />
           <Route element={<NotFound />} path='*' />
-          <Route element={<AccountSettings />} path={'/account-settings'}>
-            <Route path='password-settings' element={<PasswordSettings />} />
-            <Route path='profile-settings' element={<ProfileSettings />} />
-            <Route index element={<ProfileSettings />} />
-          </Route>
+          
         </Routes>
       </div>
     </ChakraProvider>

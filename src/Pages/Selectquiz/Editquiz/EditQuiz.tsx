@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
 import QuizCard from '../quiz-card/QuizCard';
 import QuizForm from '../quiz-form/QuizForm';
-import Success from '../../../Global Components/success-page/Success';
+import Success from '../../../Global Components/Modals/success-modal/Success';
 
 type quizListType = {
   title: string,
