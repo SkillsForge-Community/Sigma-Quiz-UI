@@ -1,5 +1,5 @@
 import React from 'react'
-import successImg from '../../assets/Images/teenyicons_tick-circle-solid.png'
+import successImg from '../../../assets/Images/teenyicons_tick-circle-solid.png'
 import { useNavigate } from 'react-router-dom'
 
 type successProps = {
