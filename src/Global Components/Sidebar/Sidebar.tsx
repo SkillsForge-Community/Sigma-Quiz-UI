@@ -12,9 +12,6 @@ import { FaUsers } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
-import { useState } from "react";
-
-
 const linkStyles = {
   textAlign: "center",
   alignItems: "center",
@@ -44,6 +41,7 @@ const linksStyles = {
     borderBottom: 0,
     borderLeft: "5px",
     borderstyle: "solid",
+
   },
   _active: {
     color: "#8F19E7",
@@ -54,8 +52,9 @@ const linksStyles = {
     borderRight: 0,
     borderBottom: 0,
     borderLeft: "5px",
-    borderstyle: "solid",
-  },
+    borderstyle: "solid",  
+  }
+    ,
 };
 const crudOperationsStyles = {
   cursor: "pointer",
@@ -66,6 +65,7 @@ const crudOperationsStyles = {
   height: "38px",
   gap: "3x",
   backgroundColor: "rgba(143, 25, 231, 1)",
+
   ":hover": { backgroundColor: "purple" },
 };
 const crudStyles = {
@@ -78,7 +78,6 @@ const crudIconStyles = {
   padding: "5px",
   borderRadius: "5px",
 };
-
 type loggedInProp = {
     isLoggedIn: boolean
   }
@@ -89,6 +88,7 @@ function Sidebar({isLoggedIn}: loggedInProp) {
       <SimpleGrid spacing={10}>
         <Box h="40px">
           <Flex sx={linkStyles}>
+
             <Select
               width="158px"
               placeholder="QUIZ 2024"
@@ -101,6 +101,7 @@ function Sidebar({isLoggedIn}: loggedInProp) {
         <SimpleGrid spacing={5}>
           <Box h="40px">
             <Heading as={"h5"} className="sidebar-schools">
+
               <Flex
                 alignItems={"center"}
                 justifyContent={"center"}
@@ -111,12 +112,14 @@ function Sidebar({isLoggedIn}: loggedInProp) {
               </Flex>
             </Heading>
           </Box>
-          <NavLink to="/subadmin/Ambassadors">
+
+          <NavLink to= "/subadmin/Ambassadors" >
             <Flex sx={linksStyles}>
               <h5>Ambassadors</h5>
             </Flex>
           </NavLink>
-          <NavLink to="/subadmin/School-Two">
+
+          <NavLink  to="/subadmin/School-Two">
             <Flex sx={linksStyles}>
               <h5>School Two</h5>
             </Flex>
@@ -177,6 +180,7 @@ function Sidebar({isLoggedIn}: loggedInProp) {
         <SimpleGrid spacing={5}>
           <Box h="40px">
             <Heading as={"h5"}>
+
               <Flex
                 alignItems={"center"}
                 justifyContent={"center"}
@@ -188,6 +192,7 @@ function Sidebar({isLoggedIn}: loggedInProp) {
             </Heading>
           </Box>
           <NavLink to="/subadmin/All-Schools">
+
             <Heading as={"h5"} sx={linksStyles}>
               <Flex
                 alignItems={"center"}
@@ -199,6 +204,7 @@ function Sidebar({isLoggedIn}: loggedInProp) {
               </Flex>
             </Heading>
           </NavLink>
+
           {isLoggedIn && <Flex flexDir={"column"} gap={"20px"}>
             <NavLink to="/select-quiz">
               <Heading as={"h5"} sx={linksStyles}>
