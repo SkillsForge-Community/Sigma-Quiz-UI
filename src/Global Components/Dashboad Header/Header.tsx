@@ -1,4 +1,4 @@
-import { SimpleGrid, Flex, Spacer, Button,Box } from "@chakra-ui/react";
+import { SimpleGrid, Flex, Spacer, Button,Box, Text } from "@chakra-ui/react";
 import pfp from "../../assets/Images/Profile picture.svg"
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
@@ -23,10 +23,10 @@ export default function Header({ isAdmin }: authenticateProps){
         setActiveButton(button);
     };
     return(
-        <SimpleGrid spacing={5}>
+        <SimpleGrid spacing={5} p="20px">
         <Flex>
             <Box >
-                <h4 className="testDetails">Test Details</h4>
+                <Text fontSize={"20px"}>Test Details</Text>
             </Box>
             <Spacer />
             <Flex align={"center"}>
