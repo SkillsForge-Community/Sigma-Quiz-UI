@@ -42,20 +42,7 @@ const linksStyles = {
     borderBottom: 0,
     borderLeft: "5px",
     borderstyle: "solid",
-    ":hover": {
-      color: "purple"
-    },
-    "_activeLink": {
-      color: "#8F19E7",
-      boxShadow: " 2px 2px 15px 1px #00000040",
-      border: "5px",
-      borderLeftColor: "#8F19E7",
-      borderTop: 0,
-      borderRight: 0,
-      borderBottom: 0,
-      borderLeft: "5px",
-      borderstyle: "solid",
-    }
+    
   },
 };
 const crudOperationsStyles = {

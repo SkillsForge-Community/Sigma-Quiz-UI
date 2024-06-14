@@ -9,9 +9,8 @@ import AddSchool from './Pages/Addschool/Index';
 import NotFound from './Global Components/NotFound';
 import Login from './Pages/Login/Index';
 import Signin from './Pages/Signin/Index';
-import NormalUsers from './Pages/NormalUsers/Index';
 import SchoolDetails from './Global Components/SchoolDetails/SchoolDetails';
-import TestDetails from './Pages/NormalUsers/TestDetails/Index';
+import TestDetails from './Global Components/TestDetails/Index';
 import AccountSettings from './Pages/Subadmin/account_settings/AccountSettings';
 import PasswordSettings from './Pages/Subadmin/account_settings/password_settings/PasswordSettings';
 import ProfileSettings from './Pages/Subadmin/account_settings/profile_settings/ProfileSettings';
@@ -29,7 +28,7 @@ function App() {
           <Route element={<MainSubAdmin />} path="/subadmin">
             <Route index element={<ManageUsers />} />
             <Route path='manage-users' element={<ManageUsers />} />
-            <Route path=':schools' element={<SchoolDetails />} />
+            <Route path=':schools' element={<SchoolDetails isAdmin={true}/>} />
             <Route element={<AccountSettings />} path={'account-settings'}>
               <Route index element={<ProfileSettings />} />
               <Route path='password-settings' element={<PasswordSettings />} />
@@ -42,10 +41,8 @@ function App() {
             <Route path='user-functions' element={<UserFunctions />} />
           </Route>
           <Route element={<AddSchool quizName="2024 Roseline Etuokwu Quiz Competition" dateCreated="2024 - 05 - 30" />} path="/Addschool" />
-          <Route element={<NormalUsers />} path="/users">
-            <Route path=':schools' element={<SchoolDetails />} />
-          </Route>
-          <Route element={<TestDetails />} path="/users/test-details" />
+          <Route element={<TestDetails isAdmin={true}/>} path="/subadmin/test-details" />
+          <Route element={<TestDetails isAdmin={false}/>} path="/users/test-details" />
           <Route element={<SelectQuiz option='select' />} path='/select-quiz' />
           <Route element={<SelectQuiz option='add' />} path='/add-quiz' />
           <Route element={<SelectQuiz option='edit' />} path='/edit-quiz' />
