@@ -6,6 +6,8 @@ import { RxSlash } from "react-icons/rx";
 import "./Details.css";
 import { useNavigate } from "react-router-dom";
 import { Flex, Spacer } from "@chakra-ui/react";
+import Header from "../../Global Components/Dashboad Header/Header";
+
 type authenticateProps = {
     isAdmin: boolean
 }
@@ -28,7 +30,7 @@ function SchoolDetails({ isAdmin }: authenticateProps) {
     const navigate = useNavigate()
     return (
         <main className="test-details">
-           
+           <Header isAdmin={true}/>
 
             <SimpleGrid spacing={10}>
                 <div>
