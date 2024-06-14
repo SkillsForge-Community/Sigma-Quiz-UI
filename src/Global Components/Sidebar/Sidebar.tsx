@@ -32,16 +32,13 @@ const linksStyles = {
   fontSize: "16px",
   color: "rgba(51, 51, 51, 0.6)",
   transition: "10ms",
-  ":hover": {
+  _hover: {
     color: "#8F19E7",
     boxShadow: " 2px 2px 15px 1px #00000040",
-    border: "5px",
-    borderLeftColor: "#8F19E7",
+    borderLeft: " 5px solid #8F19E7",
     borderTop: 0,
     borderRight: 0,
     borderBottom: 0,
-    borderLeft: "5px",
-    borderstyle: "solid",
   },
   _active: {
     color: "#8F19E7",
@@ -84,8 +81,6 @@ function Sidebar() {
       <SimpleGrid spacing={10}>
         <Box h="40px">
           <Flex sx={linkStyles}>
-            
-
             <Select
               width="158px"
               placeholder="QUIZ 2024"
@@ -235,10 +230,7 @@ function Sidebar() {
                 My Account
               </Flex>
             </Heading>
-          </NavLink>
-=======
-
-          
+          </NavLink>       
         </SimpleGrid>
       </SimpleGrid>
     </div>
