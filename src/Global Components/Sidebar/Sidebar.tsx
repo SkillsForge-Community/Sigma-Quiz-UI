@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
 import { BsPercent } from "react-icons/bs";
 import { LuSchool } from "react-icons/lu";
+// import "./Sidebar.css"
 import { SimpleGrid } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
@@ -12,8 +13,6 @@ import { FaUsers } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
-
-
 const linkStyles = {
   textAlign: "center",
   alignItems: "center",
@@ -43,17 +42,7 @@ const linksStyles = {
     borderBottom: 0,
     borderLeft: "5px",
     borderstyle: "solid",
-  },
-  _active: {
-    color: "#8F19E7",
-    boxShadow: " 2px 2px 15px 1px #00000040",
-    border: "5px",
-    borderLeftColor: "#8F19E7",
-    borderTop: 0,
-    borderRight: 0,
-    borderBottom: 0,
-    borderLeft: "5px",
-    borderstyle: "solid",
+    
   },
 };
 const crudOperationsStyles = {
@@ -65,57 +54,50 @@ const crudOperationsStyles = {
   height: "38px",
   gap: "3x",
   backgroundColor: "rgba(143, 25, 231, 1)",
-  ":hover": { backgroundColor: "purple" },
-};
+  ":hover": { backgroundColor: "purple" }
+}
 const crudStyles = {
   color: "rgba(255, 255, 255, 1)",
   gap: "8px",
   fontSize: "16px",
-};
+}
 const crudIconStyles = {
   backgroundColor: "rgba(237, 237, 237, 1)",
   padding: "5px",
-  borderRadius: "5px",
-};
+  borderRadius: "5px"
+}
 
-type loggedInProp = {
-    isLoggedIn: boolean
-  }
 
-function Sidebar({isLoggedIn}: loggedInProp) {
+function Sidebar() {
   return (
     <div>
       <SimpleGrid spacing={10}>
         <Box h="40px">
           <Flex sx={linkStyles}>
-            <Select
-              width="158px"
-              placeholder="QUIZ 2024"
-              fontSize={"20px"}
-              fontWeight={600}
-            ></Select>
+            <Select width="158px" placeholder="QUIZ 2024" fontSize={"20px"}
+              fontWeight={600}></Select>
           </Flex>
         </Box>
 
         <SimpleGrid spacing={5}>
           <Box h="40px">
             <Heading as={"h5"} className="sidebar-schools">
-              <Flex
-                alignItems={"center"}
-                justifyContent={"center"}
-                gap={"10px"}
-              >
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
                 <RiGraduationCapFill size={"26px"} />
                 Schools
               </Flex>
             </Heading>
           </Box>
-          <NavLink to= "/subadmin/Ambassadors" >
+          <NavLink 
+          
+          
+             to='/subadmin/Ambassadors'>
             <Flex sx={linksStyles}>
               <h5>Ambassadors</h5>
             </Flex>
           </NavLink>
-          <NavLink to="/subadmin/School-Two">
+
+          <NavLink  to="/subadmin/School-Two">
             <Flex sx={linksStyles}>
               <h5>School Two</h5>
             </Flex>
@@ -140,7 +122,7 @@ function Sidebar({isLoggedIn}: loggedInProp) {
               <h5>School Six</h5>
             </Flex>
           </NavLink>
-{         isLoggedIn && <Box w="156px" sx={crudOperationsStyles}>
+          <Box w="156px" sx={crudOperationsStyles}>
             <Flex alignItems={"center"} justifyContent={"center"}>
               <IconContext.Provider value={{ color: "rgba(0, 0, 0, 1)" }}>
                 <Heading as={"h5"} sx={crudStyles}>
@@ -170,84 +152,59 @@ function Sidebar({isLoggedIn}: loggedInProp) {
                 </Heading>
               </IconContext.Provider>
             </Flex>
-          </Box>}
+          </Box>
         </SimpleGrid>
 
         <SimpleGrid spacing={5}>
           <Box h="40px">
             <Heading as={"h5"}>
-              <Flex
-                alignItems={"center"}
-                justifyContent={"center"}
-                gap={"10px"}
-              >
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
                 <BsPercent size={"26px"} />
                 Scores
               </Flex>
             </Heading>
           </Box>
           <NavLink to="/subadmin/All-Schools">
-            <Heading as={"h5"} sx={linksStyles}>
-              <Flex
-                alignItems={"center"}
-                justifyContent={"center"}
-                gap={"10px"}
-              >
+            <Heading as={"h5"} sx={linksStyles}
+            >
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
                 <LuSchool size={"26px"} />
                 All Schools
               </Flex>
             </Heading>
           </NavLink>
-          {isLoggedIn && <Flex flexDir={"column"} gap={"20px"}>
-            <NavLink to="/select-quiz">
-              <Heading as={"h5"} sx={linksStyles}>
-                <Flex
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                  gap={"10px"}
-                >
-                  <CiCircleQuestion size={"26px"} />
-                  Manage Questions
-                </Flex>
-              </Heading>
-            </NavLink>
-            <Box h="40px" className="link">
-              <Heading as={"h5"}>
-                <Flex
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                  gap={"10px"}
-                >
-                  <MdAccountCircle size={"26px"} />
-                  Account
-                </Flex>
-              </Heading>
-            </Box>
-            <NavLink to="manage-users">
-              <Heading as={"h5"} sx={linksStyles}>
-                <Flex
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                  gap={"10px"}
-                >
-                  <FaUsers size={"26px"} />
-                  Manage Users
-                </Flex>
-              </Heading>
-            </NavLink>
-            <NavLink to="account-settings">
-              <Heading as={"h5"} sx={linksStyles}>
-                <Flex
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                  gap={"10px"}
-                >
-                  <CiSettings size={"26px"} />
-                  My Account
-                </Flex>
-              </Heading>
-            </NavLink>
-          </Flex>}
+          <NavLink to="/select-quiz">
+            <Heading as={"h5"} sx={linksStyles}>
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                <CiCircleQuestion size={"26px"} />
+                Manage Questions
+              </Flex>
+            </Heading>
+          </NavLink>
+          <Box h="40px" className="link">
+            <Heading as={"h5"}>
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                <MdAccountCircle size={"26px"} />
+                Account
+              </Flex>
+            </Heading>
+          </Box>
+          <NavLink to="manage-users">
+            <Heading as={"h5"} sx={linksStyles}>
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                <FaUsers size={"26px"} />
+                Manage Users
+              </Flex>
+            </Heading>
+          </NavLink>
+          <NavLink to="account-settings">
+            <Heading as={"h5"} sx={linksStyles}>
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                <CiSettings size={"26px"} />
+                My Account
+              </Flex>
+            </Heading>
+          </NavLink>
         </SimpleGrid>
       </SimpleGrid>
     </div>
