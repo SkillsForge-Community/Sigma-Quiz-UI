@@ -1,11 +1,10 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import Sidebar from '../../Global Components/Sidebar/Sidebar';
 import { Outlet } from 'react-router-dom'
-import Header from "../../Global Components/Dashboad Header/Header";
 function MainSubAdmin(){
     return(
         <Grid
-  templateAreas={`"sidebar header"
+  templateAreas={`"sidebar main"
                   "sidebar main"
                   "sidebar main"`}
         gridTemplateColumns={'253px 1fr'}
@@ -14,9 +13,6 @@ function MainSubAdmin(){
         >
   <GridItem height="1024px" bg='#EDEDED'  area={'sidebar'}>
     <Sidebar isLoggedIn = {true}/>
-  </GridItem>
-  <GridItem pl='2' bg='#FFFFFF' area={'header'}>
-    <Header isAdmin={true}/>
   </GridItem>
   <GridItem pl='2' bg='#FFFFFF' area={'main'}>
    <Outlet/>
