@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, FormControl, FormLabel, Input, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Flex, FormControl, FormLabel, Input, Text, useDisclosure } from '@chakra-ui/react'
 import { FaUserCircle } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -40,23 +40,24 @@ const PasswordSettings = () => {
     }
     
   }
-
-
+  
   return (
     <Box bg={'white'} w={"60%"} h={'815px'} borderRight={'1px solid rgba(0, 0, 0, 0.2)'} py={'50px'}>
 
       {/* DISPLAY ERROR MODAL IF PASSWORDS DO NOT MATCH   */}
       <VerticallyCenter isOpen={isOpen} onClose={onClose} message='Passwords do not match' />
       
-      <div className="profile-img">
-        <FaUserCircle size={80} color='#9a9a9a'/>
-        <div className="profile-img-text">
-          <IoIosAdd size={28}/><span>Add picture</span>
-        </div>
-      </div>
+      {/* PROFILE PICTURE BOX */}
+      <Box  w={'90%'} mx={'auto'} pos={'relative'}>
+        <FaUserCircle size={80} color='9a9a9a' style={{margin: 'auto'}}/>
+        <Flex pos={'absolute'} left={'calc(56%)'} align={'center'} top={'45%'} opacity={'0.8'}>
+          <IoIosAdd size={28} />
+          <Text fontWeight={'400'}>Add Picture</Text>
+        </Flex>
+        <Text fontSize={'24px'} fontWeight={'600'} color={'#333333'} w={'fit-content'} mx={'auto'} mt={'10px'}>Yande Stephens</Text>
+      </Box>
 
-      <span className="profile-name" style={{marginTop: '10px'}}>Yande Stephens</span>
-
+      {/* UPDATE PASSWORD FORM */}
       <form action="" onSubmit={handleUpdatePassword} style={{marginTop: '60px'}}>
         <FormControl w={'fit-content'} mx={'auto'} position={'relative'} mb={'40px'} isRequired>
             <FormLabel>Old Password</FormLabel>
