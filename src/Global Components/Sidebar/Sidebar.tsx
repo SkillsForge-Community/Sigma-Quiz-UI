@@ -13,7 +13,6 @@ import { FaUsers } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
-
 const linkStyles = {
   textAlign: "center",
   alignItems: "center",
@@ -44,30 +43,41 @@ const linksStyles = {
     borderLeft: "5px",
     borderstyle: "solid",
     ":hover": {
-        color: "purple"
+      color: "purple"
+    },
+    "_activeLink": {
+      color: "#8F19E7",
+      boxShadow: " 2px 2px 15px 1px #00000040",
+      border: "5px",
+      borderLeftColor: "#8F19E7",
+      borderTop: 0,
+      borderRight: 0,
+      borderBottom: 0,
+      borderLeft: "5px",
+      borderstyle: "solid",
     }
   },
 };
 const crudOperationsStyles = {
-    cursor: "pointer",
-    transition: "1s",
-    borderRadius: "7px",
-    margin: "0 auto",
-    padding: "7px",
-   height: "38px",
-    gap: "3x",
-    backgroundColor: "rgba(143, 25, 231, 1)",
-    ":hover": {backgroundColor: "purple"}
+  cursor: "pointer",
+  transition: "1s",
+  borderRadius: "7px",
+  margin: "0 auto",
+  padding: "7px",
+  height: "38px",
+  gap: "3x",
+  backgroundColor: "rgba(143, 25, 231, 1)",
+  ":hover": { backgroundColor: "purple" }
 }
 const crudStyles = {
-    color: "rgba(255, 255, 255, 1)",
-    gap: "8px",
-    fontSize: "16px",
+  color: "rgba(255, 255, 255, 1)",
+  gap: "8px",
+  fontSize: "16px",
 }
 const crudIconStyles = {
-    backgroundColor: "rgba(237, 237, 237, 1)",
-    padding: "5px",
-    borderRadius: "5px"
+  backgroundColor: "rgba(237, 237, 237, 1)",
+  padding: "5px",
+  borderRadius: "5px"
 }
 
 
@@ -77,26 +87,30 @@ function Sidebar() {
       <SimpleGrid spacing={10}>
         <Box h="40px">
           <Flex sx={linkStyles}>
-            <Select width="158px" placeholder="QUIZ 2024"  fontSize= {"20px"}
-  fontWeight= {600}></Select>
+            <Select width="158px" placeholder="QUIZ 2024" fontSize={"20px"}
+              fontWeight={600}></Select>
           </Flex>
         </Box>
 
         <SimpleGrid spacing={5}>
           <Box h="40px">
-              <Heading as={"h5"} className="sidebar-schools">
-            <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
-              <RiGraduationCapFill size={"26px"}/>
+            <Heading as={"h5"} className="sidebar-schools">
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                <RiGraduationCapFill size={"26px"} />
                 Schools
-            </Flex>
-                </Heading>
+              </Flex>
+            </Heading>
           </Box>
-          <NavLink to="/subadmin/Ambassadors">
+          <NavLink 
+          
+          
+             to='/subadmin/Ambassadors'>
             <Flex sx={linksStyles}>
               <h5>Ambassadors</h5>
             </Flex>
           </NavLink>
-          <NavLink to="/subadmin/School-Two">
+
+          <NavLink  to="/subadmin/School-Two">
             <Flex sx={linksStyles}>
               <h5>School Two</h5>
             </Flex>
@@ -123,84 +137,84 @@ function Sidebar() {
           </NavLink>
           <Box w="156px" sx={crudOperationsStyles}>
             <Flex alignItems={"center"} justifyContent={"center"}>
-            <IconContext.Provider value={{ color: "rgba(0, 0, 0, 1)" }}>
-              <Heading as={"h5"} sx={crudStyles}>
-                <Flex alignItems={"center"} justifyContent={"center"}>
-                Edit
-                <Text as={"span"} sx={crudIconStyles}>
-                  <FaPen />
-                </Text>
-                </Flex>
-              </Heading>
-              <span
-                style={{
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                /
-              </span>
-              <Heading as={"h5"} sx={crudStyles}>
-                <Flex alignItems={"center"} justifyContent={"center"}>
-                Add
-                <Text as={"span"} sx={crudIconStyles}>
-                  <FaPlus />
-                </Text>
-                </Flex>
-              </Heading>
-            </IconContext.Provider>
+              <IconContext.Provider value={{ color: "rgba(0, 0, 0, 1)" }}>
+                <Heading as={"h5"} sx={crudStyles}>
+                  <Flex alignItems={"center"} justifyContent={"center"}>
+                    Edit
+                    <Text as={"span"} sx={crudIconStyles}>
+                      <FaPen />
+                    </Text>
+                  </Flex>
+                </Heading>
+                <span
+                  style={{
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  /
+                </span>
+                <Heading as={"h5"} sx={crudStyles}>
+                  <Flex alignItems={"center"} justifyContent={"center"}>
+                    Add
+                    <Text as={"span"} sx={crudIconStyles}>
+                      <FaPlus />
+                    </Text>
+                  </Flex>
+                </Heading>
+              </IconContext.Provider>
             </Flex>
           </Box>
         </SimpleGrid>
 
         <SimpleGrid spacing={5}>
           <Box h="40px">
-            <Heading as= {"h5"}>
-                <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
-              <BsPercent size={"26px"} />
-              Scores
-                </Flex>
+            <Heading as={"h5"}>
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                <BsPercent size={"26px"} />
+                Scores
+              </Flex>
             </Heading>
           </Box>
           <NavLink to="/subadmin/All-Schools">
             <Heading as={"h5"} sx={linksStyles}
             >
-                <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>     
-              <LuSchool size={"26px"} />
-              All Schools
-                </Flex>
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                <LuSchool size={"26px"} />
+                All Schools
+              </Flex>
             </Heading>
           </NavLink>
           <NavLink to="/select-quiz">
             <Heading as={"h5"} sx={linksStyles}>
-                <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>   
-              <CiCircleQuestion size={"26px"} />
-              Manage Questions
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                <CiCircleQuestion size={"26px"} />
+                Manage Questions
               </Flex>
             </Heading>
           </NavLink>
           <Box h="40px" className="link">
             <Heading as={"h5"}>
-            <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
-              <MdAccountCircle size={"26px"} />
-              Account
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                <MdAccountCircle size={"26px"} />
+                Account
               </Flex>
             </Heading>
           </Box>
           <NavLink to="manage-users">
             <Heading as={"h5"} sx={linksStyles}>
-            <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>   
-              <FaUsers size={"26px"} />
-              Manage Users
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                <FaUsers size={"26px"} />
+                Manage Users
               </Flex>
             </Heading>
           </NavLink>
           <NavLink to="account-settings">
             <Heading as={"h5"} sx={linksStyles}>
-            <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>   
-              <CiSettings size={"26px"} />
-              My Account
+              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                <CiSettings size={"26px"} />
+                My Account
               </Flex>
             </Heading>
           </NavLink>

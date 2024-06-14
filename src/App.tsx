@@ -10,7 +10,7 @@ import NotFound from './Global Components/NotFound';
 import Login from './Pages/Login/Index';
 import Signin from './Pages/Signin/Index';
 import NormalUsers from './Pages/NormalUsers/Index';
-import SchoolDetails from './Pages/NormalUsers/SchoolDetails/SchoolDetails';
+import SchoolDetails from './Global Components/SchoolDetails/SchoolDetails';
 import TestDetails from './Pages/NormalUsers/TestDetails/Index';
 import AccountSettings from './Pages/Subadmin/account_settings/AccountSettings';
 import PasswordSettings from './Pages/Subadmin/account_settings/password_settings/PasswordSettings';

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { HStack, Box, Table, TableContainer, Tbody, Td, Th, Thead, Tr, SimpleGrid, Button } from '@chakra-ui/react';
-import PaginatedItems from "../Pagininate/Paginate";
+import PaginatedItems from "../../Pages/NormalUsers/Pagininate/Paginate";
 import { IoIosArrowForward } from "react-icons/io";
 import { RxSlash } from "react-icons/rx";
 import "./Details.css";
