@@ -13,7 +13,7 @@ function MainSubAdmin(){
         fontWeight='bold'
         >
   <GridItem height="1024px" bg='#EDEDED'  area={'sidebar'}>
-    <Sidebar/>
+    <Sidebar isLoggedIn = {true}/>
   </GridItem>
   <GridItem pl='2' bg='#FFFFFF' area={'header'}>
     <Header isAdmin={true}/>
