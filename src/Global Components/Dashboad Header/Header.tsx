@@ -16,13 +16,6 @@ const btnStyles={
     fontSize: "16px",
     color:"rgba(51, 51, 51, 1)"
 }
-const filteruestionsStyles={
-    backgroundColor:"rgba(237, 237, 237, 1)",
-    FontFamily:"Poppins",
-    fontWeight:"500",
-    fontSize: "18px",
-    color:btnStyles.color
-}
 export default function Header({ isAdmin }: authenticateProps){
     const {schools}=useParams()
     const [activeButton, setActiveButton] = useState<string>("Round 1");
