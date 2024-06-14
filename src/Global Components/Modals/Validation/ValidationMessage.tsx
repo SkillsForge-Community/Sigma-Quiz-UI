@@ -26,7 +26,7 @@ export default function VerticallyCenter({isOpen, onClose,message}:ModalProps) {
         <ModalContent>
           <ModalHeader color="red">Validation Error</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody w={'100%'} textAlign={'center'} mb={'20px'}>
             <h4>{message}</h4>
           </ModalBody>
           <ModalFooter>

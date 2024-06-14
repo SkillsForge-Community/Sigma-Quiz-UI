@@ -42,8 +42,19 @@ const linksStyles = {
     borderBottom: 0,
     borderLeft: "5px",
     borderstyle: "solid",
-    
   },
+  _active: {
+    color: "#8F19E7",
+    boxShadow: " 2px 2px 15px 1px #00000040",
+    border: "5px",
+    borderLeftColor: "#8F19E7",
+    borderTop: 0,
+    borderRight: 0,
+    borderBottom: 0,
+    borderLeft: "5px",
+    borderstyle: "solid",  
+  }
+    ,
 };
 const crudOperationsStyles = {
   cursor: "pointer",
@@ -56,6 +67,7 @@ const crudOperationsStyles = {
   backgroundColor: "rgba(143, 25, 231, 1)",
   ":hover": { backgroundColor: "purple" }
 }
+
 const crudStyles = {
   color: "rgba(255, 255, 255, 1)",
   gap: "8px",
@@ -64,34 +76,42 @@ const crudStyles = {
 const crudIconStyles = {
   backgroundColor: "rgba(237, 237, 237, 1)",
   padding: "5px",
-  borderRadius: "5px"
-}
-
-
+  borderRadius: "5px",
+};
 function Sidebar() {
   return (
     <div>
       <SimpleGrid spacing={10}>
         <Box h="40px">
           <Flex sx={linkStyles}>
-            <Select width="158px" placeholder="QUIZ 2024" fontSize={"20px"}
-              fontWeight={600}></Select>
+            
+
+            <Select
+              width="158px"
+              placeholder="QUIZ 2024"
+              fontSize={"20px"}
+              fontWeight={600}
+            ></Select>
           </Flex>
         </Box>
 
         <SimpleGrid spacing={5}>
           <Box h="40px">
             <Heading as={"h5"} className="sidebar-schools">
-              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+
+
+              <Flex
+                alignItems={"center"}
+                justifyContent={"center"}
+                gap={"10px"}
+              >
                 <RiGraduationCapFill size={"26px"} />
                 Schools
               </Flex>
             </Heading>
           </Box>
-          <NavLink 
-          
-          
-             to='/subadmin/Ambassadors'>
+
+          <NavLink to= "/subadmin/Ambassadors" >
             <Flex sx={linksStyles}>
               <h5>Ambassadors</h5>
             </Flex>
@@ -158,16 +178,27 @@ function Sidebar() {
         <SimpleGrid spacing={5}>
           <Box h="40px">
             <Heading as={"h5"}>
-              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+
+
+              <Flex
+                alignItems={"center"}
+                justifyContent={"center"}
+                gap={"10px"}
+              >
                 <BsPercent size={"26px"} />
                 Scores
               </Flex>
             </Heading>
           </Box>
           <NavLink to="/subadmin/All-Schools">
-            <Heading as={"h5"} sx={linksStyles}
-            >
-              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+
+
+            <Heading as={"h5"} sx={linksStyles}>
+              <Flex
+                alignItems={"center"}
+                justifyContent={"center"}
+                gap={"10px"}
+              >
                 <LuSchool size={"26px"} />
                 All Schools
               </Flex>
@@ -205,6 +236,9 @@ function Sidebar() {
               </Flex>
             </Heading>
           </NavLink>
+=======
+
+          
         </SimpleGrid>
       </SimpleGrid>
     </div>

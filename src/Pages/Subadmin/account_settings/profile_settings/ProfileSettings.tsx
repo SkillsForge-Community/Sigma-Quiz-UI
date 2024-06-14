@@ -14,7 +14,7 @@ const ProfileSettings = () => {
         </div>
       </div>
 
-      <span className="profile-name">Yande Stephens</span>
+      <span className="profile-name"  style={{marginTop: '10px'}}>Yande Stephens</span>
 
       <div className="profile-form">
         <div className="field">
