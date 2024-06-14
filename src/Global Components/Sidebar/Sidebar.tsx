@@ -110,7 +110,7 @@ function Sidebar({isLoggedIn}: loggedInProp) {
               </Flex>
             </Heading>
           </Box>
-          <NavLink to="/subadmin/Ambassadors">
+          <NavLink to= "/subadmin/Ambassadors" >
             <Flex sx={linksStyles}>
               <h5>Ambassadors</h5>
             </Flex>
