@@ -19,9 +19,12 @@ import ManageUsers from './Pages/Subadmin/ManageUsers/ManageUsers';
 import UpdateUser from './Pages/Subadmin/Update user/Index';
 import UserProfile from './Pages/Subadmin/Update user/Update user Profile/UserProfile';
 import UserFunctions from './Pages/Subadmin/Update user/User Functions/UserFunctions';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 function App() {
   return (
     <ChakraProvider>
+      <Provider store={store}>
       <div className="App">
         <Routes>
           <Route element={<Homepage />} path='/' />
@@ -53,6 +56,7 @@ function App() {
           
         </Routes>
       </div>
+      </Provider>
     </ChakraProvider>
   );
 }
