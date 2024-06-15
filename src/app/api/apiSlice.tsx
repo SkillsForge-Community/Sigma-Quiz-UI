@@ -42,7 +42,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, unknown> = a
     return result;
 };
 
-// Use baseQueryWithReauth in createApi
+// Use baseQueryWithReauth with createApi
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
     endpoints: (builder) => ({})
