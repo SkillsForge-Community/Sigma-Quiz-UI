@@ -22,8 +22,9 @@ import CountDown from "../../Global Components/CountDown";
 import Logo from "../../Global Components/Logo/Logo";
 
 interface LoginError {
-    response?: any;
-    originalStatus?: number;
+    response?: any|{ statusCode?: number};
+    status?: number
+   
 }
 
 function Login() {
@@ -69,22 +70,23 @@ function Login() {
                 navigate('/subadmin');
             } catch (error) {
                 const err = error as LoginError;
+                console.error(err);
+                onOpen();
                 if (err?.response) {
-                    onOpen();
-                    setErrorMessage("No Server Response");
-                } else if (err?.originalStatus === 400) {
-                    onOpen();
+                    setErrorMessage("Server Response Error");
+                } else if (err?.status === 400) {
                     setErrorMessage("Missing Email or Password");
-                } else if (err?.originalStatus === 401) {
-                    onOpen();
+                } else if (err?.status === 401) {
                     setErrorMessage("Unauthorized");
+                } else if (err?.status === 404) {
+                    setErrorMessage("Endpoint Not Found");
                 } else {
-                    onOpen();
-                    setErrorMessage("Login Failed");
+                    setErrorMessage("Login Failed: Network Error");
                 }
             }
         }
-    }
+    };
+    
 
     return (
         <>
