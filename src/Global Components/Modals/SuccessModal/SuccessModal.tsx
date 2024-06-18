@@ -33,7 +33,7 @@ const SuccessModal = ({setShowModal, heading, message, navigateTo} : modalProps)
 
   useEffect(() => {
     onOpen();
-  }, [])
+  }, [onOpen])
 
   const closeModal = () => {
     onClose();

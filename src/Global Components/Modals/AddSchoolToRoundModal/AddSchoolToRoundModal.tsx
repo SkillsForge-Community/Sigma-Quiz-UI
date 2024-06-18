@@ -56,7 +56,7 @@ const AddSchoolToRoundModal = ({setShowModal} : modalProps) => {
   useEffect(() => {
     onOpen();
     setIsSuccessful(false);
-  }, []);
+  }, [onOpen]);
 
 
   const closeModal = () => {

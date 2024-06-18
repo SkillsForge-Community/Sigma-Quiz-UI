@@ -21,7 +21,6 @@ import UpdateUser from './Pages/Subadmin/Update user/Index';
 import UserProfile from './Pages/Subadmin/Update user/Update user Profile/UserProfile';
 import UserFunctions from './Pages/Subadmin/Update user/User Functions/UserFunctions';
 import Round from './Pages/Round/Round';
-import path from 'path';
 import AddEditRound from './Pages/Round/AddEditRound';
 function App() {
   return (
