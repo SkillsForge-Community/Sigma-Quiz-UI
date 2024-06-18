@@ -47,9 +47,6 @@ function App() {
           <Route element={<Round />} path='/round'/>
           <Route element={<AddEditRound />} path='/round/add'/>
           <Route element={<AddEditRound />} path='/round/edit'/>
-          <Route element={<NormalUsers />} path="/users">
-            <Route path=':schools' element={<SchoolDetails />} />
-          </Route>
           <Route element={<TestDetails isAdmin={true}/>} path="/subadmin/test-details" />
           <Route element={<TestDetails isAdmin={false}/>} path="/users/test-details" />
 
