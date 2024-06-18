@@ -20,6 +20,9 @@ import ManageUsers from './Pages/Subadmin/ManageUsers/ManageUsers';
 import UpdateUser from './Pages/Subadmin/Update user/Index';
 import UserProfile from './Pages/Subadmin/Update user/Update user Profile/UserProfile';
 import UserFunctions from './Pages/Subadmin/Update user/User Functions/UserFunctions';
+import Round from './Pages/Round/Round';
+import path from 'path';
+import AddEditRound from './Pages/Round/AddEditRound';
 function App() {
   return (
     <ChakraProvider>
@@ -42,6 +45,9 @@ function App() {
             <Route path='user-functions' element={<UserFunctions />} />
           </Route>
           <Route element={<AddSchool quizName="2024 Roseline Etuokwu Quiz Competition" dateCreated="2024 - 05 - 30" />} path="/Addschool" />
+          <Route element={<Round />} path='/round'/>
+          <Route element={<AddEditRound />} path='/round/add'/>
+          <Route element={<AddEditRound />} path='/round/edit'/>
           <Route element={<NormalUsers />} path="/users">
             <Route path=':schools' element={<SchoolDetails />} />
           </Route>
