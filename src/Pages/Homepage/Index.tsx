@@ -97,7 +97,7 @@ const Homepage = () => {
 
         <button
           className="submit"
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/users")}
           type="submit"
         >
           View Quiz
