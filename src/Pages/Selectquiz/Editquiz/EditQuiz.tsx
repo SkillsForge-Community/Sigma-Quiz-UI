@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './editquiz.css'
 import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
@@ -6,15 +6,13 @@ import QuizCard from '../quiz-card/QuizCard';
 import QuizForm from '../quiz-form/QuizForm';
 import SuccessModal from '../../../Global Components/Modals/SuccessModal/SuccessModal';
 import axios from "axios";
+import { Box } from '@chakra-ui/react';
 
 
 
 type quizListType = {
-  id?: string,
   title: string,
-  description: string | null,
-  year?: number,
-  date?: string
+  description: string,
 }[]
 const EditQuiz = () => {
   
@@ -25,39 +23,29 @@ const EditQuiz = () => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [date, setDate] = useState<Date>(new Date());
+  const [quizList,  /* setQuizList */ ] = useState<quizListType>([
+    {
+      "title": "2024 Roseline Etuoku Quiz Competition",
+      "description": "---",
+    },
+    {
+      "title": "2024 Roseline Etuoku Quiz Competition",
+      "description": "---",
+    },
+    {
+      "title": "2024 Roseline Etuoku Quiz Competition",
+      "description": "---",
+    },
+    {
+      "title": "2024 Roseline Etuoku Quiz Competition",
+      "description": "---",
+    },
+    {
+      "title": "2024 Roseline Etuoku Quiz Competition",
+      "description": "---",
+    },
 
-  useEffect(() => {
-    const getQuizList = () => {
-      axios.get("https://sigma-website-backend-51b4af465e71.herokuapp.com/api/sigma-quiz/school").then(res => {
-        console.log(res.data.content)
-      }).catch(err => {
-        console.log(err)
-      })
-    }
-
-    getQuizList()
-  }, [])
-
-  const [quizList, /* setQuizList */] = useState<quizListType>([
-      {
-        "id": "2cd1bcf2-e621-49af-aa89-9e21a05759a2",
-        "year": 2024,
-        "title": "2024 Sigma Quiz",
-        "description": null,
-        "date": "2024-05-29"
-      },
-      {
-        "id": "ba2bc247-5481-4c20-bcf1-76fbefe8461a",
-        "year": 2024,
-        "title": "2024 Sigma Quiz",
-        "description": "2024 Roseline Etuoku Quiz Competition",
-        "date": "2024-05-30"
-      }
-    // {
-    //   title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-    //   description: '---'
-    // }
-  ])
+])
 
   // fire when the first page edit button is clicked
   const handleSelectQuiz = () => {
@@ -93,17 +81,17 @@ const EditQuiz = () => {
       </header>
 
       {/* first page  */}
-      {(editQuizPage === 1) && <div className="edit-quiz-form">
+      {(editQuizPage === 1) && <Box className="edit-quiz-form">
         {errorMsg && <p className='error-msg'>{errorMsg}</p>}
         <h3>Quiz</h3>
-        <div className="quiz-list">
+         <div className="quiz-list">
           {quizList.map((quiz, index) => (
             <QuizCard quiz={quiz} key={index} index={index} setselectedQuizIndex={setselectedQuizIndex} isActive={selectedQuizIndex === index} />
           ))}
         </div>
 
         <button className="edit" onClick={handleSelectQuiz}>Edit Quiz</button>
-      </div>}
+      </Box>}
 
       {/* second page  */}
       {(editQuizPage === 2) && 

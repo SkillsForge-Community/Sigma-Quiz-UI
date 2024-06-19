@@ -13,7 +13,6 @@ import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
 import { useAppSelector } from "../../app/Hooks";
-import { useEffect, useState } from "react";
 const linkStyles = {
   textAlign: "center",
   alignItems: "center",
@@ -75,16 +74,9 @@ const crudIconStyles = {
 
 function Sidebar() {
   const location = useLocation();
-  const roles  = useAppSelector((state) => state.auth.user?.roles[0]);
-  const [isAdmin,setAdmin]=useState<boolean>(false)
-  console.log(typeof roles)
-  console.log(roles);
-  useEffect(()=>{
-    if (roles==="super-admin"){
-      setAdmin(true)
-    }
-  },[roles])
-  console.log(isAdmin)
+  const token  = useAppSelector((state) => state.auth.access_token);
+  const link = token ? "/subadmin" : "/users"
+
   return (
     <div>
       <SimpleGrid spacing={10}>
@@ -114,12 +106,12 @@ function Sidebar() {
           </Box>
 
           {[
-            { to: "/subadmin/Ambassadors", label: "Ambassadors" },
-            { to: "/subadmin/School-Two", label: "School Two" },
-            { to: "/subadmin/School-Three", label: "School Three" },
-            { to: "/subadmin/School-Four", label: "School Four" },
-            { to: "/subadmin/School-Five", label: "School Five" },
-            { to: "/subadmin/School-Six", label: "School Six" },
+            { to: `${link}/Ambassadors` , label: "Ambassadors" },
+            { to: `${link}/School-Two`, label: "School Two" },
+            { to: `${link}/School-Three`, label: "School Three" },
+            { to: `${link}/School-Four`, label: "School Four" },
+            { to: `${link}/School-Five`, label: "School Five" },
+            { to: `${link}/School-Six`, label: "School Six" },
           ].map((link, index) => (
             <NavLink key={index} to={link.to}>
               <Flex
@@ -132,7 +124,7 @@ function Sidebar() {
               </Flex>
             </NavLink>
           ))}
-          <Box w="156px" sx={crudOperationsStyles}>
+          { token && <Box w="156px" sx={crudOperationsStyles}>
             <Flex alignItems={"center"} justifyContent={"center"}>
               <IconContext.Provider value={{ color: "rgba(0, 0, 0, 1)" }}>
                 <Heading as={"h5"} sx={crudStyles}>
@@ -162,7 +154,7 @@ function Sidebar() {
                 </Heading>
               </IconContext.Provider>
             </Flex>
-          </Box>
+          </Box>}
         </SimpleGrid>
 
         <SimpleGrid spacing={5}>
@@ -209,7 +201,8 @@ function Sidebar() {
               </Flex>
             </Heading>
           </NavLink>
-          { isAdmin &&<Box h="40px" className="link">
+          { token && <Flex flexDir={"column"} gap={"20px"}>
+          <Box h="40px" className="link">
             <Heading as={"h5"}>
               <Flex
                 alignItems={"center"}
@@ -220,7 +213,7 @@ function Sidebar() {
                 Account
               </Flex>
             </Heading>
-          </Box>}
+          </Box>
           <NavLink to="manage-users">
             <Heading
               as={"h5"}
@@ -258,6 +251,7 @@ function Sidebar() {
               </Flex>
             </Heading>
           </NavLink>
+          </Flex>}
         </SimpleGrid>
       </SimpleGrid>
     </div>

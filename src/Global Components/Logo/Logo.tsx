@@ -28,6 +28,7 @@ function Logo() {
 
                     </div>
                 </Box>
+                
             </HStack>
 
 
