@@ -1,18 +1,22 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './editquiz.css'
 import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
 import QuizCard from '../quiz-card/QuizCard';
 import QuizForm from '../quiz-form/QuizForm';
 import Success from '../../../Global Components/Modals/success-modal/Success';
+import axios from "axios";
 
 
 type quizListType = {
+  id?: string,
   title: string,
-  description: string,
+  description: string | null,
+  year?: number,
+  date?: string
 }[]
 const EditQuiz = () => {
-
+  
   const [editQuizPage, setEditQuizPage] = useState<number>(1)
   const [selectedQuizIndex, setselectedQuizIndex] = useState<number | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null> (null);
@@ -20,35 +24,38 @@ const EditQuiz = () => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [date, setDate] = useState<Date>(new Date());
+
+  useEffect(() => {
+    const getQuizList = () => {
+      axios.get("https://sigma-website-backend-51b4af465e71.herokuapp.com/api/sigma-quiz/school").then(res => {
+        console.log(res.data.content)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+
+    getQuizList()
+  }, [])
+
   const [quizList, /* setQuizList */] = useState<quizListType>([
-    {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
-    },
-    {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
-    },
-    {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
-    },
-    {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
-    },
-    {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
-    },
-    {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
-    },
-    {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
-    },
+      {
+        "id": "2cd1bcf2-e621-49af-aa89-9e21a05759a2",
+        "year": 2024,
+        "title": "2024 Sigma Quiz",
+        "description": null,
+        "date": "2024-05-29"
+      },
+      {
+        "id": "ba2bc247-5481-4c20-bcf1-76fbefe8461a",
+        "year": 2024,
+        "title": "2024 Sigma Quiz",
+        "description": "2024 Roseline Etuoku Quiz Competition",
+        "date": "2024-05-30"
+      }
+    // {
+    //   title: '2024 Roseline Etuokwu Sigma Quiz Competition',
+    //   description: '---'
+    // }
   ])
 
   // fire when the first page edit button is clicked
