@@ -18,7 +18,7 @@ const Homepage = () => {
                 <Select borderRadius="45px" icon={<MdKeyboardArrowDown/>}  className="dropdown-menu" height="90px"  width="491px" bg="white" placeholder="Select quiz to view">
                 </Select>
                 
-                <button className="submit" onClick={()=>navigate('/login')} type="submit">View Quiz</button>
+                <button className="submit" onClick={()=>navigate('/users')} type="submit">View Quiz</button>
             </div>
             <div className="quizes">
                 <h4>2024 Quiz</h4>
