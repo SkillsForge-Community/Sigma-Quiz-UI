@@ -34,8 +34,9 @@ function App() {
             
             <Route element={<About />} path='/About' />
             <Route element={<NotFound />} path='*' />
-            <Route element={<Signin />} path='/Signin' />
               <Route element={<MainSubAdmin />} path="/users">
+              <Route index element={<SchoolDetails  />} />
+
                 <Route path=':schools' element={<SchoolDetails  />} />
             </Route> 
             <Route element={<TestDetails isAdmin={false} />} path="/users/test-details" />

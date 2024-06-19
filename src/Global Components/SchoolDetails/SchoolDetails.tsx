@@ -61,6 +61,7 @@ function SchoolDetails() {
     const { schools } = useParams();
     const navigate = useNavigate()
     const token=useAppSelector(state=>state.auth.access_token)
+    const userName=useAppSelector(state=>state.auth.user?.first_name)
     return (
         <Box padding={"20px"} >
            <Header isAdmin={token? true :false}/>
