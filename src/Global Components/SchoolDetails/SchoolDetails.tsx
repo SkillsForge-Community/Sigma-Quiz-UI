@@ -6,10 +6,8 @@ import { RxSlash } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { Flex, Spacer } from "@chakra-ui/react";
 import Header from "../../Global Components/Dashboad Header/Header";
+import { useAppSelector } from "../../app/Hooks";
 
-type authenticateProps = {
-    isAdmin: boolean
-}
 const btnStyles={
     backgroundColor:"rgba(237, 237, 237, 1)",
     FontFamily:"Poppins",
@@ -59,12 +57,13 @@ const scoreStyles = {
   lineHeight: "54px"
 }
 
-function SchoolDetails({ isAdmin }: authenticateProps) {
+function SchoolDetails() {
     const { schools } = useParams();
     const navigate = useNavigate()
+    const token=useAppSelector(state=>state.auth.access_token)
     return (
         <Box padding={"20px"} >
-           <Header isAdmin={true}/>
+           <Header isAdmin={token? true :false}/>
 
             <SimpleGrid spacing={10}>
                 <div>
@@ -86,7 +85,7 @@ function SchoolDetails({ isAdmin }: authenticateProps) {
                         </Box>
                     </Flex>
                 </div>
-                {isAdmin&& <Flex>
+                {token&& <Flex>
                     <Button sx={filteruestionsStyles}>Right</Button>
                     <Spacer/>
                     <Button  sx={filteruestionsStyles}>Bonus</Button>
@@ -102,7 +101,7 @@ function SchoolDetails({ isAdmin }: authenticateProps) {
                     <Box >
                     <Flex justifyContent={"center"} alignItems={"center"} gap={"10px"}  padding={"5px 20px 5px 20px"}>
                         <Button backgroundColor={"#EDEDED"} rightIcon={<IoIosArrowForward /> }
-                            onClick={() => navigate(isAdmin?"/subadmin/test-details":"/users/test-details", { state: { schools: schools } })}>
+                            onClick={() => navigate(token?"/subadmin/test-details":"/users/test-details", { state: { schools: schools } })}>
                             view details
                         </Button>
                             </Flex >

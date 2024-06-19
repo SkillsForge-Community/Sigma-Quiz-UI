@@ -34,13 +34,19 @@ function App() {
             
             <Route element={<About />} path='/About' />
             <Route element={<NotFound />} path='*' />
+              <Route element={<MainSubAdmin />} path="/users">
+              <Route index element={<SchoolDetails  />} />
+
+                <Route path=':schools' element={<SchoolDetails  />} />
+            </Route> 
+            <Route element={<TestDetails isAdmin={false} />} path="/users/test-details" />
             {/* Protected routes*/}
             <Route element={<RequireAuth/>}>
             <Route element={<Signin />} path='/Signin' />
               <Route element={<MainSubAdmin />} path="/subadmin">
                 <Route index element={<ManageUsers />} />
                 <Route path='manage-users' element={<ManageUsers />} />
-                <Route path=':schools' element={<SchoolDetails isAdmin={true} />} />
+                <Route path=':schools' element={<SchoolDetails/>} />
                 <Route element={<AccountSettings />} path={'account-settings'}>
                   <Route index element={<ProfileSettings />} />
                   <Route path='password-settings' element={<PasswordSettings />} />
@@ -54,7 +60,6 @@ function App() {
               </Route>
               <Route element={<AddSchool quizName="2024 Roseline Etuokwu Quiz Competition" dateCreated="2024 - 05 - 30" />} path="/Addschool" />
               <Route element={<TestDetails isAdmin={true} />} path="/subadmin/test-details" />
-              <Route element={<TestDetails isAdmin={false} />} path="/users/test-details" />
               <Route element={<SelectQuiz option='select' />} path='/select-quiz' />
               <Route element={<SelectQuiz option='add' />} path='/add-quiz' />
               <Route element={<SelectQuiz option='edit' />} path='/edit-quiz' />

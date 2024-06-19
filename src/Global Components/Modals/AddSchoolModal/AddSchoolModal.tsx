@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
 import { LuPlusCircle } from "react-icons/lu";
 import './addschoolmodal.css';
+import { Box } from '@chakra-ui/react';
 
 interface AddSchoolModalProps {
     onClose: () => void;
@@ -22,7 +23,7 @@ const AddSchoolModal: React.FC<AddSchoolModalProps> = ({ onClose, onAddSchool })
     };
 
     return (
-        <div className="modal">
+        <Box className="modal" pos={"absolute"} backgroundColor={"#fff"} p={"30px"} w={"1040.8px"} h={"630px"} borderRadius={"10px"} top={"30px"} left={"160px"}>
             <div className="modal-content">
                 <div className="head">
                     <div>
@@ -51,7 +52,7 @@ const AddSchoolModal: React.FC<AddSchoolModalProps> = ({ onClose, onAddSchool })
                     Add School
                 </button>
             </div>
-        </div>
+        </Box>
     );
 };
 

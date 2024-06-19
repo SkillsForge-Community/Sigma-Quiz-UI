@@ -6,6 +6,7 @@ import { FaPen } from "react-icons/fa";
 import { BsSlashLg } from "react-icons/bs";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useAppSelector } from "../../app/Hooks";
 type authenticateProps = {
     isAdmin: boolean
 }
@@ -39,7 +40,7 @@ export default function Header({ isAdmin }: authenticateProps){
         setActiveButton(button);
     };
     const theme = useTheme();
-
+    const userName=useAppSelector(state=>state.auth.user?.first_name)
     return(
         <SimpleGrid spacing={5} p="20px">
         <Flex>
@@ -49,10 +50,10 @@ export default function Header({ isAdmin }: authenticateProps){
             <Spacer />
             <Flex align={"center"}>
                 <Flex alignItems={"center"} wrap={"nowrap"} w='334px' h='30px'>
-                    <h4 className="school-name">{schools} College, Sango Ota</h4>
+                    <h4 className="school-name">{schools?schools :"Ambassadors"} College, Sango Ota</h4>
                 </Flex>
                 {isAdmin && <Flex alignItems={"center"} gap="20px">
-                    <h5>Welcome, Jenner</h5>
+                    <h5>Welcome, {userName}</h5>
                     <img src={pfp} alt="profile pic" />
                     <MdOutlineKeyboardArrowDown />
                 </Flex>}
