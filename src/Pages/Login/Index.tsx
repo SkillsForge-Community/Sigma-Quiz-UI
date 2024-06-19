@@ -6,6 +6,7 @@ import VerticallyCenter from "../../Global Components/Modals/Validation/Validati
 import { useAppDispatch } from "../../app/Hooks";
 import { setCredentials } from "../../features/AuthSlice";
 import { useLoginMutation } from "../../features/authApiSlice";
+import { Spinner } from '@chakra-ui/react'
 import {
     useDisclosure,
     Stack,
@@ -22,9 +23,9 @@ import CountDown from "../../Global Components/CountDown";
 import Logo from "../../Global Components/Logo/Logo";
 
 interface LoginError {
-    response?: any|{ statusCode?: number};
+    data: { message: string }
     status?: number
-   
+
 }
 
 function Login() {
@@ -32,11 +33,11 @@ function Login() {
     const [errormessage, setErrorMessage] = useState<string>("")
     const [show, setShow] = useState<boolean>(false);
     const [email, setEmail] = useState<string>('');
-    const [passwordInput, setPasswordInput] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const [isEmailError, setisEmailError] = useState<boolean>(true)
     const [isPasswordError, setisPasswordError] = useState<boolean>(true)
     const navigate = useNavigate()
-    const [login] = useLoginMutation()
+    const [login, { isLoading }] = useLoginMutation()
     const dispatch = useAppDispatch()
 
     const handleInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
@@ -46,11 +47,11 @@ function Login() {
 
     useEffect(() => {
         setisEmailError(email === '' && true)
-        setisPasswordError(passwordInput === '' && true)
-    }, [email, passwordInput])
+        setisPasswordError(password === '' && true)
+    }, [email, password])
 
     const handlePasswordInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setPasswordInput(e.target.value);
+        setPassword(e.target.value);
         setisPasswordError(false)
     }
 
@@ -61,32 +62,33 @@ function Login() {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (email && passwordInput && ValidateEmail(email)) {
+        if (email && password && ValidateEmail(email)) {
             try {
-                const userData = await login({ email, passwordInput }).unwrap();
-                dispatch(setCredentials({ ...userData, email }));
+                const userData = await login({ email, password }).unwrap();
+                dispatch(setCredentials({ ...userData }));
+                console.log(userData)
                 setEmail("");
-                setPasswordInput("");
+                setPassword("");
                 navigate('/subadmin');
             } catch (error) {
                 const err = error as LoginError;
                 console.error(err);
                 onOpen();
-                if (err?.response) {
-                    setErrorMessage("Server Response Error");
+                if (err?.data.message) {
+                    setErrorMessage(err?.data.message);
                 } else if (err?.status === 400) {
-                    setErrorMessage("Missing Email or Password");
+                    setErrorMessage(err?.data.message);
                 } else if (err?.status === 401) {
-                    setErrorMessage("Unauthorized");
+                    setErrorMessage(err?.data.message);
                 } else if (err?.status === 404) {
-                    setErrorMessage("Endpoint Not Found");
+                    setErrorMessage(err?.data.message);
                 } else {
-                    setErrorMessage("Login Failed: Network Error");
+                    setErrorMessage(err?.data.message);
                 }
             }
         }
     };
-    
+
 
     return (
         <>
@@ -130,7 +132,7 @@ function Login() {
                                 <Input
                                     style={{ borderColor: isPasswordError ? "red" : "#33333380" }}
                                     type={show ? 'text' : 'password'}
-                                    value={passwordInput}
+                                    value={password}
                                     onChange={handlePasswordInputChange}
                                     className="input"
                                     placeholder="Type Here"
@@ -148,7 +150,9 @@ function Login() {
                                 </FormErrorMessage>
                             )}
                         </FormControl>
-                        <button className="login-button" type="submit">Login</button>
+                        <Button variant={"none"} className="login-button" type="submit"
+                            isLoading={isLoading}
+                            spinner={<Spinner color='red.500' />}>Login</Button>
                     </Stack>
                 </form>
                 <div>

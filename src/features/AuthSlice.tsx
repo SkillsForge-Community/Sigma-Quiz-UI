@@ -2,11 +2,11 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 
 type InitialState={
     user:{} |null
-    token: string |null
+    access_token: string |null
 }
 const initialState:InitialState={
     user:null,
-    token: null
+    access_token: null
 }
 const AuthSice=createSlice({
     name: "auth",
@@ -14,11 +14,11 @@ const AuthSice=createSlice({
     reducers:{
         setCredentials:(state, action:PayloadAction<InitialState>)=>{
             state.user=action.payload.user
-            state.token=action.payload.token
+            state.access_token=action.payload.access_token
         },
         logout:(state)=>{
             state.user=null
-            state.token=null
+            state.access_token=null
         }
     }
 })

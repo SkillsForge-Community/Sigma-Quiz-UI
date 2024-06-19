@@ -8,7 +8,7 @@ const baseQuery = fetchBaseQuery({
     baseUrl: "https://sigma-website-backend-51b4af465e71.herokuapp.com",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
-        const token = (getState() as RootStore).auth.token;
+        const token = (getState() as RootStore).auth.access_token;
         if (token) {
             headers.set("authorization", `Bearer ${token}`);
         }
@@ -19,15 +19,19 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, unknown> = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions);
 
+    if (result?.error) {
+        console.error("Fetch error: ", result.error);
+    }
+
     if (result?.error?.status === 403) {
-        console.log("Send refresh token");
+        console.log("Sending refresh token");
         const refreshResult = await baseQuery('/refresh', api, extraOptions);
 
         if (refreshResult?.data) {
             const user = (api.getState() as RootStore).auth.user;
-            const token = (api.getState() as RootStore).auth.token;
+            const access_token = (api.getState() as RootStore).auth.access_token;
 
-            api.dispatch(setCredentials({ user, token }));
+            api.dispatch(setCredentials({ user,access_token}));
             result = await baseQuery(args, api, extraOptions);
         } else {
             api.dispatch(logout());
