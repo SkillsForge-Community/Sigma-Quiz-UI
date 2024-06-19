@@ -45,17 +45,17 @@ const QuizForm = ({title, setTitle, description, setDescription, date, setDate} 
                 <div className="review-container">
                     <div className="review-row">
                         <span>Title</span>
-                        <span>2024 Sigma Quiz</span>
+                        <span>{title}</span>
                     </div>
 
                     <div className="review-row">
                         <span>Description</span>
-                        <span>2024 Roseline Etuokwu Sigma Quiz Competition </span>
+                        <span>{description}</span>
                     </div>
 
                     <div className="review-row">
                         <span>Date</span>
-                        <span>2024 - 05 - 30</span>
+                        <span>{formatDate(date)}</span>
                     </div>
                 </div>
             </div>

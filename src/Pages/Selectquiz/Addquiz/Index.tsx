@@ -4,6 +4,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import QuizForm from '../quiz-form/QuizForm';
 import SuccessModal from '../../../Global Components/Modals/SuccessModal/SuccessModal';
+import axios from 'axios';
+
 const AddQuiz = () => {
 
   const [addQuizPage, setAddQuizPage] = useState<number>(1);
@@ -12,8 +14,14 @@ const AddQuiz = () => {
   const [date , setDate ] = useState(new Date());
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
-  // fire when the add quiz button is clicked 
-  const handleAddQuiz = () => {
+  // -- state variables for create quiz endpoint --
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<null>(null);
+  const [isDataEmpty, setIsDataEmpty] = useState<boolean>(false);
+
+  // -- call function when the add quiz button is clicked --
+  const handleAddQuiz = async() => {
     if (title === "") {
       setErrorMsg('Quiz Title is required');
       return;
@@ -21,7 +29,30 @@ const AddQuiz = () => {
       setErrorMsg('Quiz Description is required');
       return;
     }
-    setAddQuizPage(2);
+
+    setLoading(true);
+    try {
+      const response = await axios.post('https://sigma-website-backend-51b4af465e71.herokuapp.com/api/sigma-quiz', {
+          date, 
+          title, 
+          description
+        },
+        {
+          headers: {
+          'Content-Type': 'application/json', 
+          'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkZUB5YW5qdS5jb20iLCJ1c2VyX2lkIjoiOTJlNWUxNmEtMjE5Zi00Mzk4LTlmYTQtMDBlMThiNTA3MjJlIiwiZW1haWwiOiJhZGVAeWFuanUuY29tIiwiaWF0IjoxNzE2NDc4ODQyLCJleHAiOjE3MTY3MzgwNDJ9.f89ADwqIzJbxlR2TMOsy68RI5pJnhLcCQvlhmkpc8Rg'
+        },
+      });
+
+      setData(response.data);
+      console.log(response.data);
+
+    } catch(error : any){
+      setError(error.message);
+      console.log(error)
+    }
+
+    // setAddQuizPage(2);
     setErrorMsg(null);
   }
 
