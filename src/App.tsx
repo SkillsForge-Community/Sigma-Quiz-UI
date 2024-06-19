@@ -31,11 +31,12 @@ function App() {
             {/*Public Routes*/}
             <Route element={<Homepage />} path='/' />
             <Route element={<Login />} path='/Login' />
-            <Route element={<Signin />} path='/Signin' />
+            
             <Route element={<About />} path='/About' />
             <Route element={<NotFound />} path='*' />
             {/* Protected routes*/}
             <Route element={<RequireAuth/>}>
+            <Route element={<Signin />} path='/Signin' />
               <Route element={<MainSubAdmin />} path="/subadmin">
                 <Route index element={<ManageUsers />} />
                 <Route path='manage-users' element={<ManageUsers />} />

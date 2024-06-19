@@ -23,11 +23,12 @@
     font-size: 16px;
 }
 .firstName, .lastName{
-    width: 353px;
-    height: 60px;
+    
     border:1px solid #33333380;
     border-radius: 10px;
     outline: 0;
+    padding-left: 10px;
+
 }
 .dropdown{
     width: 761px;

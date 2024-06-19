@@ -7,9 +7,17 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 url: '/api/auth/login',
                 method: "post",
                 body: { ...credentials },
-            })
-        })
-    })
+            }),
+        }),
+        register: builder.mutation({
+            query: (newAdmin) => ({
+                url: '/api/auth/register/admin',
+                method: 'post',
+                body: { ...newAdmin },
+            }),
+        }),
+        
+    }),
 });
 
-export const { useLoginMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation } = authApiSlice;
