@@ -12,7 +12,8 @@ import { FaUsers } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
-
+import { useAppSelector } from "../../app/Hooks";
+import { useEffect, useState } from "react";
 const linkStyles = {
   textAlign: "center",
   alignItems: "center",
@@ -71,8 +72,19 @@ const crudIconStyles = {
   padding: "5px",
   borderRadius: "5px",
 };
+
 function Sidebar() {
   const location = useLocation();
+  const roles  = useAppSelector((state) => state.auth.user?.roles[0]);
+  const [isAdmin,setAdmin]=useState<boolean>(false)
+  console.log(typeof roles)
+  console.log(roles);
+  useEffect(()=>{
+    if (roles==="super-admin"){
+      setAdmin(true)
+    }
+  },[roles])
+  console.log(isAdmin)
   return (
     <div>
       <SimpleGrid spacing={10}>
@@ -167,7 +179,14 @@ function Sidebar() {
             </Heading>
           </Box>
           <NavLink to="/subadmin/All-Schools">
-            <Heading as={"h5"} sx={{...linksStyles, ...(location.pathname === "/subadmin/All-Schools" && activeLinkStyle)}}>
+            <Heading
+              as={"h5"}
+              sx={{
+                ...linksStyles,
+                ...(location.pathname === "/subadmin/All-Schools" &&
+                  activeLinkStyle),
+              }}
+            >
               <Flex
                 alignItems={"center"}
                 justifyContent={"center"}
@@ -190,7 +209,7 @@ function Sidebar() {
               </Flex>
             </Heading>
           </NavLink>
-          <Box h="40px" className="link">
+          { isAdmin &&<Box h="40px" className="link">
             <Heading as={"h5"}>
               <Flex
                 alignItems={"center"}
@@ -201,9 +220,15 @@ function Sidebar() {
                 Account
               </Flex>
             </Heading>
-          </Box>
+          </Box>}
           <NavLink to="manage-users">
-            <Heading as={"h5"} sx={{...linksStyles, ...(location.pathname === "manage-users" && activeLinkStyle)}}>
+            <Heading
+              as={"h5"}
+              sx={{
+                ...linksStyles,
+                ...(location.pathname === "manage-users" && activeLinkStyle),
+              }}
+            >
               <Flex
                 alignItems={"center"}
                 justifyContent={"center"}
@@ -215,7 +240,14 @@ function Sidebar() {
             </Heading>
           </NavLink>
           <NavLink to="account-settings">
-            <Heading as={"h5"} sx={{...linksStyles, ...(location.pathname === "account-settings" && activeLinkStyle)}}>
+            <Heading
+              as={"h5"}
+              sx={{
+                ...linksStyles,
+                ...(location.pathname === "account-settings" &&
+                  activeLinkStyle),
+              }}
+            >
               <Flex
                 alignItems={"center"}
                 justifyContent={"center"}
