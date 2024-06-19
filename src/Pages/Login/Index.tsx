@@ -3,11 +3,13 @@ import "./styles.css"
 import { RiLockPasswordLine } from "react-icons/ri";
 import { NavLink, useNavigate } from "react-router-dom";
 import VerticallyCenter from "../../Global Components/Modals/Validation/ValidationMessage";
+import { useAppDispatch } from "../../app/Hooks";
+import { setCredentials } from "../../features/AuthSlice";
+import { useLoginMutation } from "../../features/authApiSlice";
+import { Spinner } from '@chakra-ui/react'
 import {
-    
-   useDisclosure,
+    useDisclosure,
     Stack,
-    
     Input,
     InputRightElement,
     InputGroup,
@@ -15,134 +17,148 @@ import {
     FormControl,
     FormLabel,
     FormErrorMessage,
-    
 } from '@chakra-ui/react';
 import { BiShow, BiHide } from "react-icons/bi";
 import CountDown from "../../Global Components/CountDown";
 import Logo from "../../Global Components/Logo/Logo";
+
+interface LoginError {
+    data: { message: string }
+    status?: number
+
+}
+
 function Login() {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const [errormessage, setErrorMessage]=useState<string>("")
-    const [show, setShow] = useState(false);
-    const [input, setInput] = useState('');
-    const [passwordInput, setPasswordInput] = useState('');
-    const [isEmailError, setisEmailError] = useState(true)
-    const [isPasswordError, setisPasswordError] = useState(true)
+    const [errormessage, setErrorMessage] = useState<string>("")
+    const [show, setShow] = useState<boolean>(false);
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [isEmailError, setisEmailError] = useState<boolean>(true)
+    const [isPasswordError, setisPasswordError] = useState<boolean>(true)
     const navigate = useNavigate()
+    const [login, { isLoading }] = useLoginMutation()
+    const dispatch = useAppDispatch()
 
     const handleInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setInput(e.target.value)
-
+        setEmail(e.target.value)
         setisEmailError(false)
     };
-    useEffect(() => {
-        setisEmailError(input ==='' && true)
-        setisPasswordError(passwordInput === '' && true)
 
-    }, [input, passwordInput])
+    useEffect(() => {
+        setisEmailError(email === '' && true)
+        setisPasswordError(password === '' && true)
+    }, [email, password])
+
     const handlePasswordInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setPasswordInput(e.target.value);
+        setPassword(e.target.value);
         setisPasswordError(false)
     }
+
     function ValidateEmail(inputText: string) {
         const mailformat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
         return mailformat.test(inputText);
     }
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        event?.preventDefault()
-        if (input && passwordInput && ValidateEmail(input)) {
-            navigate('/select-quiz');
-            return true
-        }
-        if(!input || !passwordInput){
-            onOpen()
-            setErrorMessage("Please fill all input fields")
-        }
-        else {
-            setErrorMessage("inputs must contain alpha-numeric characters")
-            onOpen()
-            return false
-            
-        }
-    }
 
-    function showSubmit() {
-        console.log(handleSubmit)
-    }
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (email && password && ValidateEmail(email)) {
+            try {
+                const userData = await login({ email, password }).unwrap();
+                dispatch(setCredentials({ ...userData }));
+                console.log(userData)
+                setEmail("");
+                setPassword("");
+                navigate('/subadmin');
+            } catch (error) {
+                const err = error as LoginError;
+                console.error(err);
+                onOpen();
+                if (err?.data.message) {
+                    setErrorMessage(err?.data.message);
+                } else if (err?.status === 400) {
+                    setErrorMessage(err?.data.message);
+                } else if (err?.status === 401) {
+                    setErrorMessage(err?.data.message);
+                } else if (err?.status === 404) {
+                    setErrorMessage(err?.data.message);
+                } else {
+                    setErrorMessage(err?.data.message);
+                }
+            }
+        }
+    };
+
+
     return (
-        <>            <VerticallyCenter message={errormessage} isOpen={isOpen} onClose={onClose}/>
-       
-        <div className="form">
-            <div className="login">
-                <Logo />
-                <div>
-                    <h3 className="login-title">Log In</h3>
-                    <h5 className="time">Provide your information in <span><CountDown /></span>  minutes</h5>
+        <>
+            <VerticallyCenter message={errormessage} isOpen={isOpen} onClose={onClose} />
+            <div className="form">
+                <div className="login">
+                    <Logo />
+                    <div>
+                        <h3 className="login-title">Log In</h3>
+                        <h5 className="time">Provide your information in <span><CountDown /></span> minutes</h5>
+                    </div>
                 </div>
-
-            </div>
-
-            <form onSubmit={event => handleSubmit(event)}>
-                <Stack
-                    spacing={4}
-                    align="center"
-                >
-                    
-                    <FormControl isInvalid={isEmailError}>
-                        <FormLabel className="FormLabel">Email</FormLabel>
-                        <Input
-                            type='email'
-                            value={input}
-                            onChange={handleInputChange}
-                            errorBorderColor='red.300'
-                            className="input"
-                            style={{ borderColor: isEmailError ? "red" : "#33333380" }}
-                            placeholder="Type Here"
-                            height="60px"
-
-                        />
-                        {isEmailError && (
-                            <FormErrorMessage
-                                style={{ color: isEmailError ? "red" : "#333333" }}
-                            >Email is required.</FormErrorMessage>
-                        )}
-                    </FormControl>
-
-                    <FormControl isInvalid={isPasswordError}>
-                        <FormLabel className="FormLabel"> <div  className="password">
-                            <p> Password</p>
-                           
-                        <RiLockPasswordLine />
-                            </div></FormLabel>
-                        <InputGroup>
+                <form onSubmit={event => handleSubmit(event)}>
+                    <Stack spacing={4} align="center">
+                        <FormControl isInvalid={isEmailError}>
+                            <FormLabel className="FormLabel">Email</FormLabel>
                             <Input
-                                style={{ borderColor: isPasswordError ? "red" : "#33333380" }}
-                                type={show ? 'text' : 'password'}
-                                value={passwordInput}
-                                onChange={handlePasswordInputChange}
+                                type='email'
+                                value={email}
+                                onChange={handleInputChange}
+                                errorBorderColor='red.300'
                                 className="input"
+                                style={{ borderColor: isEmailError ? "red" : "#33333380" }}
                                 placeholder="Type Here"
                                 height="60px"
-
                             />
-                            <InputRightElement width='4.5rem' alignItems="center">
-                                <Button variant={"none"} className="password-button" bg="none" pt="10px"  h='1.75rem' size='md' onClick={() => setShow(!show)}>
-                                    {show ? <BiShow width="1000px"   />: <BiHide width="10px"  /> }
-                                </Button>
-                            </InputRightElement>
-                        </InputGroup>
-                        {isPasswordError && (
-                            <FormErrorMessage style={{ color: isPasswordError ? "red" : "#333333" }}
-                            >Password is required.</FormErrorMessage>
-                        )}
-                    </FormControl>
-                    <button className="login-button" onClick={showSubmit} type="submit">Login</button>
-                </Stack>
-            </form>
-            <div>
-                <h5 className="account">Don't have an account?&nbsp; <NavLink style={{color:"#8F19E7", textDecoration:"underline"}} to="/Signin">Sign Up</NavLink> </h5>
+                            {isEmailError && (
+                                <FormErrorMessage
+                                    style={{ color: isEmailError ? "red" : "#333333" }}
+                                >Email is required.</FormErrorMessage>
+                            )}
+                        </FormControl>
+                        <FormControl isInvalid={isPasswordError}>
+                            <FormLabel className="FormLabel">
+                                <div className="password">
+                                    <p>Password</p>
+                                    <RiLockPasswordLine />
+                                </div>
+                            </FormLabel>
+                            <InputGroup>
+                                <Input
+                                    style={{ borderColor: isPasswordError ? "red" : "#33333380" }}
+                                    type={show ? 'text' : 'password'}
+                                    value={password}
+                                    onChange={handlePasswordInputChange}
+                                    className="input"
+                                    placeholder="Type Here"
+                                    height="60px"
+                                />
+                                <InputRightElement width='4.5rem' alignItems="center">
+                                    <Button variant={"none"} className="password-button" bg="none" pt="10px" h='1.75rem' size='md' onClick={() => setShow(!show)}>
+                                        {show ? <BiShow width="1000px" /> : <BiHide width="10px" />}
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
+                            {isPasswordError && (
+                                <FormErrorMessage style={{ color: isPasswordError ? "red" : "#333333" }}>
+                                    Password is required.
+                                </FormErrorMessage>
+                            )}
+                        </FormControl>
+                        <Button variant={"none"} className="login-button" type="submit"
+                            isLoading={isLoading}
+                            spinner={<Spinner color='red.500' />}>Login</Button>
+                    </Stack>
+                </form>
+                <div>
+                    <h5 className="account">Don't have an account?&nbsp; <NavLink style={{ color: "#8F19E7", textDecoration: "underline" }} to="/Signin">Sign Up</NavLink> </h5>
+                </div>
             </div>
-        </div>
         </>
     );
 }
