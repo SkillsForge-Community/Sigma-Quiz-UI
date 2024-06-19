@@ -4,7 +4,7 @@ import './quizcard.css'
 type quizCardProps = {
     quiz: {
         title: string,
-        description: string | null
+        description: string 
     }
     index: number,
     setselectedQuizIndex: (index: number) => void, 
