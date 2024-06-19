@@ -42,8 +42,8 @@ function Signin() {
     const [isPasswordError, setisPasswordError] = useState(true);
     const [isFirstNameError, setisFirstNameError] = useState(true);
     const [isLastNameError, setsetLastNameError] = useState(true);
-    const roles = ["super admin", "quiz-master", "adhocroles"];
-    const [selectValue, setSelectValue] = useState<string[]>([""]);
+    const roles = ["super-admin", "quiz-master", "adhocroles"];
+    const [selectValue, setSelectValue] = useState<string[]>(["super-admin"]);
     const navigate = useNavigate();
     const [register, { isLoading }] = useRegisterMutation();
     const dispatch = useAppDispatch();
