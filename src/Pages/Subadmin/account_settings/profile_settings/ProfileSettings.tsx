@@ -2,8 +2,11 @@ import React from 'react'
 import './profileSettings.css'
 import { FaUserCircle } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";
+import { useAppSelector } from '../../../../app/Hooks';
 
 const ProfileSettings = () => {
+  const user=useAppSelector(state=>state.auth.user)
+
   return (
     <div className='profile-settings'>
 
@@ -14,20 +17,20 @@ const ProfileSettings = () => {
         </div>
       </div>
 
-      <span className="profile-name"  style={{marginTop: '10px'}}>Yande Stephens</span>
+      <span className="profile-name"  style={{marginTop: '10px'}}>{user?.first_name}</span>
 
       <div className="profile-form">
         <div className="field">
           <label htmlFor="">First Name</label>
-          <input type="text" defaultValue='yande'/>
+          <input type="text" defaultValue={user?.first_name}/>
         </div>
         <div className="field">
           <label htmlFor="">Last Name</label>
-          <input type="text" defaultValue='yande'/>
+          <input type="text" defaultValue={user?.last_name}/>
         </div>
         <div className="field">
           <label htmlFor="">Email Address</label>
-          <input type="text" defaultValue='yandestephens@gmail.com'/>
+          <input type="text" defaultValue={user?.email}/>
         </div>
         <button className='update-profile'>Update Profile</button>
       </div>

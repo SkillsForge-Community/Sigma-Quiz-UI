@@ -17,6 +17,7 @@ const AccountSettings = () => {
     dispatch(logout())
     naviagte("/login")
   }
+
   return (
     <div className='account-setting-container'>
         <Outlet />
