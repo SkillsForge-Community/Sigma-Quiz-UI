@@ -5,7 +5,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import QuizCard from '../quiz-card/QuizCard';
 import QuizForm from '../quiz-form/QuizForm';
 import Success from '../../../Global Components/Modals/success-modal/Success';
-import { Box, Spinner } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 
 type quizListType = {

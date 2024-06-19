@@ -1,12 +1,39 @@
 import infor from "../../assets/Images/info.png"
 import { IoPlayCircleOutline } from "react-icons/io5"
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import './styles.css'; 
 import Logo from "../../Global Components/Logo/Logo";
-import { Box, HStack, Select, VStack } from "@chakra-ui/react";
+import { Box, HStack, MenuItem, Select, VStack } from "@chakra-ui/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 const Homepage = () => {
     const navigate=useNavigate()
+    type quizType = {
+        id?: string,
+        year?: number,
+        title?: string,
+        description?: string,
+        date?: string
+    }
+    const [quizes, setQuizes] = useState<quizType[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+
+   useEffect(() => {
+        const getAllQuizzes = () => {
+            setIsLoading(true)
+           axios.get("https://sigma-website-backend-51b4af465e71.herokuapp.com/api/sigma-quiz").then(res => {
+               console.log(res.data)
+               setQuizes(res.data)
+                setIsLoading(false)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+        getAllQuizzes()
+    }, [setQuizes]) 
+        
     return (
         <div className="Home">
             <Logo/>
@@ -15,15 +42,19 @@ const Homepage = () => {
                 <h3>Quiz competition involving secondary schools from all over Nigeria. Instilling the spirit of knowledge. Held @ the premier University; University of Ibadan</h3>
             </div>
             <div className="dropdowns">
-                <Select borderRadius="45px" icon={<MdKeyboardArrowDown/>}  className="dropdown-menu" height="90px"  width="491px" bg="white" placeholder="Select quiz to view">
+                <Select borderRadius="45px" icon={<MdOutlineKeyboardArrowDown color="red"/>}  className="dropdown-menu" height="90px" variant={"outline"}  width="491px" bg="white" >
+                
+                {isLoading ? <option>Loading...</option> : quizes?.length>0?quizes.map((quiz: quizType) => (
+                    <MenuItem key={quiz.id} value={quiz.title}>{quiz.title}</MenuItem>
+                )): <option>No data found</option>}
                 </Select>
                 
                 <button className="submit" onClick={()=>navigate('/login')} type="submit">View Quiz</button>
             </div>
             <div className="quizes">
-                <h4>2024 Quiz</h4>
-                <h4>2023 Quiz</h4>
-                <h4>2022 Quiz</h4>
+            {quizes && quizes.slice(0,3).map((quiz: quizType) => (
+                <h4>{quiz.year} Quiz</h4>
+            ))}
             </div>
             <div className="video">
                 <VStack
@@ -52,14 +83,8 @@ const Homepage = () => {
                        
                     </Box>
                 </VStack>
-            
-                
-                
-
+        
             </div>
-
-
-
         </div>
     )
 }
