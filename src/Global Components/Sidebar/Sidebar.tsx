@@ -2,9 +2,8 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
 import { BsPercent } from "react-icons/bs";
 import { LuSchool } from "react-icons/lu";
-// import "./Sidebar.css"
 import { SimpleGrid } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { FaPen } from "react-icons/fa6";
 import { IconContext } from "react-icons";
@@ -13,6 +12,8 @@ import { FaUsers } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
+import { useAppSelector } from "../../app/Hooks";
+import { useEffect, useState } from "react";
 const linkStyles = {
   textAlign: "center",
   alignItems: "center",
@@ -40,18 +41,14 @@ const linksStyles = {
     borderRight: 0,
     borderBottom: 0,
   },
-  _active: {
-    color: "#8F19E7",
-    boxShadow: " 2px 2px 15px 1px #00000040",
-    border: "5px",
-    borderLeftColor: "#8F19E7",
-    borderTop: 0,
-    borderRight: 0,
-    borderBottom: 0,
-    borderLeft: "5px",
-    borderstyle: "solid",  
-  }
-    ,
+};
+const activeLinkStyle = {
+  color: "#8F19E7",
+  boxShadow: " 2px 2px 15px 1px #00000040",
+  borderLeft: " 5px solid #8F19E7",
+  borderTop: 0,
+  borderRight: 0,
+  borderBottom: 0,
 };
 const crudOperationsStyles = {
   cursor: "pointer",
@@ -62,20 +59,32 @@ const crudOperationsStyles = {
   height: "38px",
   gap: "3x",
   backgroundColor: "rgba(143, 25, 231, 1)",
-  ":hover": { backgroundColor: "purple" }
-}
+  ":hover": { backgroundColor: "purple" },
+};
 
 const crudStyles = {
   color: "rgba(255, 255, 255, 1)",
   gap: "8px",
   fontSize: "16px",
-}
+};
 const crudIconStyles = {
   backgroundColor: "rgba(237, 237, 237, 1)",
   padding: "5px",
   borderRadius: "5px",
 };
+
 function Sidebar() {
+  const location = useLocation();
+  const roles  = useAppSelector((state) => state.auth.user?.roles[0]);
+  const [isAdmin,setAdmin]=useState<boolean>(false)
+  console.log(typeof roles)
+  console.log(roles);
+  useEffect(()=>{
+    if (roles==="super-admin"){
+      setAdmin(true)
+    }
+  },[roles])
+  console.log(isAdmin)
   return (
     <div>
       <SimpleGrid spacing={10}>
@@ -93,8 +102,6 @@ function Sidebar() {
         <SimpleGrid spacing={5}>
           <Box h="40px">
             <Heading as={"h5"} className="sidebar-schools">
-
-
               <Flex
                 alignItems={"center"}
                 justifyContent={"center"}
@@ -106,37 +113,25 @@ function Sidebar() {
             </Heading>
           </Box>
 
-          <NavLink to= "/subadmin/Ambassadors" >
-            <Flex sx={linksStyles}>
-              <h5>Ambassadors</h5>
-            </Flex>
-          </NavLink>
-
-          <NavLink  to="/subadmin/School-Two">
-            <Flex sx={linksStyles}>
-              <h5>School Two</h5>
-            </Flex>
-          </NavLink>
-          <NavLink to="/subadmin/School-Three">
-            <Flex sx={linksStyles}>
-              <h5>School Three</h5>
-            </Flex>
-          </NavLink>
-          <NavLink to="/subadmin/School-Four">
-            <Flex sx={linksStyles}>
-              <h5>School Four</h5>
-            </Flex>
-          </NavLink>
-          <NavLink to="/subadmin/School-Five">
-            <Flex sx={linksStyles}>
-              <h5>School Five</h5>
-            </Flex>
-          </NavLink>
-          <NavLink to="/subadmin/School-Six">
-            <Flex sx={linksStyles}>
-              <h5>School Six</h5>
-            </Flex>
-          </NavLink>
+          {[
+            { to: "/subadmin/Ambassadors", label: "Ambassadors" },
+            { to: "/subadmin/School-Two", label: "School Two" },
+            { to: "/subadmin/School-Three", label: "School Three" },
+            { to: "/subadmin/School-Four", label: "School Four" },
+            { to: "/subadmin/School-Five", label: "School Five" },
+            { to: "/subadmin/School-Six", label: "School Six" },
+          ].map((link, index) => (
+            <NavLink key={index} to={link.to}>
+              <Flex
+                sx={{
+                  ...linksStyles,
+                  ...(location.pathname === link.to && activeLinkStyle),
+                }}
+              >
+                <h5>{link.label}</h5>
+              </Flex>
+            </NavLink>
+          ))}
           <Box w="156px" sx={crudOperationsStyles}>
             <Flex alignItems={"center"} justifyContent={"center"}>
               <IconContext.Provider value={{ color: "rgba(0, 0, 0, 1)" }}>
@@ -173,8 +168,6 @@ function Sidebar() {
         <SimpleGrid spacing={5}>
           <Box h="40px">
             <Heading as={"h5"}>
-
-
               <Flex
                 alignItems={"center"}
                 justifyContent={"center"}
@@ -186,9 +179,14 @@ function Sidebar() {
             </Heading>
           </Box>
           <NavLink to="/subadmin/All-Schools">
-
-
-            <Heading as={"h5"} sx={linksStyles}>
+            <Heading
+              as={"h5"}
+              sx={{
+                ...linksStyles,
+                ...(location.pathname === "/subadmin/All-Schools" &&
+                  activeLinkStyle),
+              }}
+            >
               <Flex
                 alignItems={"center"}
                 justifyContent={"center"}
@@ -201,36 +199,65 @@ function Sidebar() {
           </NavLink>
           <NavLink to="/select-quiz">
             <Heading as={"h5"} sx={linksStyles}>
-              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+              <Flex
+                alignItems={"center"}
+                justifyContent={"center"}
+                gap={"10px"}
+              >
                 <CiCircleQuestion size={"26px"} />
                 Manage Questions
               </Flex>
             </Heading>
           </NavLink>
-          <Box h="40px" className="link">
+          { isAdmin &&<Box h="40px" className="link">
             <Heading as={"h5"}>
-              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+              <Flex
+                alignItems={"center"}
+                justifyContent={"center"}
+                gap={"10px"}
+              >
                 <MdAccountCircle size={"26px"} />
                 Account
               </Flex>
             </Heading>
-          </Box>
+          </Box>}
           <NavLink to="manage-users">
-            <Heading as={"h5"} sx={linksStyles}>
-              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+            <Heading
+              as={"h5"}
+              sx={{
+                ...linksStyles,
+                ...(location.pathname === "manage-users" && activeLinkStyle),
+              }}
+            >
+              <Flex
+                alignItems={"center"}
+                justifyContent={"center"}
+                gap={"10px"}
+              >
                 <FaUsers size={"26px"} />
                 Manage Users
               </Flex>
             </Heading>
           </NavLink>
           <NavLink to="account-settings">
-            <Heading as={"h5"} sx={linksStyles}>
-              <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+            <Heading
+              as={"h5"}
+              sx={{
+                ...linksStyles,
+                ...(location.pathname === "account-settings" &&
+                  activeLinkStyle),
+              }}
+            >
+              <Flex
+                alignItems={"center"}
+                justifyContent={"center"}
+                gap={"10px"}
+              >
                 <CiSettings size={"26px"} />
                 My Account
               </Flex>
             </Heading>
-          </NavLink>       
+          </NavLink>
         </SimpleGrid>
       </SimpleGrid>
     </div>
