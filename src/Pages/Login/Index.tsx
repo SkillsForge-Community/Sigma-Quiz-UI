@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./styles.css"
 import { RiLockPasswordLine } from "react-icons/ri";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import VerticallyCenter from "../../Global Components/Modals/Validation/ValidationMessage";
 import { useAppDispatch } from "../../app/Hooks";
 import { setCredentials } from "../../features/AuthSlice";
@@ -102,7 +102,7 @@ function Login() {
                     </div>
                 </div>
                 <form onSubmit={event => handleSubmit(event)}>
-                    <Stack spacing={4} align="center">
+                    <Stack spacing={10} align="center">
                         <FormControl isInvalid={isEmailError}>
                             <FormLabel className="FormLabel">Email</FormLabel>
                             <Input
@@ -155,9 +155,6 @@ function Login() {
                             spinner={<Spinner color='red.500' />}>Login</Button>
                     </Stack>
                 </form>
-                <div>
-                    <h5 className="account">Don't have an account?&nbsp; <NavLink style={{ color: "#8F19E7", textDecoration: "underline" }} to="/Signin">Sign Up</NavLink> </h5>
-                </div>
             </div>
         </>
     );
