@@ -13,7 +13,7 @@ import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
 import { useAppSelector } from "../../app/Hooks";
-import { useEffect, useState } from "react";
+
 const linkStyles = {
   textAlign: "center",
   alignItems: "center",
