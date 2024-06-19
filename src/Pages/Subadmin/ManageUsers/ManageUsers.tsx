@@ -187,7 +187,7 @@ export default function ManageUsers() {
                             <h4 className='table-title'>manage Users</h4>
                         </div>
                         <div>
-                            <button className='table-button'>Add Members</button>
+                            <button className='table-button' onClick={()=>navigate("/Signin")}>Add Members</button>
                         </div>
                     </Box>
                     <TableContainer>
