@@ -21,45 +21,53 @@ import UserProfile from './Pages/Subadmin/Update user/Update user Profile/UserPr
 import UserFunctions from './Pages/Subadmin/Update user/User Functions/UserFunctions';
 import Round from './Pages/Round/Round';
 import AddEditRound from './Pages/Round/AddEditRound';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import RequireAuth from './Global Components/RequireAuth';
+
 function App() {
   return (
     <ChakraProvider>
-      <div className="App">
-        <Routes>
-          <Route element={<Homepage />} path='/' />
-          <Route element={<MainSubAdmin />} path="/subadmin">
-            <Route index element={<ManageUsers />} />
-            <Route path='manage-users' element={<ManageUsers />} />
-            <Route path=':schools' element={<SchoolDetails isAdmin={true}/>} />
-            <Route element={<AccountSettings />} path={'account-settings'}>
-              <Route index element={<ProfileSettings />} />
-              <Route path='password-settings' element={<PasswordSettings />} />
-              <Route path='profile-settings' element={<ProfileSettings />} />
+      <Provider store={store}>
+        <div className="App">
+          <Routes>
+            {/*Public Routes*/}
+            <Route element={<Homepage />} path='/' />
+            <Route element={<Login />} path='/Login' />
+            <Route element={<Signin />} path='/Signin' />
+            <Route element={<About />} path='/About' />
+            <Route element={<NotFound />} path='*' />
+            {/* Protected routes*/}
+            <Route element={<RequireAuth/>}>
+              <Route element={<MainSubAdmin />} path="/subadmin">
+                <Route index element={<ManageUsers />} />
+                <Route path='manage-users' element={<ManageUsers />} />
+                <Route path=':schools' element={<SchoolDetails isAdmin={true} />} />
+                <Route element={<AccountSettings />} path={'account-settings'}>
+                  <Route index element={<ProfileSettings />} />
+                  <Route path='password-settings' element={<PasswordSettings />} />
+                  <Route path='profile-settings' element={<ProfileSettings />} />
+                </Route>
+              </Route>
+              <Route element={<UpdateUser />} path="/subadmin/update-user">
+                <Route index element={<UserProfile />} />
+                <Route path='profile' element={<UserProfile />} />
+                <Route path='user-functions' element={<UserFunctions />} />
+              </Route>
+              <Route element={<AddSchool quizName="2024 Roseline Etuokwu Quiz Competition" dateCreated="2024 - 05 - 30" />} path="/Addschool" />
+              <Route element={<TestDetails isAdmin={true} />} path="/subadmin/test-details" />
+              <Route element={<TestDetails isAdmin={false} />} path="/users/test-details" />
+              <Route element={<SelectQuiz option='select' />} path='/select-quiz' />
+              <Route element={<SelectQuiz option='add' />} path='/add-quiz' />
+              <Route element={<SelectQuiz option='edit' />} path='/edit-quiz' />
+
+              <Route element={<Round />} path='/round'/>
+              <Route element={<AddEditRound />} path='/round/add'/>
+              <Route element={<AddEditRound />} path='/round/edit'/>
             </Route>
-          </Route>
-          <Route element={<UpdateUser />} path="/subadmin/update-user">
-            <Route index element={<UserProfile />} />
-            <Route path='profile' element={<UserProfile />} />
-            <Route path='user-functions' element={<UserFunctions />} />
-          </Route>
-          <Route element={<AddSchool quizName="2024 Roseline Etuokwu Quiz Competition" dateCreated="2024 - 05 - 30" />} path="/Addschool" />
-
-          <Route element={<Round />} path='/round'/>
-          <Route element={<AddEditRound />} path='/round/add'/>
-          <Route element={<AddEditRound />} path='/round/edit'/>
-          <Route element={<TestDetails isAdmin={true}/>} path="/subadmin/test-details" />
-          <Route element={<TestDetails isAdmin={false}/>} path="/users/test-details" />
-
-          <Route element={<SelectQuiz option='select' />} path='/select-quiz' />
-          <Route element={<SelectQuiz option='add' />} path='/add-quiz' />
-          <Route element={<SelectQuiz option='edit' />} path='/edit-quiz' />
-          <Route element={<About />} path='/About' />
-          <Route element={<Login />} path='/Login' />
-          <Route element={<Signin />} path='/Signin' />
-          <Route element={<NotFound />} path='*' />
-          
-        </Routes>
-      </div>
+          </Routes>
+        </div>
+      </Provider>
     </ChakraProvider>
   );
 }
