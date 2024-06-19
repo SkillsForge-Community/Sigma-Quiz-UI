@@ -18,13 +18,16 @@ import {
     Td,
     TableContainer,
 } from '@chakra-ui/react'
+import { useAppSelector } from '../../../app/Hooks';
 export default function ManageUsers() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [search, setSearch] = useState<string>("");
-    const [name,/* setName */] = useState<string>("Jenner")
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const navigate=useNavigate()
+    const userName=useAppSelector(state=>state.auth.user?.first_name)
+
     function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
+
         if (e.key === "Enter") {
             if (!search) {
                 onOpen();
@@ -172,7 +175,7 @@ export default function ManageUsers() {
                         />
                     </InputGroup>
                     <Box className='profile'>
-                        <h5>Welcome, {name}</h5>
+                        <h5>Welcome, {userName}</h5>
                         <div className='profile'>
                             <img src={pfp} alt='profile' />
                             <MdOutlineKeyboardArrowDown />
