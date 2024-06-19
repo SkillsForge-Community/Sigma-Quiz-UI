@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import Logo from "../../Global Components/Logo/Logo";
-import { Box, HStack, MenuItem, Select, VStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Link, Select, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -43,8 +43,18 @@ const Homepage = () => {
   }, [setQuizes]);
 
   return (
-    <div className="Home">
+    <Box className="Home">
       <Logo />
+      <Link
+        className="login-link"
+        href="/login"
+        textDecoration={"underline"}
+        color={"rgb(255, 255, 255)"}
+        ml={"auto"}
+        fontSize={"22px"}
+      >
+        Log In
+      </Link>
       <div className="title">
         <h1>Sigma Roseline Etuokwu Quiz Competition</h1>
         <h3>
@@ -57,7 +67,7 @@ const Homepage = () => {
         <Select
           borderRadius="45px"
           icon={<MdOutlineKeyboardArrowDown color="red" />}
-          className="dropdown-menu"
+          className="dropdown"
           height="90px"
           variant={"outline"}
           width="491px"
@@ -123,7 +133,7 @@ const Homepage = () => {
           </Box>
         </VStack>
       </div>
-    </div>
+    </Box>
   );
 };
 export default Homepage;

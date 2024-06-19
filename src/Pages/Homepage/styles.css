@@ -19,7 +19,7 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
-    "logos . ."
+    "logos . login"
     "title . ."
     "dropdown . ."
     "quizes . video";
@@ -28,7 +28,9 @@ body {
   column-gap: 50px;
   height: auto;
 }
-
+.login-link {
+  grid-area: login;
+}
 .title {
   grid-area: title;
   display: flex;
