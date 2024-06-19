@@ -35,7 +35,7 @@ const Homepage = () => {
         })
         .catch((err) => {
           console.log(err);
-          setError("Failed to fetch quizzes");
+          setError("Error Fetching Quizes. Try Again");
           setIsLoading(false);
         });
     };
