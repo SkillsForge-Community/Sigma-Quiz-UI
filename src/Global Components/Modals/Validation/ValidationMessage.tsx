@@ -26,8 +26,10 @@ export default function VerticallyCenter({isOpen, onClose,message}:ModalProps) {
         <ModalContent>
           <ModalHeader color="red">Validation Error</ModalHeader>
           <ModalCloseButton />
+          
           <ModalBody textAlign={"center"}>
             <h4 >{message}</h4>
+
           </ModalBody>
           <ModalFooter>
             <Button bg="red" color="white" _hover={{ bg:"white", color: "red" }} onClick={onClose}>Close</Button>
