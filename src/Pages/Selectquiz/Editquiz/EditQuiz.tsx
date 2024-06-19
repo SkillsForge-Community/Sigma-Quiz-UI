@@ -5,7 +5,6 @@ import { IoIosArrowBack } from "react-icons/io";
 import QuizCard from '../quiz-card/QuizCard';
 import QuizForm from '../quiz-form/QuizForm';
 import SuccessModal from '../../../Global Components/Modals/SuccessModal/SuccessModal';
-import axios from "axios";
 import { Box } from '@chakra-ui/react';
 
 
