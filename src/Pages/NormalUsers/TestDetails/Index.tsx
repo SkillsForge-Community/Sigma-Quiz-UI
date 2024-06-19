@@ -44,44 +44,45 @@ function TestDetails() {
                     ))}
                 </SimpleGrid>
             </SimpleGrid>
-            <SimpleGrid spacing={5}>
-            <SimpleGrid columns={2} spacing={223} >
-            <SimpleGrid gap={10} alignItems={"center"} className="score-stats" columns={3} width={"790px"} height="272px">
-                <Box className="Score-details">
-                    <span className="actual-score">13</span>
-                    <RxSlash /> 17
-                </Box>
-                    <div className="details-subtitles">
-                        <Box >Test :</Box>
-                        <Box >Time taken :</Box>
-                        <Box >Questions attempted :</Box>
-                        <Box >Correct answers :</Box>
-                        <Box >Wrong answers :</Box>
-                        <Box >Overall result :</Box>
-                    </div>
-                    <div className="details-subvalues">
-                        <Box>General knowledge quiz</Box>
-                        <Box>1 hr 40 min</Box>
-                        <Box>25</Box>
-                        <Box>21</Box>
-                        <Box>4</Box>
-                        <Box>80%</Box>
-                    </div>
-                </SimpleGrid>
-                <SimpleGrid columns={1} columnGap={"33px"} className="pages" alignItems={"center"} width="494.81px" height="272px">
-                    <PaginatedItems numOfPages={14}/>
-                    <PaginatedItems numOfPages={14}/>
-                    <PaginatedItems numOfPages={14}/>
-                    <PaginatedItems numOfPages={14}/>
-                    <PaginatedItems numOfPages={14}/>
 
-                </SimpleGrid>
+            <SimpleGrid spacing={5}>
+                <SimpleGrid columns={2} spacing={223} >
+                    <SimpleGrid gap={10} alignItems={"center"} className="score-stats" columns={3} width={"790px"} height="272px">
+                        <Box className="Score-details">
+                            <span className="actual-score">13</span>
+                            <RxSlash /> 17
+                        </Box>
+                        <div className="details-subtitles">
+                            <Box >Test :</Box>
+                            <Box >Time taken :</Box>
+                            <Box >Questions attempted :</Box>
+                            <Box >Correct answers :</Box>
+                            <Box >Wrong answers :</Box>
+                            <Box >Overall result :</Box>
+                        </div>
+                        <div className="details-subvalues">
+                            <Box>General knowledge quiz</Box>
+                            <Box>1 hr 40 min</Box>
+                            <Box>25</Box>
+                            <Box>21</Box>
+                            <Box>4</Box>
+                            <Box>80%</Box>
+                        </div>
+                    </SimpleGrid>
+                    
+                    <SimpleGrid columns={1} columnGap={"33px"} className="pages" alignItems={"center"} width="494.81px" height="272px">
+                        <PaginatedItems numOfPages={14}/>
+                        <PaginatedItems numOfPages={14}/>
+                        <PaginatedItems numOfPages={14}/>
+                        <PaginatedItems numOfPages={14}/>
+                        <PaginatedItems numOfPages={14}/>
+                    </SimpleGrid>
                 </SimpleGrid>
                 <SimpleGrid width="328px" height="48px" columnGap={"70px"} columns={2}>
                     <Button variant="none" className="download">Download pdf</Button>
                     <Button variant="none" className="exit" onClick={()=>navigate(-1)}>Exit</Button>
                 </SimpleGrid>
-                </SimpleGrid>
+            </SimpleGrid>
         </SimpleGrid>
     )
 }

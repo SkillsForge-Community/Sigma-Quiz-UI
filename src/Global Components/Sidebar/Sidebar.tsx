@@ -61,7 +61,7 @@ const crudOperationsStyles = {
     borderRadius: "7px",
     margin: "0 auto",
     padding: "7px",
-   height: "38px",
+    height: "38px",
     gap: "3x",
     backgroundColor: "rgba(143, 25, 231, 1)",
     ":hover": {backgroundColor: "purple"}
@@ -179,7 +179,7 @@ function Sidebar() {
                 </Flex>
             </Heading>
           </NavLink>
-          <NavLink to="/select-quiz">
+          <NavLink to="/manage-questions">
             <Heading as={"h5"} sx={linksStyles}>
                 <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>   
               <CiCircleQuestion size={"26px"} />

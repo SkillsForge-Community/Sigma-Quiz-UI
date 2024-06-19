@@ -16,7 +16,7 @@ export default function MainSubAdmin(){
     <Sidebar/>
   </GridItem>
   <GridItem pl='2' bg='#FFFFFF' area={'main'}>
-   <Outlet/>
+    <Outlet/>
   </GridItem>
   
 </Grid>

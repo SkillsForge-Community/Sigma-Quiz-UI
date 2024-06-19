@@ -47,9 +47,9 @@ const Homepage = () => {
                         </HStack>
                     </Box>
                     <Box h='31px' w="325px" className="info-button">
-                       
+
                             <button onClick={() => navigate("/About")}><IoPlayCircleOutline />Play Video</button>
-                       
+                        
                     </Box>
                 </VStack>
             

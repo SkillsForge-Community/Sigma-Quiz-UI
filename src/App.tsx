@@ -20,40 +20,52 @@ import ManageUsers from './Pages/Subadmin/ManageUsers/ManageUsers';
 import UpdateUser from './Pages/Subadmin/Update user/Index';
 import UserProfile from './Pages/Subadmin/Update user/Update user Profile/UserProfile';
 import UserFunctions from './Pages/Subadmin/Update user/User Functions/UserFunctions';
+import Questions from './Pages/Questions/Questions';
+import Scores from './Pages/Scores/Scores';
+
 function App() {
   return (
     <ChakraProvider>
       <div className="App">
         <Routes>
-          <Route element={<Homepage />} path='/' />
+          <Route element={<Homepage />} path="/" />
           <Route element={<MainSubAdmin />} path="/subadmin">
             <Route index element={<ManageUsers />} />
-            <Route path='manage-users' element={<ManageUsers />} />
-            <Route path=':schools' element={<SchoolDetails />} />
-            <Route element={<AccountSettings />} path={'account-settings'}>
+            <Route path="manage-users" element={<ManageUsers />} />
+            <Route path=":schools" element={<SchoolDetails />} />
+            <Route element={<AccountSettings />} path={"account-settings"}>
               <Route index element={<ProfileSettings />} />
-              <Route path='password-settings' element={<PasswordSettings />} />
-              <Route path='profile-settings' element={<ProfileSettings />} />
+              <Route path="password-settings" element={<PasswordSettings />} />
+              <Route path="profile-settings" element={<ProfileSettings />} />
             </Route>
           </Route>
           <Route element={<UpdateUser />} path="/subadmin/update-user">
             <Route index element={<UserProfile />} />
-            <Route path='profile' element={<UserProfile />} />
-            <Route path='user-functions' element={<UserFunctions />} />
+            <Route path="profile" element={<UserProfile />} />
+            <Route path="user-functions" element={<UserFunctions />} />
           </Route>
-          <Route element={<AddSchool quizName="2024 Roseline Etuokwu Quiz Competition" dateCreated="2024 - 05 - 30" />} path="/Addschool" />
+          <Route
+            element={
+              <AddSchool
+                quizName="2024 Roseline Etuokwu Quiz Competition"
+                dateCreated="2024 - 05 - 30"
+              />
+            }
+            path="/Addschool"
+          />
           <Route element={<NormalUsers />} path="/users">
-            <Route path=':schools' element={<SchoolDetails />} />
+            <Route path=":schools" element={<SchoolDetails />} />
           </Route>
           <Route element={<TestDetails />} path="/users/test-details" />
-          <Route element={<SelectQuiz option='select' />} path='/select-quiz' />
-          <Route element={<SelectQuiz option='add' />} path='/add-quiz' />
-          <Route element={<SelectQuiz option='edit' />} path='/edit-quiz' />
-          <Route element={<About />} path='/About' />
-          <Route element={<Login />} path='/Login' />
-          <Route element={<Signin />} path='/Signin' />
-          <Route element={<NotFound />} path='*' />
-          
+          <Route element={<SelectQuiz option="select" />} path="/select-quiz" />
+          <Route element={<SelectQuiz option="add" />} path="/add-quiz" />
+          <Route element={<SelectQuiz option="edit" />} path="/edit-quiz" />
+          <Route element={<Questions />} path="/manage-questions" />
+          <Route element={<Scores />} path="/all-scores" />
+          <Route element={<About />} path="/About" />
+          <Route element={<Login />} path="/Login" />
+          <Route element={<Signin />} path="/Signin" />
+          <Route element={<NotFound />} path="*" />
         </Routes>
       </div>
     </ChakraProvider>
