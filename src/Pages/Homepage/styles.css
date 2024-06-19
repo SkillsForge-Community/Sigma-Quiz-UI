@@ -152,6 +152,10 @@ body {
   border-radius: 40px;
   cursor: pointer;
 }
+option {
+  background-color: #fff;
+  color: #000;
+}
 @keyframes Home {
   from {
     transform: translateX(-120%);
