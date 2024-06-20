@@ -54,6 +54,7 @@ const SelectQuiz = ({option} : selectQuizProps) => {
           } else {
             setData(response.data);
             setIsDataEmpty(false);
+            setError(null);
           }
         } catch (error : any) {
           setError(error.message || 'Unknown error');
