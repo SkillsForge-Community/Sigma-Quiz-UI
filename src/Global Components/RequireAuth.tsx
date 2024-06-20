@@ -4,6 +4,9 @@ function RequireAuth(){
     const location= useLocation()
     const token =useAppSelector(state=>state.auth.access_token)
     console.log(token)
+    if (token){
+        localStorage.setItem("token", token);
+    }
     return(
         token ? <Outlet/>: <Navigate to ="/login" state={{from :location}} replace/>
     )

@@ -20,6 +20,9 @@ const AddQuiz = () => {
   const [data, setData] = useState<null>(null);
   const [isDataEmpty, setIsDataEmpty] = useState<boolean>(false);
 
+  // --- get bearer token from the local storage
+  const token = localStorage.getItem("token")
+
   // -- call function when the add quiz button is clicked --
   const handleAddQuiz = async() => {
     if (title === "") {
@@ -39,20 +42,20 @@ const AddQuiz = () => {
         },
         {
           headers: {
-          'Content-Type': 'application/json', 
-          'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkZUB5YW5qdS5jb20iLCJ1c2VyX2lkIjoiOTJlNWUxNmEtMjE5Zi00Mzk4LTlmYTQtMDBlMThiNTA3MjJlIiwiZW1haWwiOiJhZGVAeWFuanUuY29tIiwiaWF0IjoxNzE2NDc4ODQyLCJleHAiOjE3MTY3MzgwNDJ9.f89ADwqIzJbxlR2TMOsy68RI5pJnhLcCQvlhmkpc8Rg'
+          'Authorization': `Bearer ${token}`
         },
       });
 
       setData(response.data);
       console.log(response.data);
+      setAddQuizPage(2);
 
     } catch(error : any){
       setError(error.message);
       console.log(error)
     }
 
-    // setAddQuizPage(2);
+    
     setErrorMsg(null);
   }
 
