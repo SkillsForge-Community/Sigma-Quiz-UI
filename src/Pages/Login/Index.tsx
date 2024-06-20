@@ -6,7 +6,7 @@ import VerticallyCenter from "../../Global Components/Modals/Validation/Validati
 import { useAppDispatch } from "../../app/Hooks";
 import { setCredentials } from "../../features/AuthSlice";
 import { useLoginMutation } from "../../features/authApiSlice";
-import { Spinner } from '@chakra-ui/react'
+import LoadingIcons from 'react-loading-icons'
 import {
     useDisclosure,
     Stack,
@@ -72,7 +72,7 @@ function Login() {
                 navigate('/subadmin');
             } catch (error) {
                 const err = error as LoginError;
-                console.error(err);
+                console.log(err);
                 onOpen();
                 if (err?.data.message) {
                     setErrorMessage(err?.data.message);
@@ -150,9 +150,9 @@ function Login() {
                                 </FormErrorMessage>
                             )}
                         </FormControl>
-                        <Button variant={"none"} className="login-button" type="submit"
+                        <Button variant={"none"} _hover={{backgroundColor:"none", opacity:"0.7"}} className="login-button" type="submit"
                             isLoading={isLoading}
-                            spinner={<Spinner color='red.500' />}>Login</Button>
+                            spinner={<LoadingIcons.ThreeDots width={"60%"}/>}>Login</Button>
                     </Stack>
                 </form>
             </div>
