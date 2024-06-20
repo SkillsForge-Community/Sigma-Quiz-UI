@@ -1,10 +1,13 @@
-import infor from "../../assets/Images/info.png"
-import { IoPlayCircleOutline } from "react-icons/io5"
-import { MdKeyboardArrowDown } from "react-icons/md";
+import infor from "../../assets/Images/info.png";
+import { IoPlayCircleOutline } from "react-icons/io5";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import './styles.css'; 
+import "./styles.css";
 import Logo from "../../Global Components/Logo/Logo";
-import { Box, HStack, Select, VStack } from "@chakra-ui/react";
+import { Box, Button, HStack, Select, VStack} from "@chakra-ui/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useAppSelector } from "../../app/Hooks";
 const Homepage = () => {
     const navigate=useNavigate()
     return (
@@ -47,9 +50,9 @@ const Homepage = () => {
                         </HStack>
                     </Box>
                     <Box h='31px' w="325px" className="info-button">
-
+                       
                             <button onClick={() => navigate("/About")}><IoPlayCircleOutline />Play Video</button>
-                        
+                       
                     </Box>
                 </VStack>
             

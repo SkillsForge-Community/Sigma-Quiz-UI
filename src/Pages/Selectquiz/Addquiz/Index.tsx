@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './styles.css'; 
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import Success from '../../../Global Components/Modals/success-modal/Success';
 import QuizForm from '../quiz-form/QuizForm';
+import SuccessModal from '../../../Global Components/Modals/SuccessModal/SuccessModal';
 const AddQuiz = () => {
 
   const [addQuizPage, setAddQuizPage] = useState<number>(1);
@@ -45,7 +45,8 @@ const AddQuiz = () => {
 
       {/* second page */}
       {(addQuizPage === 2) &&
-        <Success mode='add' />
+        <SuccessModal heading='Quiz Successfully Added' message='You have successfully added that quiz' navigateTo='/select-quiz'/>
+
       }
 
     </div>

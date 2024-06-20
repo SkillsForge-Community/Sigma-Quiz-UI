@@ -1,4 +1,4 @@
-import { SimpleGrid, Flex, Spacer, Button,Box, Text } from "@chakra-ui/react";
+import { SimpleGrid, Flex, Spacer, Button,Box, Text, useTheme } from "@chakra-ui/react";
 import pfp from "../../assets/Images/Profile picture.svg"
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
@@ -6,6 +6,7 @@ import { FaPen } from "react-icons/fa";
 import { BsSlashLg } from "react-icons/bs";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useAppSelector } from "../../app/Hooks";
 type authenticateProps = {
     isAdmin: boolean
 }
@@ -16,12 +17,30 @@ const btnStyles={
     fontSize: "16px",
     color:"rgba(51, 51, 51, 1)"
 }
+const roundBtnStyles = {
+    cursor: "pointer",
+    fontFamily: '"Poppins", sansSerif',
+    fontWeight: 400,
+    fontStyle: "normal",    
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "10px 19px 10px 15px",
+    fontSize: "16px",
+    transition: "background-color 0.3s, border-radius 0.3s",
+    color: "rgba(51, 51, 51, 1)",
+    borderRadius: "10px",
+    width: "104px",
+    height: "47px"
+}
+
 export default function Header({ isAdmin }: authenticateProps){
     const {schools}=useParams()
     const [activeButton, setActiveButton] = useState<string>("Round 1");
     const handleButtonClick = (button: string) => {
         setActiveButton(button);
     };
+    const theme = useTheme();
+    const userName=useAppSelector(state=>state.auth.user?.first_name)
     return(
         <SimpleGrid spacing={5} p="20px">
         <Flex>
@@ -31,10 +50,10 @@ export default function Header({ isAdmin }: authenticateProps){
             <Spacer />
             <Flex align={"center"}>
                 <Flex alignItems={"center"} wrap={"nowrap"} w='334px' h='30px'>
-                    <h4 className="school-name">{schools} College, Sango Ota</h4>
+                    <h4 className="school-name">{schools?schools :"Ambassadors"} College, Sango Ota</h4>
                 </Flex>
                 {isAdmin && <Flex alignItems={"center"} gap="20px">
-                    <h5>Welcome, Jenner</h5>
+                    <h5>Welcome, {userName}</h5>
                     <img src={pfp} alt="profile pic" />
                     <MdOutlineKeyboardArrowDown />
                 </Flex>}
@@ -43,7 +62,7 @@ export default function Header({ isAdmin }: authenticateProps){
         <Flex>
             <Flex height="47px" width="633px">
                 {['Round 1', 'Round 2', 'Round 3', 'Round 4', 'Round 5', 'Overall'].map((round, index) => (
-                    <Box
+                    <Box sx={{...roundBtnStyles, backgroundColor: activeButton === round ? theme.colors.gray["200"] : "transparent", borderRadius: activeButton === round? "10px": "none"}}
                         key={index}
                         className={`round-button ${activeButton === round ? 'active' : ''}`}
                         onClick={() => handleButtonClick(round)}
