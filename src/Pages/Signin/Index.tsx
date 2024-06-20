@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Logo from "../../Global Components/Logo/Logo";
 import { RiLockPasswordLine } from "react-icons/ri";
 import {useNavigate } from "react-router-dom";
-import { Select, SimpleGrid, Spinner } from '@chakra-ui/react';
+import { Select, SimpleGrid} from '@chakra-ui/react';
 import "./styles.css";
 import VerticallyCenter from "../../Global Components/Modals/Validation/ValidationMessage";
 import { useAppDispatch } from "../../app/Hooks";
@@ -23,7 +23,7 @@ import {
 } from '@chakra-ui/react';
 import { BiShow, BiHide } from "react-icons/bi";
 import CountDown from "../../Global Components/CountDown";
-
+import LoadingIcons from "react-loading-icons";
 interface LoginError {
     data: { message: string }
     status?: number
@@ -254,9 +254,9 @@ function Signin() {
                                 {roleOptions}
                             </Select>
                         </FormControl>
-                        <Button variant={"none"} className="login-button" type="submit"
+                        <Button variant={"none"}  _hover={{backgroundColor:"none", opacity:"0.7"}} className="login-button" type="submit"
                             isLoading={isLoading}
-                            spinner={<Spinner color='red.500' />}>Create Account</Button>
+                            spinner={<LoadingIcons.ThreeDots width={"60%"}/>}>Create Account</Button>
                     </Stack>
                 </form>
             </div>

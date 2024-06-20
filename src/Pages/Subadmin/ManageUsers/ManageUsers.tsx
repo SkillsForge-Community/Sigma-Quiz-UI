@@ -9,6 +9,7 @@ import pfp from "../../../assets/Images/Profile picture.svg"
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { SimpleGrid } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import {
     Table,
     Thead,
@@ -19,9 +20,22 @@ import {
     TableContainer,
 } from '@chakra-ui/react'
 import { useAppSelector } from '../../../app/Hooks';
+import LoadingIcons from 'react-loading-icons';
+import { AppConstants } from '../../../Global Components/AppConstants/AppConstants';
 
+interface errs {
+    message: string
+}
+type Users = {
+    first_name: string
+    last_name: string
+    email: string
+    dateCreated: string
+    lastLogin: string
+    status: boolean
+}
 export default function ManageUsers() {
-    
+    const [isLoading, setLoading] = useState<boolean>(false)
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [search, setSearch] = useState<string>("");
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -29,8 +43,40 @@ export default function ManageUsers() {
     const userName=useAppSelector(state=>state.auth.user?.first_name)
     const [isSuperAdmin, setSuperAdmin]=useState<boolean>(false)
     const toast = useToast()
-    const roles =useAppSelector(state=>state.auth.user?.roles[0]);
-    
+    const roles = useAppSelector(state => state.auth.user?.roles[0]);
+    const token = useAppSelector(state => state.auth.access_token)
+    const [users, setUsers] = useState<Users[]>([])
+    const [errorMessage,setErrorMessage]=useState<string>("")
+    const getUsers = useCallback(async () => {
+        try {
+            setLoading(true)
+            const response = await axios.get(`${AppConstants.baseUrl}/users`, {
+                headers: {
+                    'Authorization': `Bearer ${token}` // Set the Authorization header
+                }
+            });
+            setLoading(false)
+            setUsers(response.data);
+            
+        } catch (error) {
+            const err = error as errs
+            setErrorMessage(err.message)
+            toast({
+                variant: "none",
+                title: `${err.message}`,
+                position: "top",
+                isClosable: true,
+                containerStyle: {
+                    backgroundColor: "red.500",
+                    color: "white"
+                }
+            })
+
+        }
+    },[toast,token]);
+    useEffect(() => {
+        getUsers()
+    }, [getUsers])
     function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
 
         if (e.key === "Enter") {
@@ -44,141 +90,30 @@ export default function ManageUsers() {
             onOpen();
         }
     }
-    type Users = {
-        name: string
-        email: string
-        dateCreated: string
-        lastLogin: string
-        status: boolean
-    }
-    const users: Users[] = [
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: true
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: true
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: false
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: false
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: true
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: true
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: true
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: true
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: false
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: true
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: true
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: true
-        },
-        {
-            name: "Stephen Walmart",
-            email: "stephenwalmart@gmail.com",
-            dateCreated: "08/09/23",
-            lastLogin: "08/09/23 - 08:00AM",
-            status: true
-        }
-    ]
+
+
     const handleAdmin = useCallback(() => {
         return roles === "super-admin";
     }, [roles]);
-   const handleUser= (index:number)=>{
+    const handleUser = (index: number) => {
         setActiveIndex(activeIndex === index ? null : index)
         navigate("/subadmin/update-user")
-   }
-    const manage_users = users.map((user, index) => {
-        return (
-            <Tr onClick={()=>handleUser(index)}
-                className={`mange-users-data ${activeIndex === index ? "active-mange-users-data" : ""}`} key={index}>
-                <Td>{user.name}</Td>
-                <Td>{user.email}</Td>
-                <Td>{user.dateCreated}</Td>
-                <Td>{user.lastLogin}</Td>
-                <Td className='active-status' style={{ color: (user.status) ? "rgba(4, 194, 35, 1)" : "rgba(255, 64, 64, 1)" }}>{user.status ? "Active" : "Inactive"}</Td>
-            </Tr>
-        )
-    })
+    }
     const handleCreateAccount=()=>{
         if(isSuperAdmin){
             navigate("/Signin")
-        }else{
+        } else {
             toast({
-                variant:"none",
-                title: `Not Authorised!`,
+                variant: "none",
+                title: `Not Authorized!`,
                 position: "top",
                 isClosable: true,
-                containerStyle:{
-                    backgroundColor:"red.500",
-                    color:"white"
-
+                containerStyle: {
+                    backgroundColor: "red.500",
+                    color: "white"
                 }
-              })
-           
+            })
+
 
         }
     }
@@ -235,7 +170,46 @@ export default function ManageUsers() {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {manage_users}
+                            {errorMessage?(<Tr color={"red"}>
+                                <Td>{errorMessage}!</Td>
+                                <Td>{errorMessage}!</Td>
+                                <Td>{errorMessage}!</Td>
+                                <Td>{errorMessage}!</Td>
+                                <Td>{errorMessage}!</Td>
+
+                                 </Tr>): isLoading?(
+                                    <Tr>
+                                        <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)"/></Td>
+                                        <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)"/></Td>
+                                        <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)"/></Td>
+                                        <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)"/></Td>
+                                        <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)"/></Td>
+                                    </Tr>
+                                ) : 
+                                
+                                users?(
+                                    users.map((user, index) => (
+                                        <Tr
+                                            onClick={() => handleUser(index)}
+                                            className={`mange-users-data ${activeIndex === index ? "active-mange-users-data" : ""}`}                                            key={index}
+                                        >
+                                            <Td>{`${user.first_name?user.first_name :"Not found"} ${user.last_name?user.last_name :"Not found"}`}</Td>
+                                            <Td>{user.email?user.email:"Not found"}</Td>
+                                            <Td>{user.dateCreated?user.dateCreated :"2024"}</Td>
+                                            <Td>{user.lastLogin?user.lastLogin :"2024"}</Td>
+                                            <Td className='active-status' style={{ color: (user.status) ? "rgba(4, 194, 35, 1)" : "rgba(255, 64, 64, 1)" }}>
+                                                {user.status ? "Active" : "Inactive"}
+                                            </Td>
+                                        </Tr>
+                                    ))
+                                ):
+                                (
+                                    <Tr>
+                                        Data not Found
+                                    </Tr>
+                                )
+                                }
+                               
                             </Tbody>
 
                         </Table>
