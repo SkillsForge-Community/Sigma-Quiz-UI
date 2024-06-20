@@ -8,7 +8,6 @@ import AddQuiz from './Addquiz/Index';
 import EditQuiz from './Editquiz/EditQuiz';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Box, Text } from '@chakra-ui/react';
 
 // -- define types for props --
 type selectQuizProps = {
