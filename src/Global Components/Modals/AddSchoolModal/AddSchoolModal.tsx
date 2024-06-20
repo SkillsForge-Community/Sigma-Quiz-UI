@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { LuPlusCircle } from "react-icons/lu";
 import "./addschoolmodal.css";
-import { Box, Button, Flex, Heading, Input } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import { FaCalendarAlt } from "react-icons/fa";
 interface AddSchoolModalProps {
   onClose: () => void;
