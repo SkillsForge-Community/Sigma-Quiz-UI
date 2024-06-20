@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import Logo from "../../Global Components/Logo/Logo";
-import { Box, HStack, Link, Select, VStack } from "@chakra-ui/react";
+import { Box, Button, HStack, Select, VStack} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -35,26 +35,33 @@ const Homepage = () => {
         })
         .catch((err) => {
           console.log(err);
-          setError("Failed to fetch quizzes");
+          setError("Error Fetching Quizes. Try Again");
           setIsLoading(false);
         });
     };
     getAllQuizzes();
   }, [setQuizes]);
 
+  const loginButtonStyle = {
+    backgroundColor: "rgba(143, 25, 231, 1)",
+        color: "rgb(255, 255, 255)",
+        ml: "auto", 
+        _hover: {
+          cursor: "pointer",
+          backgroundColor: "rgba(143, 25, 231, 1)"
+        }
+  }
+
   return (
     <Box className="Home">
       <Logo />
-      <Link
+      <Button
         className="login-link"
-        href="/login"
-        textDecoration={"underline"}
-        color={"rgb(255, 255, 255)"}
-        ml={"auto"}
-        fontSize={"22px"}
+        onClick={() => navigate("/login")}
+        sx={loginButtonStyle}
       >
         Log In
-      </Link>
+      </Button>
       <div className="title">
         <h1>Sigma Roseline Etuokwu Quiz Competition</h1>
         <h3>
