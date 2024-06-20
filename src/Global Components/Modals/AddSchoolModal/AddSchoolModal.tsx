@@ -4,36 +4,11 @@ import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { LuPlusCircle } from "react-icons/lu";
 import "./addschoolmodal.css";
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, SystemCSSProperties } from "@chakra-ui/react";
 import { FaCalendarAlt } from "react-icons/fa";
 interface AddSchoolModalProps {
   onClose: () => void;
   onAddSchool: (school: string) => void;
-}
-
-type backArrowStyleType = {
-    textDecoration: string
-    color: string
-    transition: string
-    _hover: {
-      color: string
-    },
-};
-type addSchoolButtonStyleType = {
-    padding: string
-    fontSize: string
-    color: string
-    backgroundColor: string
-    border: string
-    borderRadius: string
-    cursor: string
-    transition: string
-    width: string
-    height: string
-    gap: string
-    _hover: {
-      backgroundColor: string
-    },
 }
 
 const AddSchoolModal: React.FC<AddSchoolModalProps> = ({
@@ -50,15 +25,12 @@ const AddSchoolModal: React.FC<AddSchoolModalProps> = ({
     }
   };
 
-  const backArrowStyle: backArrowStyleType = {
+  const backArrowStyle: SystemCSSProperties = {
     textDecoration: "none",
     color: "#000",
-    transition: "color 0.3s",
-    _hover: {
-      color: "#8F19E7",
-    },
+    transition: "color 0.3s"
   };
-  const addSchoolButtonStyle: addSchoolButtonStyleType = {
+  const addSchoolButtonStyle: SystemCSSProperties = {
     padding: "10px 15px",
     fontSize: "16px",
     color: "white",
@@ -69,10 +41,7 @@ const AddSchoolModal: React.FC<AddSchoolModalProps> = ({
     transition: "background 0.3s",
     width: "215px",
     height: "60px",
-    gap: "10px",
-    _hover: {
-      backgroundColor: "#9d48df",
-    },
+    gap: "10px"
   };
 
   return (
@@ -96,7 +65,7 @@ const AddSchoolModal: React.FC<AddSchoolModalProps> = ({
           className="head"
         >
           <Box>
-            <Box sx={backArrowStyle}>
+            <Box sx={backArrowStyle} _hover={{color: "#8F19E7"}}>
               <Link className="back" to="/Addschool" onClick={onClose}>
                 <IoIosArrowBack />
               </Link>
@@ -177,7 +146,7 @@ const AddSchoolModal: React.FC<AddSchoolModalProps> = ({
             onClick={handleSubmit}
             className="add-school-btn"
             sx={addSchoolButtonStyle}
-            ml={"auto"}
+            ml={"auto"} _hover={{backgroundColor: "#9d48df"}}
           >
             <Flex alignItems={"center"} justifyContent={"center"}>
               <LuPlusCircle size={24} className="plus-icon" />
