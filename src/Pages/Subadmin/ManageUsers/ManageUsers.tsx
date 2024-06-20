@@ -39,13 +39,14 @@ export default function ManageUsers() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [search, setSearch] = useState<string>("");
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
-    const navigate = useNavigate()
-    const userName = useAppSelector(state => state.auth.user?.first_name)
-    const [isAdmin, setAdmin] = useState<boolean>(false)
+    const navigate=useNavigate()
+    const userName=useAppSelector(state=>state.auth.user?.first_name)
+    const [isSuperAdmin, setSuperAdmin]=useState<boolean>(false)
     const toast = useToast()
     const roles = useAppSelector(state => state.auth.user?.roles[0]);
     const token = useAppSelector(state => state.auth.access_token)
     const [users, setUsers] = useState<Users[]>([])
+    const [errorMessage,setErrorMessage]=useState<string>("")
     const getUsers = useCallback(async () => {
         try {
             setLoading(true)
@@ -54,10 +55,12 @@ export default function ManageUsers() {
                     'Authorization': `Bearer ${token}` // Set the Authorization header
                 }
             });
-            setUsers(response.data);
             setLoading(false)
+            setUsers(response.data);
+            
         } catch (error) {
             const err = error as errs
+            setErrorMessage(err.message)
             toast({
                 variant: "none",
                 title: `${err.message}`,
@@ -96,8 +99,8 @@ export default function ManageUsers() {
         setActiveIndex(activeIndex === index ? null : index)
         navigate("/subadmin/update-user")
     }
-    const handleCreateAccount = () => {
-        if (isAdmin) {
+    const handleCreateAccount=()=>{
+        if(isSuperAdmin){
             navigate("/Signin")
         } else {
             toast({
@@ -115,7 +118,7 @@ export default function ManageUsers() {
         }
     }
     useEffect(() => {
-        setAdmin(handleAdmin());
+        setSuperAdmin(handleAdmin());
     }, [handleAdmin]);
     return (
         <>
@@ -167,7 +170,14 @@ export default function ManageUsers() {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                            {isLoading ? (
+                            {errorMessage?(<Tr color={"red"}>
+                                <Td>{errorMessage}!</Td>
+                                <Td>{errorMessage}!</Td>
+                                <Td>{errorMessage}!</Td>
+                                <Td>{errorMessage}!</Td>
+                                <Td>{errorMessage}!</Td>
+
+                                 </Tr>): isLoading?(
                                     <Tr>
                                         <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)"/></Td>
                                         <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)"/></Td>
@@ -175,7 +185,9 @@ export default function ManageUsers() {
                                         <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)"/></Td>
                                         <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)"/></Td>
                                     </Tr>
-                                ) : users?(
+                                ) : 
+                                
+                                users?(
                                     users.map((user, index) => (
                                         <Tr
                                             onClick={() => handleUser(index)}
