@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react'
 import { useAppSelector } from '../../../app/Hooks';
 import LoadingIcons from 'react-loading-icons';
-import { constants } from '../../../Global Components/AppConstants/AppConstants';
+import { AppConstants } from '../../../Global Components/AppConstants/AppConstants';
 
 interface errs {
     message: string
@@ -50,7 +50,7 @@ export default function ManageUsers() {
     const getUsers = useCallback(async () => {
         try {
             setLoading(true)
-            const response = await axios.get(`${constants.baseUrl}/users`, {
+            const response = await axios.get(`${AppConstants.baseUrl}/users`, {
                 headers: {
                     'Authorization': `Bearer ${token}` // Set the Authorization header
                 }

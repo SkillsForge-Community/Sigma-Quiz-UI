@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootStore } from "../store";
-import { constants } from "../../Global Components/AppConstants/AppConstants";
+import { AppConstants } from "../../Global Components/AppConstants/AppConstants";
 // Define the base query with headers setup
 const baseQuery = fetchBaseQuery({
-    baseUrl: constants.baseUrl,
+    baseUrl: AppConstants.baseUrl,
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootStore).auth.access_token;
