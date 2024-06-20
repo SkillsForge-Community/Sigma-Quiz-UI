@@ -1,8 +1,8 @@
-import { Box, Input, InputGroup, InputLeftAddon } from '@chakra-ui/react';
+import { Box, Button, Input, InputGroup, InputLeftAddon, useToast } from '@chakra-ui/react';
 import { CiSearch } from 'react-icons/ci';
 import "./ManageUsers.css";
 import { IconContext } from 'react-icons';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import VerticallyCenter from '../../../Global Components/Modals/Validation/ValidationMessage';
 import { useDisclosure } from '@chakra-ui/react';
 import pfp from "../../../assets/Images/Profile picture.svg"
@@ -19,13 +19,18 @@ import {
     TableContainer,
 } from '@chakra-ui/react'
 import { useAppSelector } from '../../../app/Hooks';
+
 export default function ManageUsers() {
+    
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [search, setSearch] = useState<string>("");
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const navigate=useNavigate()
     const userName=useAppSelector(state=>state.auth.user?.first_name)
-
+    const [isSuperAdmin, setSuperAdmin]=useState<boolean>(false)
+    const toast = useToast()
+    const roles =useAppSelector(state=>state.auth.user?.roles[0]);
+    
     function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
 
         if (e.key === "Enter") {
@@ -139,6 +144,9 @@ export default function ManageUsers() {
             status: true
         }
     ]
+    const handleAdmin = useCallback(() => {
+        return roles === "super-admin";
+    }, [roles]);
    const handleUser= (index:number)=>{
         setActiveIndex(activeIndex === index ? null : index)
         navigate("/subadmin/update-user")
@@ -155,6 +163,28 @@ export default function ManageUsers() {
             </Tr>
         )
     })
+    const handleCreateAccount=()=>{
+        if(isSuperAdmin){
+            navigate("/Signin")
+        }else{
+            toast({
+                variant:"none",
+                title: `Not Authorised!`,
+                position: "top",
+                isClosable: true,
+                containerStyle:{
+                    backgroundColor:"red.500",
+                    color:"white"
+
+                }
+              })
+           
+
+        }
+    }
+    useEffect(() => {
+        setSuperAdmin(handleAdmin());
+    }, [handleAdmin]);
     return (
         <>
             <VerticallyCenter isOpen={isOpen} onClose={onClose} message='Search cannot be empty!' />
@@ -190,7 +220,7 @@ export default function ManageUsers() {
                             <h4 className='table-title'>manage Users</h4>
                         </div>
                         <div>
-                            <button className='table-button' onClick={()=>navigate("/Signin")}>Add Members</button>
+                            <Button className='table-button' onClick={handleCreateAccount}>Add Members</Button>
                         </div>
                     </Box>
                     <TableContainer>
