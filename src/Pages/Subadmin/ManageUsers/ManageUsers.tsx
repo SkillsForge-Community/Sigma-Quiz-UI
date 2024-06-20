@@ -27,7 +27,7 @@ export default function ManageUsers() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const navigate=useNavigate()
     const userName=useAppSelector(state=>state.auth.user?.first_name)
-    const [isAdmin, setAdmin]=useState<boolean>(false)
+    const [isSuperAdmin, setSuperAdmin]=useState<boolean>(false)
     const toast = useToast()
     const roles =useAppSelector(state=>state.auth.user?.roles[0]);
     
@@ -163,9 +163,8 @@ export default function ManageUsers() {
             </Tr>
         )
     })
-    console.log(isAdmin)
     const handleCreateAccount=()=>{
-        if(isAdmin){
+        if(isSuperAdmin){
             navigate("/Signin")
         }else{
             toast({
@@ -184,7 +183,7 @@ export default function ManageUsers() {
         }
     }
     useEffect(() => {
-        setAdmin(handleAdmin());
+        setSuperAdmin(handleAdmin());
     }, [handleAdmin]);
     return (
         <>
