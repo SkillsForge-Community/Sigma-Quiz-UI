@@ -31,6 +31,8 @@ const Homepage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  console.log(quizes.slice(0, 3))
+
   useEffect(() => {
     const getAllQuizzes = () => {
       setIsLoading(true);
@@ -95,7 +97,7 @@ const Homepage = () => {
           ) : error ? (
             <option>{error}</option>
           ) : quizes?.length > 0 ? (
-            quizes.map((quiz: quizType) => (
+            quizes.slice().reverse().map((quiz: quizType) => (
               <option key={quiz.id} value={quiz.title}>
                 {quiz.title}
               </option>
