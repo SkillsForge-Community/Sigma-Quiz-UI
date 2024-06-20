@@ -7,6 +7,7 @@ import Logo from "../../Global Components/Logo/Logo";
 import { Box, Button, HStack, Select, SystemCSSProperties, VStack} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
+import { useAppSelector } from "../../app/Hooks";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Homepage = () => {
   const [quizes, setQuizes] = useState<quizType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-
+  const token=useAppSelector(state=>state.auth.access_token)
 
   useEffect(() => {
     const getAllQuizzes = () => {
@@ -103,7 +104,7 @@ const Homepage = () => {
 
         <button
           className="submit"
-          onClick={() => navigate("/users")}
+          onClick={() => navigate(`${token?"/subadmin":"/users"}`)}
           type="submit"
         >
           View Quiz

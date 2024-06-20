@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootStore } from "../store";
+import { AppConstants } from "../../Global Components/AppConstants/AppConstants";
 // Define the base query with headers setup
 const baseQuery = fetchBaseQuery({
-    baseUrl: "https://sigma-website-backend-51b4af465e71.herokuapp.com",
+    baseUrl: AppConstants.baseUrl,
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootStore).auth.access_token;
@@ -17,5 +18,6 @@ const baseQuery = fetchBaseQuery({
 
 export const apiSlice = createApi({
     baseQuery: baseQuery,
-    endpoints: (builder) => ({})
+    endpoints: (builder) => ({}),
+    
 });
