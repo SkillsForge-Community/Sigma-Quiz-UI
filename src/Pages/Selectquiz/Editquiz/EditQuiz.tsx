@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
 import QuizCard from '../quiz-card/QuizCard';
 import QuizForm from '../quiz-form/QuizForm';
-import Success from '../../../Global Components/Modals/success-modal/Success';
+import SuccessModal from '../../../Global Components/Modals/SuccessModal/SuccessModal';
 import { Box } from '@chakra-ui/react';
+
 
 
 type quizListType = {
@@ -102,9 +103,7 @@ const EditQuiz = () => {
 
       {/* third page  */}
       {(editQuizPage === 3) && 
-        <div style={{marginTop: '50px'}}>
-          <Success mode='edit'/>
-        </div>
+        <SuccessModal heading='Quiz Successfully Edited' message='You have successfully edited that quiz' navigateTo='/select-quiz'/>
       }
       
     </div>

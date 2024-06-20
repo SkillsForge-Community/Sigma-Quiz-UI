@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import Logo from "../../Global Components/Logo/Logo";
-import { Box, Button, HStack, Select, VStack } from "@chakra-ui/react";
+import { Box, Button, HStack, Select, VStack} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -45,7 +45,7 @@ const Homepage = () => {
         })
         .catch((err) => {
           console.log(err);
-          setError("Failed to fetch quizzes");
+          setError("Error Fetching Quizes. Try Again");
           setIsLoading(false);
         });
     };

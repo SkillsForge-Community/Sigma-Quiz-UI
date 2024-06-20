@@ -19,9 +19,12 @@ import ManageUsers from './Pages/Subadmin/ManageUsers/ManageUsers';
 import UpdateUser from './Pages/Subadmin/Update user/Index';
 import UserProfile from './Pages/Subadmin/Update user/Update user Profile/UserProfile';
 import UserFunctions from './Pages/Subadmin/Update user/User Functions/UserFunctions';
+import Round from './Pages/Round/Round';
+import AddEditRound from './Pages/Round/AddEditRound';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import RequireAuth from './Global Components/RequireAuth';
+
 function App() {
   return (
     <ChakraProvider>
@@ -64,8 +67,10 @@ function App() {
               <Route element={<SelectQuiz option='add' />} path='/add-quiz' />
               <Route element={<SelectQuiz option='edit' />} path='/edit-quiz' />
 
+              <Route element={<Round />} path='/round'/>
+              <Route element={<AddEditRound />} path='/round/add'/>
+              <Route element={<AddEditRound />} path='/round/edit'/>
             </Route>
-
           </Routes>
         </div>
       </Provider>
