@@ -25,19 +25,11 @@ import { FaPlus } from "react-icons/fa6";
 import { FaPen } from "react-icons/fa";
 import { BsSlashLg } from "react-icons/bs";
 
-const btnStyles = {
-    backgroundColor: "rgba(237, 237, 237, 1)",
-    FontFamily: "Poppins",
-    fontWeight: "400",
-    fontSize: "16px",
-    color: "rgba(51, 51, 51, 1)",
-};
-
 const inputStyles = {
     backgroundColor: "white",
     FontFamily: "Poppins",
     fontSize: "15px",
-    color: btnStyles.color
+    color: "rgba(51, 51, 51, 1)"
 };
 
 const Questions = () => {
@@ -62,9 +54,6 @@ const Questions = () => {
     const rightStyles = (isClicked: boolean) => ({
         background: isClicked ? "purple" : "white",
         color: isClicked ? "white" : "black",
-        FontFamily: "Poppins",
-        fontWeight: "400",
-        fontSize: "16px",
         cursor: "pointer",
         _hover: {
             background: "purple",
@@ -75,9 +64,6 @@ const Questions = () => {
     const wrongStyles = {
         background: isWrongClicked ? "red" : "white",
         color: isWrongClicked ? "white" : "black",
-        FontFamily: "Poppins",
-        fontWeight: "400",
-        fontSize: "16px",
         _hover: {
             background: "red",
             color: "white",
@@ -121,7 +107,7 @@ const Questions = () => {
                             ))}
                         </Flex>
                         <Spacer />
-                        <Button sx={btnStyles}>
+                        <Button fontFamily='Poppins' fontWeight='400' fontSize='16px' bgColor="rgba(237, 237, 237, 1)" color="rgba(51, 51, 51, 1)">
                             <Flex gap={"7px"}>
                                 <Flex gap={"10px"}>
                                     <h5>Edit</h5>
@@ -161,7 +147,7 @@ const Questions = () => {
                             <InputRightAddon sx={inputStyles}><MdOutlineKeyboardArrowDown /></InputRightAddon>
                         </InputGroup>
                         <Spacer />
-                        <HStack spacing={3}>
+                        <HStack spacing={3} fontFamily='Poppins' fontWeight='400' fontSize='16px'>
                             <Flex justify={'space-around'} borderRadius='5px' bgColor={'white'}>
                                 {rightValues.map((value, index) => (
                                     <Box p='7px' m='1px 3px' key={index} sx={rightStyles(clickedRightButtonIndex === index)} onClick={() => handleRightClick(index)}>

@@ -43,17 +43,9 @@ const crudIconStyles = {
 
 const Scores = () => {
     const [activeButton, setActiveButton] = useState<string>("Round 1");
-
+    
     const handleButtonClick = (button: string) => {
         setActiveButton(button);
-    };
-
-    const btnStyles = {
-        backgroundColor: "rgba(237, 237, 237, 1)",
-        fontFamily: "Poppins",
-        fontWeight: "400",
-        fontSize: "16px",
-        color: "rgba(51, 51, 51, 1)",
     };
 
     const rounds = ['Round 1', 'Round 2', 'Round 3', 'Round 4', 'Round 5', 'Overall'];
@@ -93,7 +85,7 @@ const Scores = () => {
                             ))}
                         </Flex>
                         <Spacer />
-                        <Button sx={btnStyles}>
+                        <Button fontFamily='Poppins' fontWeight='400' fontSize='16px' bgColor="rgba(237, 237, 237, 1)" color="rgba(51, 51, 51, 1)">
                             <Flex gap={"7px"}>
                                 <Flex gap={"10px"}>
                                     <Text>Edit</Text>

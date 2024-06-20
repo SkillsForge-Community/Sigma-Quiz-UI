@@ -31,8 +31,6 @@ const SchoolScoreCard: React.FC<SchoolScoreCardProps> = ({
 }) => {
     return (
         <>
-            
-
             <Flex justify={"space-between"} width="790px" m="10px 10px 5px 24px">
                 <Text className="school-name">{schoolName}</Text>
                 <Flex gap='1px' alignItems={"center"} justify={'center'}>See More<MdKeyboardArrowRight /></Flex>
