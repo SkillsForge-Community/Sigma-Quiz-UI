@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import Logo from "../../Global Components/Logo/Logo";
-import { Box, Button, HStack, Select, VStack} from "@chakra-ui/react";
+import { Box, Button, HStack, Select, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -17,6 +17,16 @@ const Homepage = () => {
     description?: string;
     date?: string;
   };
+  type loginButtonStyleType = {
+    backgroundColor: string
+    color: string
+    ml: string
+    _hover: {
+      cursor: string
+      backgroundColor: string
+    },
+  }
+
   const [quizes, setQuizes] = useState<quizType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -42,15 +52,15 @@ const Homepage = () => {
     getAllQuizzes();
   }, [setQuizes]);
 
-  const loginButtonStyle = {
+  const loginButtonStyle: loginButtonStyleType = {
     backgroundColor: "rgba(143, 25, 231, 1)",
-        color: "rgb(255, 255, 255)",
-        ml: "auto", 
-        _hover: {
-          cursor: "pointer",
-          backgroundColor: "rgba(143, 25, 231, 1)"
-        }
-  }
+    color: "rgb(255, 255, 255)",
+    ml: "auto",
+    _hover: {
+      cursor: "pointer",
+      backgroundColor: "rgba(143, 25, 231, 1)",
+    },
+  };
 
   return (
     <Box className="Home">
