@@ -1,4 +1,4 @@
-import { SimpleGrid, Flex, Spacer, Button,Box, Text, useTheme } from "@chakra-ui/react";
+import { SimpleGrid, Flex, Spacer, Button,Box, Text, useTheme, SystemCSSProperties } from "@chakra-ui/react";
 import pfp from "../../assets/Images/Profile picture.svg"
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
@@ -10,16 +10,14 @@ import { useAppSelector } from "../../app/Hooks";
 type authenticateProps = {
     isAdmin: boolean
 }
-const btnStyles={
+const btnStyles:SystemCSSProperties ={
     backgroundColor:"rgba(237, 237, 237, 1)",
-    FontFamily:"Poppins",
     fontWeight:"400",
     fontSize: "16px",
     color:"rgba(51, 51, 51, 1)"
 }
-const roundBtnStyles = {
+const roundBtnStyles: SystemCSSProperties = {
     cursor: "pointer",
-    fontFamily: '"Poppins", sansSerif',
     fontWeight: 400,
     fontStyle: "normal",    
     justifyContent: "center",
@@ -42,7 +40,7 @@ export default function Header({ isAdmin }: authenticateProps){
     const theme = useTheme();
     const userName=useAppSelector(state=>state.auth.user?.first_name)
     return(
-        <SimpleGrid spacing={5} p="20px">
+        <SimpleGrid spacing={5} p="20px" fontFamily={"Poppins, sans-serif"}>
         <Flex>
             <Box >
                 <Text fontSize={"20px"}>Test Details</Text>
