@@ -25,7 +25,7 @@ import Logo from "../../Global Components/Logo/Logo";
 interface LoginError {
     data: { message: string }
     status?: number
-
+    error:string
 }
 
 function Login() {
@@ -74,16 +74,19 @@ function Login() {
                 const err = error as LoginError;
                 console.log(err);
                 onOpen();
-                if (err?.data.message) {
-                    setErrorMessage(err?.data.message);
+                if (err?.error) {
+                    setErrorMessage("Unknown Server Error. Please try again later");
                 } else if (err?.status === 400) {
                     setErrorMessage(err?.data.message);
                 } else if (err?.status === 401) {
                     setErrorMessage(err?.data.message);
                 } else if (err?.status === 404) {
                     setErrorMessage(err?.data.message);
-                } else {
+                }else if (err.status){
                     setErrorMessage(err?.data.message);
+                }
+                else {
+                    setErrorMessage("Unknown Server Error. Please try again later");
                 }
             }
         }
