@@ -21,6 +21,8 @@ import UserProfile from './Pages/Subadmin/Update user/Update user Profile/UserPr
 import UserFunctions from './Pages/Subadmin/Update user/User Functions/UserFunctions';
 import Round from './Pages/Round/Round';
 import AddEditRound from './Pages/Round/AddEditRound';
+import Questions from "./Pages/Questions/Questions";
+import Scores from "./Pages/Scores/Scores";
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import RequireAuth from './Global Components/RequireAuth';
@@ -48,9 +50,11 @@ function App() {
             <Route element={<Signin />} path='/Signin' />
               <Route element={<MainSubAdmin />} path="/subadmin">
                 <Route index element={<ManageUsers />} />
-                <Route path='manage-users' element={<ManageUsers />} />
-                <Route path=':schools' element={<SchoolDetails/>} />
-                <Route element={<AccountSettings />} path={'account-settings'}>
+                <Route path="manage-users" element={<ManageUsers />} />
+                <Route path=":schools" element={<SchoolDetails />} />
+                <Route path="manage-questions" element={<Questions />} />
+
+                <Route element={<AccountSettings />} path={"account-settings"}>
                   <Route index element={<ProfileSettings />} />
                   <Route path='password-settings' element={<PasswordSettings />} />
                   <Route path='profile-settings' element={<ProfileSettings />} />
@@ -62,6 +66,7 @@ function App() {
                 <Route path='user-functions' element={<UserFunctions />} />
               </Route>
               <Route element={<AddSchool quizName="2024 Roseline Etuokwu Quiz Competition" dateCreated="2024 - 05 - 30" />} path="/Addschool" />
+              <Route element={<Scores />} path="/all-scores" />
               <Route element={<TestDetails isAdmin={true} />} path="/subadmin/test-details" />
               <Route element={<SelectQuiz option='select' />} path='/select-quiz' />
               <Route element={<SelectQuiz option='add' />} path='/add-quiz' />
