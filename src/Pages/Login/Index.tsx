@@ -82,7 +82,10 @@ function Login() {
                     setErrorMessage(err?.data.message);
                 } else if (err?.status === 404) {
                     setErrorMessage(err?.data.message);
-                } else {
+                }else if (err.status){
+                    setErrorMessage(err?.data.message);
+                }
+                else {
                     setErrorMessage(err?.data.message);
                 }
             }
