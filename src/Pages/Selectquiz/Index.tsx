@@ -1,4 +1,3 @@
-import React from 'react'
 import logo from '../../assets/Images/logo.png'
 import "./styles.css"
 import { LuPlusCircle } from "react-icons/lu";

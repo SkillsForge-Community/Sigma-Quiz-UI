@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './editquiz.css'
 import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
 import QuizCard from '../quiz-card/QuizCard';
 import QuizForm from '../quiz-form/QuizForm';
-import Success from '../../../Global Components/Modals/success-modal/Success';
+import SuccessModal from '../../../Global Components/Modals/SuccessModal/SuccessModal';
+import { Box } from '@chakra-ui/react';
+
 
 
 type quizListType = {
@@ -12,7 +14,7 @@ type quizListType = {
   description: string,
 }[]
 const EditQuiz = () => {
-
+  
   const [editQuizPage, setEditQuizPage] = useState<number>(1)
   const [selectedQuizIndex, setselectedQuizIndex] = useState<number | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null> (null);
@@ -20,36 +22,29 @@ const EditQuiz = () => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [date, setDate] = useState<Date>(new Date());
-  const [quizList, /* setQuizList */] = useState<quizListType>([
+  const [quizList,  /* setQuizList */ ] = useState<quizListType>([
     {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
+      "title": "2024 Roseline Etuoku Quiz Competition",
+      "description": "---",
     },
     {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
+      "title": "2024 Roseline Etuoku Quiz Competition",
+      "description": "---",
     },
     {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
+      "title": "2024 Roseline Etuoku Quiz Competition",
+      "description": "---",
     },
     {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
+      "title": "2024 Roseline Etuoku Quiz Competition",
+      "description": "---",
     },
     {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
+      "title": "2024 Roseline Etuoku Quiz Competition",
+      "description": "---",
     },
-    {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
-    },
-    {
-      title: '2024 Roseline Etuokwu Sigma Quiz Competition',
-      description: '---'
-    },
-  ])
+
+])
 
   // fire when the first page edit button is clicked
   const handleSelectQuiz = () => {
@@ -85,17 +80,17 @@ const EditQuiz = () => {
       </header>
 
       {/* first page  */}
-      {(editQuizPage === 1) && <div className="edit-quiz-form">
+      {(editQuizPage === 1) && <Box className="edit-quiz-form">
         {errorMsg && <p className='error-msg'>{errorMsg}</p>}
         <h3>Quiz</h3>
-        <div className="quiz-list">
+         <div className="quiz-list">
           {quizList.map((quiz, index) => (
             <QuizCard quiz={quiz} key={index} index={index} setselectedQuizIndex={setselectedQuizIndex} isActive={selectedQuizIndex === index} />
           ))}
         </div>
 
         <button className="edit" onClick={handleSelectQuiz}>Edit Quiz</button>
-      </div>}
+      </Box>}
 
       {/* second page  */}
       {(editQuizPage === 2) && 
@@ -108,9 +103,7 @@ const EditQuiz = () => {
 
       {/* third page  */}
       {(editQuizPage === 3) && 
-        <div style={{marginTop: '50px'}}>
-          <Success mode='edit'/>
-        </div>
+        <SuccessModal heading='Quiz Successfully Edited' message='You have successfully edited that quiz' navigateTo='/select-quiz'/>
       }
       
     </div>

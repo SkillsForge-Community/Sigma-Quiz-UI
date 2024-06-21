@@ -1,4 +1,4 @@
-import { SimpleGrid, Box, Button } from "@chakra-ui/react"
+import { SimpleGrid, Box, Button, Flex, Spacer } from "@chakra-ui/react"
 import { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import "./TestDetails.css"
@@ -6,12 +6,24 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import PaginatedItems from "../Pagininate/Paginate";
 import { RxSlash } from "react-icons/rx";
+import { BsSlashLg } from "react-icons/bs";
+import { FaPen, FaPlus } from "react-icons/fa";
 interface LocationState {
     schools: string;
 }
-function TestDetails() {
+const btnStyles={
+    backgroundColor:"rgba(237, 237, 237, 1)",
+    FontFamily:"Poppins",
+    fontWeight:"400",
+    fontSize: "16px",
+    color:"rgba(51, 51, 51, 1)"
+}
+type authenticateProps = {
+    isAdmin: boolean
+}
+function TestDetails({isAdmin}:authenticateProps) {
     const navigate = useNavigate()
-    const [activeButton, setActiveButton] = useState<string>("");
+    const [activeButton, setActiveButton] = useState<string>("Round 1");
     const location = useLocation()
     const { schools } = location.state as LocationState
     const handleButtonClick = (button: string) => {
@@ -20,29 +32,52 @@ function TestDetails() {
     return (
         <SimpleGrid spacing={10} className="testDetails">
 
-            <SimpleGrid spacing={1}>
-                <SimpleGrid width="1285px" alignItems={"center"} justifyItems={"space-between"}>
+            <SimpleGrid spacing={8}>
+                <Flex width="1285px" alignItems={"center"} justifyItems={"space-between"}>
                     <Box className="back-button">
                         <IoIosArrowBack className="go-back" onClick={() => navigate(-1)} />
                         <h4>Test Details</h4>
                     </Box>
+                    <Spacer/>
                     <Box >
                         <h4 className="school-name">{schools} College, Sango Ota</h4>
                     </Box>
-                </SimpleGrid>
-                <SimpleGrid className="filter-buttons"  pl="45px" columns={6} spacing={30} height="47px" width="613px">
-                    {['Round 1', 'Round 2', 'Round 3', 'Round 4', 'Round 5', 'Overall'].map((round, index) => (
-                        <Box
-                            key={index}
-                            className={`round-button ${activeButton === round ? 'active' : ''}`}
-                            onClick={() => handleButtonClick(round)}
-                            width="73"
-                            height='47px'
-                        >
-                            {round}
-                        </Box>
-                    ))}
-                </SimpleGrid>
+                </Flex>
+                <Flex>
+                    <Flex height="47px" width="633px">
+                        {['Round 1', 'Round 2', 'Round 3', 'Round 4', 'Round 5', 'Overall'].map((round, index) => (
+                            <Box
+                                key={index}
+                                className={`round-button ${activeButton === round ? 'active' : ''}`}
+                                onClick={() => handleButtonClick(round)}
+                                width="104px"
+                                height='47px'
+                            >
+                                {round}
+                            </Box>
+                        ))}
+                    </Flex>
+                    <Spacer />
+                    {
+                        isAdmin &&
+                        <Button sx={btnStyles}>
+                            <Flex gap={"7px"}>
+                                <Flex gap={"10px"}>
+
+                                    <h5>Edit</h5>
+                                    <FaPen />
+
+                                </Flex>
+                                <BsSlashLg />
+
+                                <Flex gap={"10px"}>
+                                    <h5>Add</h5>
+                                    <FaPlus />
+                                </Flex>
+                            </Flex>
+                        </Button>
+                    }
+                </Flex>
             </SimpleGrid>
             <SimpleGrid spacing={5}>
             <SimpleGrid columns={2} spacing={223} >
@@ -60,7 +95,8 @@ function TestDetails() {
                         <Box >Overall result :</Box>
                     </div>
                     <div className="details-subvalues">
-                        <Box>General knowledge quiz</Box>
+                       {!isAdmin && <Box>General knowledge quiz</Box>}
+                       {isAdmin && <Box>{activeButton}</Box>}
                         <Box>1 hr 40 min</Box>
                         <Box>25</Box>
                         <Box>21</Box>

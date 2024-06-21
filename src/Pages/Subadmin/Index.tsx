@@ -1,19 +1,18 @@
 import { Grid, GridItem } from '@chakra-ui/react'
-import Sidebar from '../../Global Components/Sidebar/Sidebar'
+import Sidebar from '../../Global Components/Sidebar/Sidebar';
 import { Outlet } from 'react-router-dom'
-
-export default function MainSubAdmin(){
+function MainSubAdmin(){
     return(
         <Grid
   templateAreas={`"sidebar main"
                   "sidebar main"
                   "sidebar main"`}
-        gridTemplateColumns={'253px auto'}
+        gridTemplateColumns={'253px 1fr'}
         color='blackAlpha.700'
         fontWeight='bold'
         >
   <GridItem height="1024px" bg='#EDEDED'  area={'sidebar'}>
-    <Sidebar/>
+    <Sidebar />
   </GridItem>
   <GridItem pl='2' bg='#FFFFFF' area={'main'}>
    <Outlet/>
@@ -22,3 +21,4 @@ export default function MainSubAdmin(){
 </Grid>
     )
 }
+export default MainSubAdmin
