@@ -25,7 +25,7 @@ import Logo from "../../Global Components/Logo/Logo";
 interface LoginError {
     data: { message: string }
     status?: number
-
+    error:string
 }
 
 function Login() {
@@ -74,8 +74,8 @@ function Login() {
                 const err = error as LoginError;
                 console.log(err);
                 onOpen();
-                if (err?.data.message) {
-                    setErrorMessage(err?.data.message);
+                if (err?.error) {
+                    setErrorMessage("Slow Network");
                 } else if (err?.status === 400) {
                     setErrorMessage(err?.data.message);
                 } else if (err?.status === 401) {
@@ -83,7 +83,7 @@ function Login() {
                 } else if (err?.status === 404) {
                     setErrorMessage(err?.data.message);
                 } else {
-                    setErrorMessage(err?.data.message);
+                    setErrorMessage(err?.error);
                 }
             }
         }
