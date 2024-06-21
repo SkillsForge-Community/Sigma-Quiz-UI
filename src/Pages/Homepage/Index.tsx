@@ -4,10 +4,11 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import Logo from "../../Global Components/Logo/Logo";
-import { Box, Button, HStack, Select, VStack} from "@chakra-ui/react";
+import { Box, Button, HStack, Select, SystemCSSProperties, VStack} from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppSelector } from "../../app/Hooks";
+
 const Homepage = () => {
   const navigate = useNavigate();
   type quizType = {
@@ -17,10 +18,12 @@ const Homepage = () => {
     description?: string;
     date?: string;
   };
+
   const [quizes, setQuizes] = useState<quizType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const token=useAppSelector(state=>state.auth.access_token)
+
   useEffect(() => {
     const getAllQuizzes = () => {
       setIsLoading(true);
@@ -42,23 +45,27 @@ const Homepage = () => {
     getAllQuizzes();
   }, [setQuizes]);
 
-  const loginButtonStyle = {
+  const loginButtonStyle: SystemCSSProperties = {
     backgroundColor: "rgba(143, 25, 231, 1)",
-        color: "rgb(255, 255, 255)",
-        ml: "auto", 
-        _hover: {
-          cursor: "pointer",
-          backgroundColor: "rgba(143, 25, 231, 1)"
-        }
-  }
+    color: "rgb(255, 255, 255)",
+    marginLeft: "auto",
+  };
+
+  const reversedQuizzes = useMemo(() => {
+    return quizes.slice().reverse();
+  }, [quizes])
 
   return (
+    
     <Box className="Home">
       <Logo />
-      <Button
+      <Button _hover={{
+      cursor: "pointer",
+      backgroundColor: "rgba(143, 25, 231, 1)",
+    }}
         className="login-link"
         onClick={() => navigate("/login")}
-        sx={loginButtonStyle}
+        sx={loginButtonStyle} 
       >
         Log In
       </Button>
@@ -85,7 +92,7 @@ const Homepage = () => {
           ) : error ? (
             <option>{error}</option>
           ) : quizes?.length > 0 ? (
-            quizes.map((quiz: quizType) => (
+            reversedQuizzes.map((quiz: quizType) => (
               <option key={quiz.id} value={quiz.title}>
                 {quiz.title}
               </option>
