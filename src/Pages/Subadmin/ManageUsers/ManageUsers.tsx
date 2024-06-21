@@ -186,7 +186,7 @@ export default function ManageUsers() {
                                     </Tr>
                                 ) : isLoading ? (
                                     <Tr>
-                                        <Td colSpan={5} textAlign={"center"}><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)" /></Td>
+                                        <Td ><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)" /></Td>
                                         <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)" /></Td>
                                         <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)" /></Td>
                                         <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)" /></Td>
