@@ -197,7 +197,7 @@ function Sidebar() {
               </Flex>
             </Heading>
           </NavLink>
-          <NavLink to="/select-quiz">
+          <NavLink to="manage-questions">
             <Heading as={"h5"} sx={linksStyles}>
               <Flex
                 alignItems={"center"}
