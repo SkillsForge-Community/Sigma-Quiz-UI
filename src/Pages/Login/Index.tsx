@@ -75,7 +75,7 @@ function Login() {
                 console.log(err);
                 onOpen();
                 if (err?.error) {
-                    setErrorMessage("Slow Network");
+                    setErrorMessage(err?.error);
                 } else if (err?.status === 400) {
                     setErrorMessage(err?.data.message);
                 } else if (err?.status === 401) {
@@ -83,7 +83,7 @@ function Login() {
                 } else if (err?.status === 404) {
                     setErrorMessage(err?.data.message);
                 } else {
-                    setErrorMessage(err?.error);
+                    setErrorMessage(err?.data.message);
                 }
             }
         }
