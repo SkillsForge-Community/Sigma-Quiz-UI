@@ -86,7 +86,7 @@ function Login() {
                     setErrorMessage(err?.data.message);
                 }
                 else {
-                    setErrorMessage(err?.data.message);
+                    setErrorMessage("Unknown Server Error. Please try again later");
                 }
             }
         }
