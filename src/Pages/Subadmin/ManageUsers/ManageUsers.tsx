@@ -181,15 +181,12 @@ export default function ManageUsers() {
                             <Tbody>
                                 {errorMessage ? (
                                     <Tr color={"red"}>
-                                        <Td>{errorMessage}!</Td>
-                                        <Td>{errorMessage}!</Td>
-                                        <Td>{errorMessage}!</Td>
-                                        <Td>{errorMessage}!</Td>
-                                        <Td>{errorMessage}!</Td>
+                                        <Td colSpan={5} textAlign={"center"}>{errorMessage}!</Td>
+                                        
                                     </Tr>
                                 ) : isLoading ? (
                                     <Tr>
-                                        <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)" /></Td>
+                                        <Td colSpan={5} textAlign={"center"}><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)" /></Td>
                                         <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)" /></Td>
                                         <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)" /></Td>
                                         <Td><LoadingIcons.ThreeDots width={"50%"} fill="rgba(60, 63, 69, 0.35)" /></Td>
