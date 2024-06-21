@@ -75,7 +75,7 @@ function Login() {
                 console.log(err);
                 onOpen();
                 if (err?.error) {
-                    setErrorMessage(err?.error);
+                    setErrorMessage("Unknown Server Error. Please try again later");
                 } else if (err?.status === 400) {
                     setErrorMessage(err?.data.message);
                 } else if (err?.status === 401) {
