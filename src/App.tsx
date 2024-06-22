@@ -39,7 +39,7 @@ function App() {
             
             <Route element={<About />} path='/About' />
             <Route element={<NotFound />} path='*' />
-              <Route element={<MainSubAdmin />} path="/users">
+              <Route element={<MainSubAdmin />} path="/users/:id">
               <Route index element={<SchoolDetails  />} />
 
                 <Route path=':schools' element={<SchoolDetails  />} />

@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthSlice from "../features/AuthSlice";
 import { apiSlice } from "./api/apiSlice";
+import getQuizResultSlice from "../features/getQuizResultSlice";
 export const store= configureStore({
     reducer:{
         [apiSlice.reducerPath]:apiSlice.reducer,
-        auth:AuthSlice
+        auth:AuthSlice,
+        getQuizResult:getQuizResultSlice
     },
     middleware: getDefaultMiddleware=>getDefaultMiddleware().concat(apiSlice.middleware),
     devTools:true
