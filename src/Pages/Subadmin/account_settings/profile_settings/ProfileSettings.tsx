@@ -1,4 +1,3 @@
-import React from 'react'
 import './profileSettings.css'
 import { FaUserCircle } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";

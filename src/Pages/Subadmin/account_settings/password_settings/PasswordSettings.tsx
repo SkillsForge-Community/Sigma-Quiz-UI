@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -6,6 +6,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Spinner,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -16,12 +17,14 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import VerticallyCenter from "../../../../Global Components/Modals/Validation/ValidationMessage";
 import axios from "axios";
 import { useAppSelector } from "../../../../app/Hooks";
-import LoadingIcons from "react-loading-icons";
+
 const PasswordSettings = () => {
   const token = useAppSelector((state) => state.auth.access_token);
   // -- modal variables
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("")
+  const [err, setErr] = useState<string>("")
   // -- states for inputs
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -55,8 +58,8 @@ const PasswordSettings = () => {
   //integrating the updatepassword api
   const updatePassword = async () => {
     const passwordObject = {
-      "old-password": oldPassword,
-      "new-passwowrd": newPassword,
+      "old_password": oldPassword,
+      "new_password": newPassword,
     };
     try {
       setIsLoading(true);
@@ -65,14 +68,21 @@ const PasswordSettings = () => {
         passwordObject,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Set the Authorization header
+            Authorization: `Bearer ${token}`, 
           },
         }
       );
       setIsLoading(false);
-      console.log("success");
+      setMessage(res.data.message)
+      setOldPassword("")
+      setNewPassword("")
+      setConfirmPassword("")
     } catch (error) {
-      console.log(error);
+      setIsLoading(false)
+      if(axios.isAxiosError(error)){
+        console.log(error);
+        setErr(error.message)
+      } 
     }
   };
 
@@ -249,9 +259,7 @@ const PasswordSettings = () => {
           )}
         </FormControl>
 
-        <Button
-          isLoading={isLoading}
-          spinner={<LoadingIcons.Bars />}
+          {isLoading? <Box w={"10%"} m={"0 auto"}> <Spinner textAlign={"center"} color="#8F19E7"/> </Box>: <Button
           type="submit"
           h={"75px"}
           w={"520px"}
@@ -260,10 +268,14 @@ const PasswordSettings = () => {
           color={"white"}
           bgColor={"#8F19E7"}
           sx={buttonStyle}
-          onClick={() => updatePassword()}
         >
           Update Password
-        </Button>
+        </Button>}
+
+        <Box my={"1.5em"} textAlign={"center"}>
+        {message && <Box color={"green"}>{message}</Box>}
+        {err && <Box color={"red"}>{err}. Try again</Box>}
+        </Box>
       </form>
     </Box>
   );
