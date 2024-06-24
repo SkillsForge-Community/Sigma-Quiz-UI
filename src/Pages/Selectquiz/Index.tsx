@@ -6,12 +6,85 @@ import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import AddQuiz from './Addquiz/Index';
 import EditQuiz from './Editquiz/EditQuiz';
-
+import { useEffect, useMemo, useState } from 'react';
+import axios from 'axios';
+import { AppConstants } from '../../Global Components/AppConstants/AppConstants';
+import { useAppDispatch, useAppSelector } from '../../app/Hooks';
+import { setQuizId } from '../../features/quizIdSlice';
+import { Select, useToast } from '@chakra-ui/react';
+import { logout } from '../../features/AuthSlice';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 type selectQuizProps = {
   option: string
 }
-const SelectQuiz = ({option} : selectQuizProps) => {
-  const navigate=useNavigate()
+type quizType = {
+  id?: string;
+  year?: number;
+  title?: string;
+  description?: string;
+  date?: string;
+};
+const SelectQuiz = ({ option }: selectQuizProps) => {
+  const toast=useToast()
+  const navigate = useNavigate()
+  const [quizes, setQuizes] = useState<quizType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [quizIds, setQuizIds] = useState<string>("")
+  const dispatch = useAppDispatch()
+  const quizId = useAppSelector(state => state.getID.quizId)
+  useEffect(() => {
+    if(quizIds){
+      dispatch(setQuizId(quizIds))
+    }
+  }, [dispatch, quizIds])
+  useEffect(() => {
+    const getAllQuizzes = () => {
+      setIsLoading(true);
+      axios
+        .get(
+          `${AppConstants.baseUrl}/sigma-quiz`
+        )
+        .then((res) => {
+          setQuizes(res.data);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setError("Error Fetching Quizes. Try Again");
+          setIsLoading(false);
+        });
+    };
+    getAllQuizzes();
+  }, [setQuizes]);
+  const reversedQuizzes = useMemo(() => {
+    return quizes.slice().reverse();
+  }, [quizes])
+  const handleQuizChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedQuizId = event.target.value;
+    setQuizIds(selectedQuizId);
+  };
+  function handleSubAdmin(){
+    if(quizIds){
+      navigate(`/subadmin/${quizId}`)
+    }else{
+      toast({
+        variant: "none",
+        title: `Select a quiz`,
+        position: "top",
+        isClosable: true,
+        containerStyle: {
+          backgroundColor: "red.500",
+          color: "white"
+        }
+      });
+    }
+    
+  }
+  function handleLogOut(){
+    dispatch(logout())
+    navigate("/")
+  }
   return (
     <div className="select-quiz-page">
       <div className="select-quiz-container">
@@ -22,9 +95,29 @@ const SelectQuiz = ({option} : selectQuizProps) => {
         <p>Select which quiz you choose to operate</p>
 
         <div className="select-field">
-          <select name="" id="">
-            <option value="">2024 Roseline Etuokwu Quiz Competition</option>
-          </select>
+        <Select
+          borderRadius="45px"
+          icon={<MdOutlineKeyboardArrowDown color="red" />}
+          className="dropdown"
+          height="90px"
+          bg="white"
+          placeholder="Select a quiz"
+          onChange={handleQuizChange}
+        >
+          {isLoading ? (
+            <option>Loading...</option>
+          ) : error ? (
+            <option>{error}</option>
+          ) : quizes?.length > 0 ? (
+            reversedQuizzes.map((quiz: quizType) => (
+              <option key={quiz.id} value={quiz.id}>
+                {quiz.title}
+              </option>
+            ))
+          ) : (
+            <option>No data found</option>
+          )}
+        </Select>
           <IoIosArrowDown size={30} color="black" className="arrow-down" />
         </div>
 
@@ -40,10 +133,10 @@ const SelectQuiz = ({option} : selectQuizProps) => {
         </div>
 
         <div className="get-started-btn">
-          <button onClick={() => navigate("/AddSchool")}>Get Started</button>
+          <button onClick={handleSubAdmin}>Get Started</button>
         </div>
         <div className="logout">
-          <Link to="">Log Out</Link>
+          <Link to="/" onClick={handleLogOut}>Log Out</Link>
         </div>
       </div>
       {option === "add" && (

@@ -8,9 +8,10 @@ import { Box, Button, HStack, Select, SystemCSSProperties, VStack, useToast } fr
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { useAppSelector } from "../../app/Hooks";
-
+import { useAppDispatch } from "../../app/Hooks";
+import { setQuizId } from "../../features/quizIdSlice";
 const Homepage = () => {
-  const toast=useToast()
+  const toast = useToast()
   const navigate = useNavigate();
   type quizType = {
     id?: string;
@@ -24,10 +25,20 @@ const Homepage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const token = useAppSelector(state => state.auth.access_token)
-  const [quizId, setQuizId] = useState<string>("")
+  const [quizIds, setQuizIds] = useState<string>("")
+  const dispatch = useAppDispatch()
+  const quizId = useAppSelector(state => state.getID.quizId)
+
+  useEffect(() => {
+    if(quizIds){
+      dispatch(setQuizId(quizIds))
+    }
+    dispatch(setQuizId(quizIds))
+  }, [dispatch, quizIds])
   useEffect(() => {
     const getAllQuizzes = () => {
       setIsLoading(true);
+
       axios
         .get(
           "https://sigma-website-backend-51b4af465e71.herokuapp.com/api/sigma-quiz"
@@ -55,13 +66,12 @@ const Homepage = () => {
   }, [quizes])
   const handleQuizChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedQuizId = event.target.value;
-    setQuizId(selectedQuizId);
+    setQuizIds(selectedQuizId);
   };
   const handleQuizId = () => {
-    if (quizId) {
-      navigate(`${token ? "/subadmin" : `/users/${quizId}`}`)
-    }
-    else {
+    if (quizIds) {
+        navigate(`${token ? `/subadmin/${quizIds}` : `/users/${quizIds}`}`)
+    }else {
       toast({
         variant: "none",
         title: `Select a quiz`,
@@ -73,7 +83,17 @@ const Homepage = () => {
         }
       });
     }
+
   }
+  function handleLogin() {
+    
+
+      
+        navigate("/login")
+      
+      
+  }
+  console.log(quizId)
   return (
 
     <Box className="Home">
@@ -83,7 +103,7 @@ const Homepage = () => {
         backgroundColor: "rgba(143, 25, 231, 1)",
       }}
         className="login-link"
-        onClick={() => navigate("/login")}
+        onClick={handleLogin}
         sx={loginButtonStyle}
       >
         Log In
@@ -105,7 +125,7 @@ const Homepage = () => {
           variant={"outline"}
           width="491px"
           bg="white"
-          placeholder="Select a quiz" 
+          placeholder="Select a quiz"
 
           onChange={handleQuizChange}
         >

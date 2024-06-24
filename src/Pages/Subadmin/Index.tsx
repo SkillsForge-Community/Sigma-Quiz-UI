@@ -20,9 +20,10 @@ function MainSubAdmin() {
       templateColumns="253px 1fr"
       color='blackAlpha.700'
       fontWeight='bold'
-      height="auto" // Adjusted height to fill the viewport
+      height="100vh" // Adjusted height to fill the viewport
+      width={"100vw"}
     >
-      <GridItem bg='#EDEDED' area={'sidebar'}>
+      <GridItem bg='#EDEDED'  area={'sidebar'} >
         <Sidebar />
       </GridItem>
       <GridItem bg='#FFFFFF' area={'main'} p="2">

@@ -8,6 +8,7 @@ import PaginatedItems from "../Pagininate/Paginate";
 import { RxSlash } from "react-icons/rx";
 import { BsSlashLg } from "react-icons/bs";
 import { FaPen, FaPlus } from "react-icons/fa";
+import { useAppSelector } from "../../app/Hooks";
 interface LocationState {
     schools: string;
 }
@@ -23,6 +24,7 @@ type authenticateProps = {
 }
 function TestDetails({isAdmin}:authenticateProps) {
     const navigate = useNavigate()
+    const quizId = useAppSelector(state => state.getID.quizId)
     const [activeButton, setActiveButton] = useState<string>("Round 1");
     const location = useLocation()
     const { schools } = location.state as LocationState
@@ -35,7 +37,7 @@ function TestDetails({isAdmin}:authenticateProps) {
             <SimpleGrid spacing={8}>
                 <Flex width="1285px" alignItems={"center"} justifyItems={"space-between"}>
                     <Box className="back-button">
-                        <IoIosArrowBack className="go-back" onClick={() => navigate(-1)} />
+                        <IoIosArrowBack className="go-back" onClick={() => navigate(`/subadmin/${quizId})`)} />
                         <h4>Test Details</h4>
                     </Box>
                     <Spacer/>
@@ -115,7 +117,7 @@ function TestDetails({isAdmin}:authenticateProps) {
                 </SimpleGrid>
                 <SimpleGrid width="328px" height="48px" columnGap={"70px"} columns={2}>
                     <Button variant="none" className="download">Download pdf</Button>
-                    <Button variant="none" className="exit" onClick={()=>navigate(-1)}>Exit</Button>
+                    <Button variant="none" className="exit" onClick={()=>navigate(`/subadmin/${quizId}`)}>Exit</Button>
                 </SimpleGrid>
                 </SimpleGrid>
         </SimpleGrid>

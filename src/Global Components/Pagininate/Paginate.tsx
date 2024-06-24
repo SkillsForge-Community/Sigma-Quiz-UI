@@ -1,17 +1,15 @@
-import React, {/*  useState */ } from "react";
+import React from "react";
 import ReactPaginate from "react-paginate";
 import { BiSolidRightArrow } from "react-icons/bi";
 import { BiSolidLeftArrow } from "react-icons/bi";
-
 import "./styles.css";
 
 interface PaginatedItemsProps {
-  numOfPages:number
+  numOfPages: number;
+  
 }
 
 const PaginatedItems: React.FC<PaginatedItemsProps> = ({ numOfPages }) => {
-  /* const [page, setPage] = useState<number>(0);
- */
   return (
     <div>
       <ReactPaginate
@@ -20,30 +18,22 @@ const PaginatedItems: React.FC<PaginatedItemsProps> = ({ numOfPages }) => {
         pageClassName={"page-item"}
         pageRangeDisplayed={numOfPages}
         marginPagesDisplayed={0}
-/*         onPageChange={(event) => setPage(event.selected)}
- */        pageCount={50} 
+        pageCount={50}
         breakLabel={""}
         previousLabel={
           <div className="page-icons-container">
-          <BiSolidLeftArrow 
-          className="page-icons" />
-            </div>
-          
-            
-          
+            <BiSolidLeftArrow className="page-icons" />
+          </div>
         }
         nextLabel={
           <div className="page-icons-container">
-          <BiSolidRightArrow 
-          className="page-icons" />
+            <BiSolidRightArrow className="page-icons" />
           </div>
-          
-           
-         
         }
       />
+  
     </div>
   );
-}
+};
 
 export default PaginatedItems;

@@ -15,7 +15,7 @@ const AccountSettings = () => {
   const dispatch=useAppDispatch()
   function handleLogOut(){
     dispatch(logout())
-    naviagte("/login")
+    naviagte("/")
   }
 
   return (

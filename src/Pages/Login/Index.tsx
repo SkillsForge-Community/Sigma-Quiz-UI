@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./styles.css"
 import { RiLockPasswordLine } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import VerticallyCenter from "../../Global Components/Modals/Validation/ValidationMessage";
 import { useAppDispatch } from "../../app/Hooks";
 import { setCredentials } from "../../features/AuthSlice";
@@ -29,6 +29,7 @@ interface LoginError {
 }
 
 function Login() {
+
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [errormessage, setErrorMessage] = useState<string>("")
     const [show, setShow] = useState<boolean>(false);
@@ -39,7 +40,6 @@ function Login() {
     const navigate = useNavigate()
     const [login, { isLoading }] = useLoginMutation()
     const dispatch = useAppDispatch()
-
     const handleInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setEmail(e.target.value)
         setisEmailError(false)
@@ -69,7 +69,7 @@ function Login() {
                 console.log(userData)
                 setEmail("");
                 setPassword("");
-                navigate('/subadmin');
+                navigate(`/select-quiz`);
             } catch (error) {
                 const err = error as LoginError;
                 console.log(err);

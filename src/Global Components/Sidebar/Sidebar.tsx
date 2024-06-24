@@ -78,31 +78,30 @@ type School = {
   address: string;
 };
 
-type SchoolRegistration = {
-  school: School;
-};
 
-export type Results = {
-  schoolRegistrations: SchoolRegistration[];
-};
 
 function Sidebar() {
   const location = useLocation();
   const token = useAppSelector((state) => state.auth.access_token);
-  const [school, setSchool] = useState<Results | null>(null); // Specify initial state as null
+  const [school, setSchool] = useState< School[] | null>(null); // Specify initial state as null
   const { data, loading, error } = useAppSelector((state) => state.getQuizResult); // Specify type for data
+  const [errorMessage, setErrorMessage]=useState<string>("")
 
   useEffect(() => {
     if (data) {
-      setSchool(data);
+      const schools = data.schoolRegistrations.map((registration) => registration.school);
+      setSchool(schools);
     }
   }, [data]);
-  const schoolName = school && school.schoolRegistrations.map((item) => item.school.name);
-  const links = schoolName && schoolName.map((item) => ({
-    to: item,
-    label: item,
+  const links = school && school.map((item) => ({
+    to: item.id,
+    label: item.name,
   }));
-
+    useEffect(()=>{
+        if(error){
+            setErrorMessage("Error fetching test details, try agin later!")
+        }
+    },[error])
   console.log(links);
   return (
     <div>
@@ -148,7 +147,7 @@ function Sidebar() {
                       }}
                       sx={{
                         ...linksStyles,
-                        ...(location.pathname === link.to && activeLinkStyle),
+                        ...(location.pathname ===`/${link.to}` && activeLinkStyle),
                       }}
                     >
                       <h5>{link.label}</h5>
@@ -156,11 +155,10 @@ function Sidebar() {
                   </NavLink>
                 ))
               ) : (
-                <Flex sx={linksStyles} align={"center"}>
+                <Flex color={"red"} sx={linksStyles} align={"center"}>
                   No Data
                 </Flex>
               )}
-
               {token && (
                 <Box w="156px" sx={crudOperationsStyles}>
                   <Flex alignItems={"center"} justifyContent={"center"}>
@@ -205,12 +203,12 @@ function Sidebar() {
                   </Flex>
                 </Heading>
               </Box>
-              <NavLink to="/subadmin/All-Schools">
+              <NavLink to="all-schools">
                 <Heading
                   as={"h5"}
                   sx={{
                     ...linksStyles,
-                    ...(location.pathname === "/subadmin/All-Schools" &&
+                    ...(location.pathname === "all-schools" &&
                       activeLinkStyle),
                   }}
                 >
@@ -220,14 +218,14 @@ function Sidebar() {
                   </Flex>
                 </Heading>
               </NavLink>
-              <NavLink to="manage-questions">
+              {token && <NavLink to="manage-questions">
                 <Heading as={"h5"} sx={linksStyles}>
                   <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
                     <CiCircleQuestion size={"26px"} />
                     Manage Questions
                   </Flex>
                 </Heading>
-              </NavLink>
+              </NavLink>}
               {token && (
                 <Flex flexDir={"column"} gap={"20px"}>
                   <Box h="40px" className="link">
@@ -275,7 +273,7 @@ function Sidebar() {
         </div>
       ):
       <Flex alignItems="center" textAlign={"center"} color={"red"} justifyContent="center"  height="100%">
-          {error}
+          {errorMessage}
         </Flex>
       }
     </div>

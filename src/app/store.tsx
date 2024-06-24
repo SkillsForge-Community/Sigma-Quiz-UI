@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import AuthSlice from "../features/AuthSlice";
 import { apiSlice } from "./api/apiSlice";
 import getQuizResultSlice from "../features/getQuizResultSlice";
+import quizIdSlice from "../features/quizIdSlice";
 export const store= configureStore({
     reducer:{
         [apiSlice.reducerPath]:apiSlice.reducer,
         auth:AuthSlice,
-        getQuizResult:getQuizResultSlice
+        getQuizResult:getQuizResultSlice,
+        getID: quizIdSlice
     },
     middleware: getDefaultMiddleware=>getDefaultMiddleware().concat(apiSlice.middleware),
     devTools:true
