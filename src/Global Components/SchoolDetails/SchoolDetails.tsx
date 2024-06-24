@@ -101,16 +101,17 @@ function SchoolDetails() {
 
     const theme = useTheme();
     const userName = useAppSelector(state => state.auth.user?.first_name);
-    const roundMap = new Map<string, Round>();
-    const roundParticipationMap = new Map<string, Round>();
     useEffect(() => {
         if (schoolsID && data) {
-            
+            const roundMap = new Map<string, Round>();
+            const roundParticipationMap = new Map<string, Round>();
+    
             const school = data.schoolRegistrations.find((school) => school.schoolId === schoolsID);
-
+    
             data.rounds.forEach((round) => {
                 roundMap.set(round.id, round);
             });
+    
             data.schoolRegistrations.forEach((schReg) => {
                 schReg.rounds.forEach((roundsParticipation) => {
                     const round = roundMap.get(roundsParticipation.roundId);
@@ -119,37 +120,40 @@ function SchoolDetails() {
                     }
                 });
             });
+    
             setRounds(roundParticipationMap);
-
+            setRoundScore(roundParticipation?.score || 0);
             const answeredCorrectly = school?.rounds[0].answered_questions.filter(item => item.answered_correctly).length || 0;
             setRoundAnsweredCorrectly(answeredCorrectly);
             const answeredQuestion = school?.rounds[0].answered_questions.length || 0;
             setRoundAnsweredQuestions(answeredQuestion);
-
-            setTotalQuestions(Array.from(rounds.values()).reduce((acc, round) => acc + round.no_of_questions, 0));
-            const totalCorrectAnswers = Array.from(rounds.values()).reduce((acc, round) => {
+    
+            setTotalQuestions(Array.from(roundParticipationMap.values()).reduce((acc, round) => acc + round.no_of_questions, 0));
+            const totalCorrectAnswers = Array.from(roundParticipationMap.values()).reduce((acc, round) => {
                 return acc + round.questions.filter(item => item.answered_correctly).length;
             }, 0);
             setQuizCorrectAnswers(totalCorrectAnswers);
-
-            setRoundScore(roundParticipation?.score || 0);
-            if(!roundParticipation){
-                setRoundParticipation(school?.rounds[0]);
-
-            }
-            if(!testRound){
-                setTestRound(data.rounds[0]);
-            }
+    
             if (school) {
                 setSchoolDetails(school);
-                setQuizScore(school?.score || 0);
+                setQuizScore(school.score || 0);
             } else {
                 setErrorMessage("School details not found.");
             }
+    
+            if (!roundParticipation) {
+                setRoundParticipation(school?.rounds[0]);
+            }
+    
+            if (!testRound) {
+                setTestRound(data.rounds[0]);
+            }
+    
         } else if (error) {
             setErrorMessage("Error fetching test details. Please try again later!");
         }
-    }, [data, error, schoolsID, roundParticipation, schoolDetails,roundMap, roundParticipationMap, rounds, testRound]);
+    }, [data, error, schoolsID,roundParticipation, testRound]);
+    
     return (
         <>
             {loading ? (

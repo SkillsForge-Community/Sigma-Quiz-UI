@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ReactPaginate from "react-paginate";
 import { BiSolidRightArrow, BiSolidLeftArrow } from "react-icons/bi";
 import { Round, Question } from "../../features/getQuizResultSlice";
@@ -33,7 +33,7 @@ const PaginatedItems1: React.FC<PaginatedItemsProps> = ({
   const [pageContent, setPageContent] = useState<string>("");
   const [/* answeredCorrectly */, setAnsweredCorrectly] = useState<boolean | null | undefined>(null);
 
-  const handlePageClick = (event: { selected: number }) => {
+  const handlePageClick = useCallback((event: { selected: number }) => {
     setPage(event.selected);
     const answer = testRound?.questions.find(
       (question) => question.question_number === event.selected + 1
@@ -41,7 +41,7 @@ const PaginatedItems1: React.FC<PaginatedItemsProps> = ({
     const schoolName = answer?.answered_by?.schoolRegistration?.school?.name;
     setPageContent(schoolName ? `Answered by ${schoolName}` : `Question ${answer?.question_number}`);
     setAnsweredCorrectly(answer?.answered_correctly || false);
-  };
+  }, [testRound])
 
   useEffect(() => {
     if (testRound) {
