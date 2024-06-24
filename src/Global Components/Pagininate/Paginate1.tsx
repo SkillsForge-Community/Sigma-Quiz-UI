@@ -20,20 +20,8 @@ const answeredStyles = {
   fontSize: "18px",
 };
 
-const correctAnswerStyle = {
-  backgroundColor: "#02C309",
-  color: "#FFFFFF",
-};
 
-const wrongAnswerStyle = {
-  backgroundColor: "rgba(255, 0, 0, 0.2)",
-  color: "black",
-};
 
-const defaultStyle = {
-  backgroundColor: "#EDEDED",
-  color: "#333333",
-};
 
 const PaginatedItems1: React.FC<PaginatedItemsProps> = ({
   pageCount,
@@ -43,7 +31,7 @@ const PaginatedItems1: React.FC<PaginatedItemsProps> = ({
 }) => {
   const [page, setPage] = useState<number>(0);
   const [pageContent, setPageContent] = useState<string>("");
-  const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean | null | undefined>(null);
+  const [/* answeredCorrectly */, setAnsweredCorrectly] = useState<boolean | null | undefined>(null);
 
   const handlePageClick = (event: { selected: number }) => {
     setPage(event.selected);
@@ -59,7 +47,7 @@ const PaginatedItems1: React.FC<PaginatedItemsProps> = ({
     if (testRound) {
       handlePageClick({ selected: 0 });
     }
-  }, [testRound]);
+  }, [testRound,handlePageClick]);
 
   const getPageItemClassName = (pageNumber: number): string => {
     const answer = testRound?.questions.find(

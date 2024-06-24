@@ -13,12 +13,7 @@ import { FaPen, FaPlus } from "react-icons/fa";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import pfp from "../../assets/Images/Profile picture.svg";
 
-const btnStylesq = {
-    backgroundColor: "rgba(237, 237, 237, 1)",
-    fontWeight: "400",
-    fontSize: "16px",
-    color: "rgba(51, 51, 51, 1)"
-};
+
 const roundBtnStyles = {
     cursor: "pointer",
     fontWeight: 400,
@@ -108,8 +103,6 @@ function SchoolDetails() {
     const userName = useAppSelector(state => state.auth.user?.first_name);
     const roundMap = new Map<string, Round>();
     const roundParticipationMap = new Map<string, Round>();
-    const quizId = useAppSelector(state => state.getID.quizId)
-
     useEffect(() => {
         if (schoolsID && data) {
             
@@ -156,7 +149,7 @@ function SchoolDetails() {
         } else if (error) {
             setErrorMessage("Error fetching test details. Please try again later!");
         }
-    }, [data, error, schoolsID, roundParticipation, schoolDetails]);
+    }, [data, error, schoolsID, roundParticipation, schoolDetails,roundMap, roundParticipationMap, rounds, testRound]);
     return (
         <>
             {loading ? (
