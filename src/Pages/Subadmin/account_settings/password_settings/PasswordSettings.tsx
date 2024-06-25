@@ -7,6 +7,7 @@ import {
   FormLabel,
   Input,
   Spinner,
+  SystemCSSProperties,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -36,11 +37,6 @@ const PasswordSettings = () => {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
     
-  const buttonStyle = {
-    ":hover": {
-      bgColor: "#9F29f7",
-    },
-  };
 
   // --- update password function
   const handleUpdatePassword = (e: React.FormEvent<HTMLFormElement>) => {
@@ -267,7 +263,8 @@ const PasswordSettings = () => {
           display={"block"}
           color={"white"}
           bgColor={"#8F19E7"}
-          sx={buttonStyle}
+          _hover={
+            {bgColor: "#9F29f7"}}
         >
           Update Password
         </Button>}
