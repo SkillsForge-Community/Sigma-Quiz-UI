@@ -16,8 +16,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 body: { ...newAdmin },
             }),
         }),
-        
+        getQuizResults: builder.query({
+            query: () => ({
+                url: `/sigma-quiz`,
+                method: 'get',
+            }),
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation, useGetQuizResultsQuery } = authApiSlice;

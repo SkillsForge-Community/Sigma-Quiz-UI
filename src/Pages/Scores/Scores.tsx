@@ -16,7 +16,6 @@ import { FaPen, FaPlus } from "react-icons/fa";
 import { BsSlashLg } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import Sidebar from "../../Global Components/Sidebar/Sidebar";
 import SchoolScoreCard from './SchoolScoreCard/SchoolScoreCard';
 import pfp from "../../assets/Images/Profile picture.svg";
 
@@ -52,9 +51,6 @@ const Scores = () => {
 
     return (
         <Grid templateColumns='repeat(5, 1fr)'>
-            <GridItem as='aside' colSpan={1} height="1024px" bg='#EDEDED'>
-                <Sidebar />
-            </GridItem>
             <GridItem as='main' colSpan={4} p="10px" pos='relative'>
                 <SimpleGrid spacing={5} p="20px">
                     <Flex>

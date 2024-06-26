@@ -1,14 +1,16 @@
-import { SimpleGrid, Flex, Spacer, Button,Box, Text, useTheme, SystemCSSProperties } from "@chakra-ui/react";
+import { SimpleGrid, Flex, Spacer, Button,Box, Text, useTheme, SystemCSSProperties} from "@chakra-ui/react";
 import pfp from "../../assets/Images/Profile picture.svg"
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import { FaPen } from "react-icons/fa";
 import { BsSlashLg } from "react-icons/bs";
-import { useState } from "react";
+import {  useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../app/Hooks";
 type authenticateProps = {
-    isAdmin: boolean
+    isAdmin: boolean,
+    title:string | undefined
+    schoolName:string | undefined
 }
 const btnStyles:SystemCSSProperties ={
     backgroundColor:"rgba(237, 237, 237, 1)",
@@ -31,8 +33,8 @@ const roundBtnStyles: SystemCSSProperties = {
     height: "47px"
 }
 
-export default function Header({ isAdmin }: authenticateProps){
-    const {schools}=useParams()
+export default function Header({ isAdmin,title,schoolName}: authenticateProps){
+    const { schoolsID } = useParams();
     const [activeButton, setActiveButton] = useState<string>("Round 1");
     const handleButtonClick = (button: string) => {
         setActiveButton(button);
@@ -43,12 +45,12 @@ export default function Header({ isAdmin }: authenticateProps){
         <SimpleGrid spacing={5} p="20px" fontFamily={"Poppins, sans-serif"}>
         <Flex>
             <Box >
-                <Text fontSize={"20px"}>Test Details</Text>
+                <Text fontSize={"20px"}>{title}</Text>
             </Box>
             <Spacer />
             <Flex align={"center"}>
                 <Flex alignItems={"center"} wrap={"nowrap"} w='334px' h='30px'>
-                    <h4 className="school-name">{schools?schools :"Ambassadors"} College, Sango Ota</h4>
+                    <h4 className="school-name">{schoolName?schoolName :"Ambassadors"}</h4>
                 </Flex>
                 {isAdmin && <Flex alignItems={"center"} gap="20px">
                     <h5>Welcome, {userName}</h5>

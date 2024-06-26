@@ -26,32 +26,35 @@ import Scores from "./Pages/Scores/Scores";
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import RequireAuth from './Global Components/RequireAuth';
-
+import ScrollToTop from './Global Components/ScrollToTop';
 function App() {
   return (
     <ChakraProvider>
       <Provider store={store}>
         <div className="App">
+          <ScrollToTop />
           <Routes>
             {/*Public Routes*/}
             <Route element={<Homepage />} path='/' />
             <Route element={<Login />} path='/Login' />
-            
+
             <Route element={<About />} path='/About' />
             <Route element={<NotFound />} path='*' />
-              <Route element={<MainSubAdmin />} path="/users">
-              <Route index element={<SchoolDetails  />} />
+            <Route element={<MainSubAdmin />} path="/users/:id">
+              <Route index element={<Scores />} />
 
-                <Route path=':schools' element={<SchoolDetails  />} />
-            </Route> 
+              <Route path=':schoolsID' element={<SchoolDetails />} />
+            </Route>
             <Route element={<TestDetails isAdmin={false} />} path="/users/test-details" />
             {/* Protected routes*/}
-            <Route element={<RequireAuth/>}>
-            <Route element={<Signin />} path='/Signin' />
-              <Route element={<MainSubAdmin />} path="/subadmin">
-                <Route index element={<ManageUsers />} />
+            <Route element={<RequireAuth />}>
+              <Route element={<Signin />} path='/Signin' />
+              <Route element={<MainSubAdmin />} path="/subadmin/:id">
+                <Route index element={<Scores />} />
+                <Route element={<Scores />} path="all-schools" />
+
                 <Route path="manage-users" element={<ManageUsers />} />
-                <Route path=":schools" element={<SchoolDetails />} />
+                <Route path=":schoolsID" element={<SchoolDetails />} />
                 <Route path="manage-questions" element={<Questions />} />
 
                 <Route element={<AccountSettings />} path={"account-settings"}>
@@ -66,16 +69,16 @@ function App() {
                 <Route path='user-functions' element={<UserFunctions />} />
               </Route>
               <Route element={<AddSchool quizName="2024 Roseline Etuokwu Quiz Competition" dateCreated="2024 - 05 - 30" />} path="/Addschool" />
-              <Route element={<Scores />} path="/all-scores" />
               <Route element={<TestDetails isAdmin={true} />} path="/subadmin/test-details" />
               <Route element={<SelectQuiz option='select' />} path='/select-quiz' />
               <Route element={<SelectQuiz option='add' />} path='/add-quiz' />
               <Route element={<SelectQuiz option='edit' />} path='/edit-quiz' />
 
-              <Route element={<Round />} path='/round'/>
-              <Route element={<AddEditRound />} path='/round/add'/>
-              <Route element={<AddEditRound />} path='/round/edit'/>
+              <Route element={<Round />} path='/round' />
+              <Route element={<AddEditRound />} path='/round/add' />
+              <Route element={<AddEditRound />} path='/round/edit' />
             </Route>
+
           </Routes>
         </div>
       </Provider>

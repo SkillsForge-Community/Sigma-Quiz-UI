@@ -4,12 +4,14 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import Logo from "../../Global Components/Logo/Logo";
-import { Box, Button, HStack, Select, SystemCSSProperties, VStack} from "@chakra-ui/react";
+import { Box, Button, HStack, Select, SystemCSSProperties, VStack, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { useAppSelector } from "../../app/Hooks";
-
+import { useAppDispatch } from "../../app/Hooks";
+import { setQuizId } from "../../features/quizIdSlice";
 const Homepage = () => {
+  const toast = useToast()
   const navigate = useNavigate();
   type quizType = {
     id?: string;
@@ -22,17 +24,26 @@ const Homepage = () => {
   const [quizes, setQuizes] = useState<quizType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const token=useAppSelector(state=>state.auth.access_token)
+  const token = useAppSelector(state => state.auth.access_token)
+  const [quizIds, setQuizIds] = useState<string>("")
+  const dispatch = useAppDispatch()
+  const quizId = useAppSelector(state => state.getID.quizId)
 
+  useEffect(() => {
+    if(quizIds){
+      dispatch(setQuizId(quizIds))
+    }
+    dispatch(setQuizId(quizIds))
+  }, [dispatch, quizIds])
   useEffect(() => {
     const getAllQuizzes = () => {
       setIsLoading(true);
+
       axios
         .get(
           "https://sigma-website-backend-51b4af465e71.herokuapp.com/api/sigma-quiz"
         )
         .then((res) => {
-          console.log(res.data);
           setQuizes(res.data);
           setIsLoading(false);
         })
@@ -44,7 +55,6 @@ const Homepage = () => {
     };
     getAllQuizzes();
   }, [setQuizes]);
-
   const loginButtonStyle: SystemCSSProperties = {
     backgroundColor: "rgba(143, 25, 231, 1)",
     color: "rgb(255, 255, 255)",
@@ -54,18 +64,47 @@ const Homepage = () => {
   const reversedQuizzes = useMemo(() => {
     return quizes.slice().reverse();
   }, [quizes])
+  const handleQuizChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedQuizId = event.target.value;
+    setQuizIds(selectedQuizId);
+  };
+  const handleQuizId = () => {
+    if (quizIds) {
+        navigate(`${token ? `/subadmin/${quizIds}` : `/users/${quizIds}`}`)
+    }else {
+      toast({
+        variant: "none",
+        title: `Select a quiz`,
+        position: "top",
+        isClosable: true,
+        containerStyle: {
+          backgroundColor: "red.500",
+          color: "white"
+        }
+      });
+    }
 
-  return (
+  }
+  function handleLogin() {
     
+
+      
+        navigate("/login")
+      
+      
+  }
+  console.log(quizId)
+  return (
+
     <Box className="Home">
       <Logo />
       <Button _hover={{
-      cursor: "pointer",
-      backgroundColor: "rgba(143, 25, 231, 1)",
-    }}
+        cursor: "pointer",
+        backgroundColor: "rgba(143, 25, 231, 1)",
+      }}
         className="login-link"
-        onClick={() => navigate("/login")}
-        sx={loginButtonStyle} 
+        onClick={handleLogin}
+        sx={loginButtonStyle}
       >
         Log In
       </Button>
@@ -86,6 +125,9 @@ const Homepage = () => {
           variant={"outline"}
           width="491px"
           bg="white"
+          placeholder="Select a quiz"
+
+          onChange={handleQuizChange}
         >
           {isLoading ? (
             <option>Loading...</option>
@@ -93,7 +135,7 @@ const Homepage = () => {
             <option>{error}</option>
           ) : quizes?.length > 0 ? (
             reversedQuizzes.map((quiz: quizType) => (
-              <option key={quiz.id} value={quiz.title}>
+              <option key={quiz.id} value={quiz.id}>
                 {quiz.title}
               </option>
             ))
@@ -104,7 +146,7 @@ const Homepage = () => {
 
         <button
           className="submit"
-          onClick={() => navigate(`${token?"/subadmin":"/users"}`)}
+          onClick={handleQuizId}
           type="submit"
         >
           View Quiz

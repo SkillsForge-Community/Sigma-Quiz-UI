@@ -12,3 +12,6 @@
     --black-color: #000000;
     --hover-color: #9d48df;
 }
+html {
+    scroll-behavior: smooth;
+  }
