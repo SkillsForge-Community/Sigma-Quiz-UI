@@ -1,13 +1,13 @@
 import { Link, useParams } from "react-router-dom";
 import { Box, Table, TableContainer, Text, Tbody, Td, Th, Thead, Tr, SimpleGrid, Button, Heading, useTheme, Flex, Spacer } from '@chakra-ui/react';
-import PaginatedItems1 from "../Pagininate/Paginate1";
+import PaginatedItems1 from "../Pagininate/AnsweredByPaginate";
 import { IoIosArrowForward } from "react-icons/io";
 import { RxSlash } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/Hooks";
 import LoadingIcons from "react-loading-icons";
 import { useEffect, useState } from "react";
-import { SchoolRegistration, RoundParticipation, Round } from "../../features/getQuizResultSlice";
+import { SchoolRegistration, RoundParticipation, Round } from "../Types/Types";
 import { BsSlashLg } from "react-icons/bs";
 import { FaPen, FaPlus } from "react-icons/fa";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";

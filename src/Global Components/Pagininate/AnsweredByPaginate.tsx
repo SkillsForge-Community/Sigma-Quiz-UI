@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import ReactPaginate from "react-paginate";
 import { BiSolidRightArrow, BiSolidLeftArrow } from "react-icons/bi";
-import { Round, Question } from "../../features/getQuizResultSlice";
+import { Round, Question } from "../Types/Types";
 import "./styles.css";
 import { Heading, Text } from "@chakra-ui/react";
 

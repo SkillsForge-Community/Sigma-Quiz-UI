@@ -7,12 +7,10 @@ import { BsSlashLg } from "react-icons/bs";
 import {  useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../app/Hooks";
-import { RoundParticipation } from "../../features/getQuizResultSlice";
 type authenticateProps = {
     isAdmin: boolean,
     title:string | undefined
     schoolName:string | undefined
-    rounds:RoundParticipation[]| undefined
 }
 const btnStyles:SystemCSSProperties ={
     backgroundColor:"rgba(237, 237, 237, 1)",
@@ -35,7 +33,7 @@ const roundBtnStyles: SystemCSSProperties = {
     height: "47px"
 }
 
-export default function Header({ isAdmin,title,schoolName,rounds}: authenticateProps){
+export default function Header({ isAdmin,title,schoolName}: authenticateProps){
     const { schoolsID } = useParams();
     const [activeButton, setActiveButton] = useState<string>("Round 1");
     const handleButtonClick = (button: string) => {

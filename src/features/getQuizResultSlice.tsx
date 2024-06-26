@@ -1,87 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppConstants } from "../Global Components/AppConstants/AppConstants";
 import axios from "axios";
+import { IQuiz } from "../Global Components/Types/Types";
 
-
-type AnsweredBy = {
-  id: string;
-  roundId: string;
-  schoolRegistrationId: string;
-  score: number;
-  position: number;
-  schoolRegistration?: SchoolRegistration;
-};
-
-export type Question = {
-  id: string;
-  roundId: string;
-  question_number: number;
-  answered_by: AnsweredBy | null;
-  answered_correctly: boolean | null;
-  bonus_to: AnsweredBy | null;
-};
-
-type School = {
-  id: string;
-  name: string;
-  state: string;
-  address: string;
-};
-
-type Quiz = {
-  id: string;
-  year: number;
-  title: string;
-  description: string | null;
-  date: string;
-};
-
-export type SchoolRegistration = {
-  id: string;
-  quizId: string;
-  schoolId: string;
-  quiz: Quiz;
-  school: School;
-  rounds: RoundParticipation[];
-  score: number;
-  position: number;
-};
-
-export type RoundParticipation = {
-  id: string;
-  roundId: string;
-  schoolRegistrationId: string;
-  score: number;
-  position: number;
-  answered_questions: Question[];
-  bonus_questions: Question[];
-};
-
-export type Round = {
-  id: string;
-  quizId: string;
-  name: string;
-  round_number: number;
-  no_of_questions: number;
-  no_of_schools: number;
-  marks_per_question: number;
-  marks_per_bonus_question: number;
-  schoolParticipations: RoundParticipation[];
-  questions: Question[];
-};
-
-type QuizEvent = {
-  id: string;
-  year: number;
-  title: string;
-  description: string | null;
-  date: string;
-  rounds: Round[];
-  schoolRegistrations: SchoolRegistration[];
-};
 type InitialState = {
   loading: boolean;
-  data:  QuizEvent | null;
+  data:  IQuiz | null;
   error: string | null;
 };
 
@@ -109,7 +33,7 @@ const getResult = createSlice({
       state.data = null;
       state.error = null;
     });
-    builder.addCase(getQuizResult.fulfilled, (state, action: PayloadAction<QuizEvent>) => {
+    builder.addCase(getQuizResult.fulfilled, (state, action: PayloadAction<IQuiz>) => {
       state.loading = false;
       state.data = action.payload;
       state.error = null;
