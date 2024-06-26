@@ -23,7 +23,7 @@ const answeredStyles = {
 
 
 
-const PaginatedItems1: React.FC<PaginatedItemsProps> = ({
+const AnsweredBy: React.FC<PaginatedItemsProps> = ({
   pageCount,
   numOfPages,
   testRound,
@@ -97,4 +97,4 @@ const PaginatedItems1: React.FC<PaginatedItemsProps> = ({
   );
 };
 
-export default PaginatedItems1;
+export default AnsweredBy;

@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { Box, Table, TableContainer, Text, Tbody, Td, Th, Thead, Tr, SimpleGrid, Button, Heading, useTheme, Flex, Spacer } from '@chakra-ui/react';
-import PaginatedItems1 from "../Pagininate/AnsweredByPaginate";
+import AnsweredBy from "../Pagininate/AnsweredByPaginate";
 import { IoIosArrowForward } from "react-icons/io";
 import { RxSlash } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
@@ -224,7 +224,7 @@ function SchoolDetails() {
                             </Heading>
                             <Flex direction={"column"} justifyContent="space-between">
                                 <Box pr="100px">
-                                    <PaginatedItems1 testRound={testRound} questions={testRound?.questions} pageCount={testRound?.no_of_questions} numOfPages={30} />
+                                    <AnsweredBy testRound={testRound} questions={testRound?.questions} pageCount={testRound?.no_of_questions} numOfPages={30} />
                                 </Box>
                                 <br />
                                 <Box mt={"55px"} ml={"800px"} position={"absolute"} w="" h="27px">
@@ -250,7 +250,7 @@ function SchoolDetails() {
                         <Flex justifyContent="space-between" alignItems="center">
                             <Box w="auto">
                                 <h5 className="answer">Answered Questions</h5>
-                                <PaginatedItems1 numOfPages={20} pageCount={RoundansweredQuestions} />
+                                <AnsweredBy numOfPages={20} pageCount={RoundansweredQuestions} />
                             </Box>
                             <Box>
                                 <Flex justifyContent="center" alignItems="center" gap="10px" padding="5px 20px 5px 20px">
