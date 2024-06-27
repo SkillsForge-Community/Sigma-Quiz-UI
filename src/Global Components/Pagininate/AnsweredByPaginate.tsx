@@ -50,7 +50,6 @@ const AnsweredBy: React.FC<PaginatedItemsProps> = ({
       handlePageClick({ selected: 0 });
     }
   }, [testRound,handlePageClick]);
-
   return (
     <>
       <ReactPaginate

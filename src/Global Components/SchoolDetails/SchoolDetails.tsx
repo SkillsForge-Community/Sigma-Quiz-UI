@@ -16,6 +16,7 @@ import axios from "axios";
 import { error } from "../Types/Types";
 import { getQuizResult } from "../../features/getQuizResultSlice";
 import { useAppDispatch } from "../../app/Hooks";
+import { AppConstants } from "../AppConstants/AppConstants";
 const roundBtnStyles = {
     cursor: "pointer",
     fontWeight: 400,
@@ -116,7 +117,7 @@ function SchoolDetails() {
             setMarkLoading(true)
             // eslint-disable-next-line
             const response = await axios.put(
-                `https://sigma-website-backend-51b4af465e71.herokuapp.com/api/sigma-quiz/questions/${question_id && question_id}/mark`,
+                `${AppConstants.baseUrl}/sigma-quiz/questions/${question_id && question_id}/mark`,
                 data,
                 {
                     headers: {
@@ -172,12 +173,13 @@ function SchoolDetails() {
            
         }
     };
+   
     const assignBonus = async (question_id: string | undefined, data: { school_id: string | undefined }) => {
         try {
             setBonusLoading(true)
             // eslint-disable-next-line
             const response = await axios.put(
-                `https://sigma-website-backend-51b4af465e71.herokuapp.com/api/sigma-quiz/questions/${question_id}/bonus`,
+                `${AppConstants.baseUrl}/sigma-quiz/questions/${question_id}/bonus`,
                 data,
                 {
                     headers: {
