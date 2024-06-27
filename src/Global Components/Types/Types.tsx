@@ -74,14 +74,14 @@ export type AnsweredBy = {
     rounds: Round[];
     schoolRegistrations: SchoolRegistration[];
   };
-  export type AxiosError={
-    message: string,
-  error: string,
-  statusCode: number
+  
+  export interface Error {
+    response: {
+      data: {
+        message: string;
+        error: string;
+        statusCode: number;
+      };
+    };
   }
-  export type AxiosErrorMessage={
-    data:AxiosError
-  }
-  export interface error{
-  response:AxiosErrorMessage
-  }
+  

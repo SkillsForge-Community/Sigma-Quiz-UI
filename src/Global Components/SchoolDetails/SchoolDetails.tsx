@@ -13,7 +13,7 @@ import { FaPen, FaPlus } from "react-icons/fa";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import pfp from "../../assets/Images/Profile picture.svg";
 import axios from "axios";
-import { error } from "../Types/Types";
+import { Error as error } from "../Types/Types";
 import { getQuizResult } from "../../features/getQuizResultSlice";
 import { useAppDispatch } from "../../app/Hooks";
 import { AppConstants } from "../AppConstants/AppConstants";
@@ -96,7 +96,7 @@ function SchoolDetails() {
     const [roundScore, setRoundScore] = useState<number>(0);
     const [quizScore, setQuizScore] = useState<number>(0);
     const question_id = useAppSelector(state => state.getQuestionID.id)
-
+    
     const [bonusLoading, setBonusLoading] = useState<boolean>(false);
     const [markLoading, setMarkLoading] = useState<boolean>(false);
     const quizId = useAppSelector(state => state.getID.quizId)
