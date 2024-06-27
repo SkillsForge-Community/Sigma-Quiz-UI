@@ -4,7 +4,8 @@ import { BiSolidRightArrow, BiSolidLeftArrow } from "react-icons/bi";
 import { Round, Question } from "../Types/Types";
 import "./styles.css";
 import { Heading, Text } from "@chakra-ui/react";
-
+import { getID } from "../../features/getQuestionID";
+import { useAppDispatch } from "../../app/Hooks";
 interface PaginatedItemsProps {
   numOfPages: number;
   pageCount: number | undefined;
@@ -29,19 +30,20 @@ const AnsweredBy: React.FC<PaginatedItemsProps> = ({
   testRound,
   questions,
 }) => {
-  const [page, setPage] = useState<number>(0);
+  const [/* page */, setPage] = useState<number>(0);
   const [pageContent, setPageContent] = useState<string>("");
   const [/* answeredCorrectly */, setAnsweredCorrectly] = useState<boolean | null | undefined>(null);
-
+  const dispatch=useAppDispatch()
   const handlePageClick = useCallback((event: { selected: number }) => {
     setPage(event.selected);
-    const answer = testRound?.questions.find(
+    const question = testRound?.questions.find(
       (question) => question.question_number === event.selected + 1
     );
-    const schoolName = answer?.answered_by?.schoolRegistration?.school?.name;
-    setPageContent(schoolName ? `Answered by ${schoolName}` : `Question ${answer?.question_number}`);
-    setAnsweredCorrectly(answer?.answered_correctly || false);
-  }, [testRound])
+    dispatch(getID(question?.id))
+    const schoolName = question?.answered_by?.schoolRegistration?.school?.name;
+    setPageContent(schoolName ? `Answered by ${schoolName}` : `Question ${question?.question_number}`);
+    setAnsweredCorrectly(question?.answered_correctly || false);
+  }, [testRound,dispatch])
 
   useEffect(() => {
     if (testRound) {
@@ -49,26 +51,12 @@ const AnsweredBy: React.FC<PaginatedItemsProps> = ({
     }
   }, [testRound,handlePageClick]);
 
-  const getPageItemClassName = (pageNumber: number): string => {
-    const answer = testRound?.questions.find(
-      (question) => question.question_number === pageNumber + 1
-    );
-    const answeredCorrectly = answer?.answered_correctly;
-    if (answeredCorrectly === true) {
-      return "correct";
-    } else if (answeredCorrectly === false) {
-      return "wrong";
-    } else {
-      return "default";
-    }
-  };
-
   return (
-    <div>
+    <>
       <ReactPaginate
         containerClassName={"pagination"}
         activeClassName={"actives"}
-        pageClassName={getPageItemClassName(page)}
+        pageClassName={"page-item"}
         previousLabel={
           <div className="page-icons-container">
             <BiSolidLeftArrow className="page-icons" />
@@ -93,7 +81,7 @@ const AnsweredBy: React.FC<PaginatedItemsProps> = ({
           </Heading>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
