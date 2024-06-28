@@ -47,6 +47,7 @@ export default function ManageUsers() {
     const getUsers = useCallback(async () => {
         try {
             setLoading(true);
+            console.log("Access Token:: ", token);
             const response = await axios.get(`${AppConstants.baseUrl}/users`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -55,7 +56,7 @@ export default function ManageUsers() {
             setLoading(false);
             setUsers(response.data);
             setFilteredUsers(response.data);
-        } catch (error) {
+        } catch (error:any) {
             const err = error as errs;
             setErrorMessage(err.message);
             setLoading(false);
@@ -69,6 +70,11 @@ export default function ManageUsers() {
                     color: "white"
                 }
             });
+            
+            // navigate to login if unauthenticated
+            if (error.response.data?.statusCode === 401) {
+              navigate("/Login");
+            }
         }
     }, [toast, token]);
 
