@@ -76,7 +76,7 @@ export default function ManageUsers() {
               navigate("/Login");
             }
         }
-    }, [toast, token]);
+    }, [toast, token, navigate]);
 
     useEffect(() => {
         getUsers();
