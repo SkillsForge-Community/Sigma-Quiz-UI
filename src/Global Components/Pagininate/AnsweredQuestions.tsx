@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { BiSolidRightArrow, BiSolidLeftArrow } from "react-icons/bi";
 import { Question } from "../Types/Types";
 import { Box, Flex, GridItem, SystemCSSProperties } from "@chakra-ui/react";
-import "./styles.css";
 
 interface PaginatedItemsProps {
     answeredQuestion: Question[] | undefined;

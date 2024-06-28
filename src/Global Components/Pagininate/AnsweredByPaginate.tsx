@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { BiSolidRightArrow, BiSolidLeftArrow } from "react-icons/bi";
 import { Round } from "../Types/Types";
-import "./styles.css";
 import { Box, Flex, GridItem, Heading, SystemCSSProperties, Text } from "@chakra-ui/react";
 import { getID } from "../../features/getQuestionID";
 import { useAppDispatch } from "../../app/Hooks";
