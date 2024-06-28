@@ -8,7 +8,7 @@ export type AnsweredBy = {
   };
   
   export type Question = {
-    id: string;
+    id: string |undefined;
     roundId: string;
     question_number: number;
     answered_by: AnsweredBy | null;
@@ -74,3 +74,14 @@ export type AnsweredBy = {
     rounds: Round[];
     schoolRegistrations: SchoolRegistration[];
   };
+  
+  export interface Error {
+    response: {
+      data: {
+        message: string;
+        error: string;
+        statusCode: number;
+      };
+    };
+  }
+  

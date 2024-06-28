@@ -1,19 +1,22 @@
 import { Link, useParams } from "react-router-dom";
-import { Box, Table, TableContainer, Text, Tbody, Td, Th, Thead, Tr, SimpleGrid, Button, Heading, useTheme, Flex, Spacer } from '@chakra-ui/react';
+import { Box, Table, TableContainer, Text, Tbody, Td, Th, Thead, Tr, SimpleGrid, Button, Heading, useTheme, Flex, Spacer, useToast } from '@chakra-ui/react';
 import AnsweredBy from "../Pagininate/AnsweredByPaginate";
 import { IoIosArrowForward } from "react-icons/io";
 import { RxSlash } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/Hooks";
 import LoadingIcons from "react-loading-icons";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { SchoolRegistration, RoundParticipation, Round } from "../Types/Types";
 import { BsSlashLg } from "react-icons/bs";
 import { FaPen, FaPlus } from "react-icons/fa";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import pfp from "../../assets/Images/Profile picture.svg";
-
-
+import axios from "axios";
+import { Error as error } from "../Types/Types";
+import { getQuizResult } from "../../features/getQuizResultSlice";
+import { useAppDispatch } from "../../app/Hooks";
+import { AppConstants } from "../AppConstants/AppConstants";
 const roundBtnStyles = {
     cursor: "pointer",
     fontWeight: 400,
@@ -77,6 +80,7 @@ const scoreStyles = {
 function SchoolDetails() {
     const { schoolsID } = useParams();
     const navigate = useNavigate();
+    const toast = useToast()
     const token = useAppSelector((state) => state.auth.access_token);
     const { data, loading, error } = useAppSelector((state) => state.getQuizResult);
     const [errorMessage, setErrorMessage] = useState<string>("");
@@ -91,7 +95,146 @@ function SchoolDetails() {
     const [quizCorrectAnswers, setQuizCorrectAnswers] = useState<number>(0);
     const [roundScore, setRoundScore] = useState<number>(0);
     const [quizScore, setQuizScore] = useState<number>(0);
-    console.log(testRound)
+    const question_id = useAppSelector(state => state.getQuestionID.id)
+    
+    const [bonusLoading, setBonusLoading] = useState<boolean>(false);
+    const [markLoading, setMarkLoading] = useState<boolean>(false);
+    const quizId = useAppSelector(state => state.getID.quizId)
+    const [correct,setCorrect]=useState<boolean>()
+    const [wrong,setWrong]=useState<boolean>()
+
+    console.log(roundParticipation)
+    const dispatch = useAppDispatch();
+    const markQuestion = async (correct:boolean,question_id: string | undefined, data: { school_id: string | undefined, answered_correctly: boolean }) => {
+        try {
+            
+            if(correct){
+                setCorrect(true)
+            }
+            else{
+                setWrong(true)
+            }
+            setMarkLoading(true)
+            // eslint-disable-next-line
+            const response = await axios.put(
+                `${AppConstants.baseUrl}/sigma-quiz/questions/${question_id && question_id}/mark`,
+                data,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            setCorrect(false)
+            setWrong(false)
+            setMarkLoading(false)
+            dispatch(getQuizResult(quizId));
+            getSchoolDetails()
+        } catch (error) {
+            setMarkLoading(false)
+            const err = error as error
+            console.log(err.response.data)
+            if (err.response.data.statusCode === 409) {
+                toast({
+                    variant: "none",
+                    title: `${err.response.data.message}`,
+                    position: "top",
+                    isClosable: true,
+                    containerStyle: {
+                        backgroundColor: "red.500",
+                        color: "white"
+                    }
+                });
+            }
+            else if(err.response.data){
+                toast({
+                    variant: "none",
+                    title: `${err.response.data.message}`,
+                    position: "top",
+                    isClosable: true,
+                    containerStyle: {
+                        backgroundColor: "red.500",
+                        color: "white"
+                    }
+                });
+            }
+            else{
+                toast({
+                    variant: "none",
+                    title: `${"Error marking question"}`,
+                    position: "top",
+                    isClosable: true,
+                    containerStyle: {
+                        backgroundColor: "red.500",
+                        color: "white"
+                    }
+                });
+            }
+           
+        }
+    };
+   
+    const assignBonus = async (question_id: string | undefined, data: { school_id: string | undefined }) => {
+        try {
+            setBonusLoading(true)
+            // eslint-disable-next-line
+            const response = await axios.put(
+                `${AppConstants.baseUrl}/sigma-quiz/questions/${question_id}/bonus`,
+                data,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            setBonusLoading(false)
+
+            dispatch(getQuizResult(quizId));
+            getSchoolDetails()
+        } catch (error) {
+            setBonusLoading(false)
+
+            const err = error as error
+            console.log(err.response.data)
+            if (err.response.data.statusCode === 409) {
+                toast({
+                    variant: "none",
+                    title: `${err.response.data.message}`,
+                    position: "top",
+                    isClosable: true,
+                    containerStyle: {
+                        backgroundColor: "red.500",
+                        color: "white"
+                    }
+                });
+            }
+            else if(err.response.data){
+                toast({
+                    variant: "none",
+                    title: `${err.response.data.message}`,
+                    position: "top",
+                    isClosable: true,
+                    containerStyle: {
+                        backgroundColor: "red.500",
+                        color: "white"
+                    }
+                });
+            }
+            else {
+                toast({
+                    variant: "none",
+                    title: `${"Error assigning bonus"}`,
+                    position: "top",
+                    isClosable: true,
+                    containerStyle: {
+                        backgroundColor: "red.500",
+                        color: "white"
+                    }
+                });
+            }
+
+        }
+    };
 
     const handleButtonClick = (currentRound: RoundParticipation, button: string) => {
         setActiveButton(button);
@@ -101,17 +244,17 @@ function SchoolDetails() {
 
     const theme = useTheme();
     const userName = useAppSelector(state => state.auth.user?.first_name);
-    useEffect(() => {
+    const getSchoolDetails = useCallback(() => {
         if (schoolsID && data) {
             const roundMap = new Map<string, Round>();
             const roundParticipationMap = new Map<string, Round>();
-    
+
             const school = data.schoolRegistrations.find((school) => school.schoolId === schoolsID);
-    
+
             data.rounds.forEach((round) => {
                 roundMap.set(round.id, round);
             });
-    
+
             data.schoolRegistrations.forEach((schReg) => {
                 schReg.rounds.forEach((roundsParticipation) => {
                     const round = roundMap.get(roundsParticipation.roundId);
@@ -120,40 +263,45 @@ function SchoolDetails() {
                     }
                 });
             });
-    
+
             setRounds(roundParticipationMap);
             setRoundScore(roundParticipation?.score || 0);
             const answeredCorrectly = school?.rounds[0].answered_questions.filter(item => item.answered_correctly).length || 0;
             setRoundAnsweredCorrectly(answeredCorrectly);
             const answeredQuestion = school?.rounds[0].answered_questions.length || 0;
             setRoundAnsweredQuestions(answeredQuestion);
-    
+
             setTotalQuestions(Array.from(roundParticipationMap.values()).reduce((acc, round) => acc + round.no_of_questions, 0));
             const totalCorrectAnswers = Array.from(roundParticipationMap.values()).reduce((acc, round) => {
                 return acc + round.questions.filter(item => item.answered_correctly).length;
             }, 0);
             setQuizCorrectAnswers(totalCorrectAnswers);
-    
+
             if (school) {
                 setSchoolDetails(school);
                 setQuizScore(school.score || 0);
             } else {
                 setErrorMessage("School details not found.");
             }
-    
+
             if (!roundParticipation) {
                 setRoundParticipation(school?.rounds[0]);
             }
-    
+
             if (!testRound) {
                 setTestRound(data.rounds[0]);
             }
-    
+
         } else if (error) {
             setErrorMessage("Error fetching test details. Please try again later!");
         }
-    }, [data, error, schoolsID,roundParticipation, testRound]);
-    
+    }, [data, schoolsID, error, roundParticipation, testRound]);
+
+
+    useEffect(() => {
+        getSchoolDetails();
+    }, [data, error, schoolsID, getSchoolDetails]);
+
     return (
         <>
             {loading ? (
@@ -240,11 +388,32 @@ function SchoolDetails() {
                         </div>
                         {token && (
                             <Flex>
-                                <Button sx={filterQuestionsStyles}>Right</Button>
+                                <Button
+                                    variant={"none"} _hover={{ backgroundColor: "none", opacity: "0.7" }}
+                                    isLoading={correct && markLoading}
+                                    spinner={<Flex align={"center"} justifyItems={"center"}>
+                                        <LoadingIcons.ThreeDots width={"60%"} fill="rgba(143, 25, 231, 1)" />
+                                    </Flex>}
+                                    onClick={() => markQuestion(true,question_id, { school_id: schoolsID, answered_correctly: true })} sx={filterQuestionsStyles}>Right</Button>
                                 <Spacer />
-                                <Button sx={filterQuestionsStyles}>Bonus</Button>
+                                <Button
+                                    isLoading={bonusLoading}
+                                    spinner={
+                                        <Flex justifyItems={"center"}>
+                                            <LoadingIcons.ThreeDots width={"60%"} fill="rgba(143, 25, 231, 1)" />
+                                        </Flex>
+                                    }
+                                    onClick={() => assignBonus(question_id, { school_id: schoolsID })}
+                                    sx={filterQuestionsStyles}>Bonus</Button>
                                 <Spacer />
-                                <Button sx={filterQuestionsStyles}>Wrong</Button>
+                                <Button
+                                    variant={"none"} _hover={{ backgroundColor: "none", opacity: "0.7" }}
+                                    isLoading={wrong && markLoading}
+                                    spinner={<Flex justifyItems={"center"}>
+                                        <LoadingIcons.ThreeDots width={"60%"} fill="rgba(143, 25, 231, 1)" />
+                                    </Flex>}
+                                    onClick={() => markQuestion(true,question_id, { school_id: schoolsID, answered_correctly: false })}
+                                    sx={filterQuestionsStyles}>Wrong</Button>
                             </Flex>
                         )}
                         <Flex justifyContent="space-between" alignItems="center">
