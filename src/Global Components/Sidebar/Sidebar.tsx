@@ -18,9 +18,10 @@ import { FaUsers } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
-import { useAppSelector } from "../../app/Hooks";
+import { useAppDispatch, useAppSelector } from "../../app/Hooks";
 import { useEffect, useState } from "react";
 import LoadingIcons from "react-loading-icons";
+import { getQuizResult } from "../../features/getQuizResultSlice";
 const linkStyles: SystemCSSProperties = {
   textAlign: "center",
   alignItems: "center",
@@ -86,7 +87,8 @@ function Sidebar() {
   const [school, setSchool] = useState< School[] | null>(null); // Specify initial state as null
   const { data, loading, error } = useAppSelector((state) => state.getQuizResult); // Specify type for data
   const [errorMessage, setErrorMessage]=useState<string>("")
-
+  const quizId = useAppSelector(state => state.getID.quizId)
+  const dispatch=useAppDispatch()
   useEffect(() => {
     if (data) {
       const schools = data.schoolRegistrations.map((registration) => registration.school);
@@ -149,6 +151,7 @@ function Sidebar() {
                         ...linksStyles,
                         ...(location.pathname ===`/${link.to}` && activeLinkStyle),
                       }}
+                      onClick={()=>dispatch(getQuizResult(quizId))}
                     >
                       <h5>{link.label}</h5>
                     </Flex>

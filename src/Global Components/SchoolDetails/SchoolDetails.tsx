@@ -1,13 +1,14 @@
 import { Link, useParams } from "react-router-dom";
 import { Box, Table, TableContainer, Text, Tbody, Td, Th, Thead, Tr, SimpleGrid, Button, Heading, useTheme, Flex, Spacer, useToast } from '@chakra-ui/react';
 import AnsweredBy from "../Pagininate/AnsweredByPaginate";
+import AnsweredQuestions from "../Pagininate/AnsweredQuestions";
 import { IoIosArrowForward } from "react-icons/io";
 import { RxSlash } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/Hooks";
 import LoadingIcons from "react-loading-icons";
 import { useCallback, useEffect, useState } from "react";
-import { SchoolRegistration, RoundParticipation, Round } from "../Types/Types";
+import { SchoolRegistration, RoundParticipation, Round, Question } from "../Types/Types";
 import { BsSlashLg } from "react-icons/bs";
 import { FaPen, FaPlus } from "react-icons/fa";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
@@ -91,7 +92,7 @@ function SchoolDetails() {
     const [totalQuestions, setTotalQuestions] = useState<number>(0);
     const [activeButton, setActiveButton] = useState<string>("Round 1");
     const [RoundansweredCorrectly, setRoundAnsweredCorrectly] = useState<number>(0);
-    const [RoundansweredQuestions, setRoundAnsweredQuestions] = useState<number>(0);
+    const [RoundansweredQuestions, setRoundAnsweredQuestions] = useState<Question[]>();
     const [quizCorrectAnswers, setQuizCorrectAnswers] = useState<number>(0);
     const [roundScore, setRoundScore] = useState<number>(0);
     const [quizScore, setQuizScore] = useState<number>(0);
@@ -268,7 +269,7 @@ function SchoolDetails() {
             setRoundScore(roundParticipation?.score || 0);
             const answeredCorrectly = school?.rounds[0].answered_questions.filter(item => item.answered_correctly).length || 0;
             setRoundAnsweredCorrectly(answeredCorrectly);
-            const answeredQuestion = school?.rounds[0].answered_questions.length || 0;
+            const answeredQuestion = roundParticipation?.answered_questions;
             setRoundAnsweredQuestions(answeredQuestion);
 
             setTotalQuestions(Array.from(roundParticipationMap.values()).reduce((acc, round) => acc + round.no_of_questions, 0));
@@ -372,7 +373,7 @@ function SchoolDetails() {
                             </Heading>
                             <Flex direction={"column"} justifyContent="space-between">
                                 <Box pr="100px">
-                                    <AnsweredBy testRound={testRound} questions={testRound?.questions} pageCount={testRound?.no_of_questions} numOfPages={30} />
+                                    <AnsweredBy testRound={testRound}  pageCount={testRound?.no_of_questions} numOfPages={30} />
                                 </Box>
                                 <br />
                                 <Box mt={"55px"} ml={"800px"} position={"absolute"} w="" h="27px">
@@ -419,7 +420,7 @@ function SchoolDetails() {
                         <Flex justifyContent="space-between" alignItems="center">
                             <Box w="auto">
                                 <h5 className="answer">Answered Questions</h5>
-                                <AnsweredBy numOfPages={20} pageCount={RoundansweredQuestions} />
+                                <AnsweredQuestions answeredQuestion={RoundansweredQuestions} />
                             </Box>
                             <Box>
                                 <Flex justifyContent="center" alignItems="center" gap="10px" padding="5px 20px 5px 20px">
@@ -447,7 +448,7 @@ function SchoolDetails() {
                                         <Td>
                                             <Flex sx={scoreStyles}>
                                                 <span className="actual-score">{RoundansweredCorrectly}</span>
-                                                <RxSlash /> {RoundansweredQuestions ? RoundansweredQuestions : 0}
+                                                <RxSlash /> {RoundansweredQuestions?.length ? RoundansweredQuestions.length : 0}
                                             </Flex>
                                         </Td>
                                         <Td>
