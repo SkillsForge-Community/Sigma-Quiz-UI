@@ -18,6 +18,7 @@ import { IconContext } from "react-icons";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import SchoolScoreCard from './SchoolScoreCard/SchoolScoreCard';
 import pfp from "../../assets/Images/Profile picture.svg";
+import { useAppSelector } from '../../app/Hooks';
 
 const crudOperationsStyles: SystemCSSProperties = {
   cursor: "pointer",
@@ -41,6 +42,8 @@ const crudIconStyles:SystemCSSProperties = {
 }
 
 const Scores = () => {
+    const { data, loading, error } = useAppSelector((state) => state.getQuizResult);
+    console.log(data)
     const [activeButton, setActiveButton] = useState<string>("Round 1");
     
     const handleButtonClick = (button: string) => {
