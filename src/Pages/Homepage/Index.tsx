@@ -7,9 +7,9 @@ import Logo from "../../Global Components/Logo/Logo";
 import { Box, Button, HStack, Select, SystemCSSProperties, VStack, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
-import { useAppSelector } from "../../app/Hooks";
 import { useAppDispatch } from "../../app/Hooks";
 import { setQuizId } from "../../features/quizIdSlice";
+import { AppConstants } from "../../Global Components/AppConstants/AppConstants";
 const Homepage = () => {
   const toast = useToast()
   const navigate = useNavigate();
@@ -24,24 +24,22 @@ const Homepage = () => {
   const [quizes, setQuizes] = useState<quizType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const token = useAppSelector(state => state.auth.access_token)
-  const [quizIds, setQuizIds] = useState<string>("")
+  const [selectedQuizId, setSelectedQuizId] = useState<string>("")
   const dispatch = useAppDispatch()
-  const quizId = useAppSelector(state => state.getID.quizId)
 
   useEffect(() => {
-    if(quizIds){
-      dispatch(setQuizId(quizIds))
+    if(selectedQuizId){
+      dispatch(setQuizId(selectedQuizId))
     }
-    dispatch(setQuizId(quizIds))
-  }, [dispatch, quizIds])
+    dispatch(setQuizId(selectedQuizId))
+  }, [dispatch, selectedQuizId])
   useEffect(() => {
     const getAllQuizzes = () => {
       setIsLoading(true);
 
       axios
         .get(
-          "https://sigma-website-backend-51b4af465e71.herokuapp.com/api/sigma-quiz"
+          `${AppConstants.baseUrl}/sigma-quiz`
         )
         .then((res) => {
           setQuizes(res.data);
@@ -65,12 +63,12 @@ const Homepage = () => {
     return quizes.slice().reverse();
   }, [quizes])
   const handleQuizChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedQuizId = event.target.value;
-    setQuizIds(selectedQuizId);
+    const newQuizId = event.target.value;
+    setSelectedQuizId(newQuizId);
   };
   const handleQuizId = () => {
-    if (quizIds) {
-        navigate(`${token ? `/subadmin/${quizIds}` : `/users/${quizIds}`}`)
+    if (selectedQuizId) {
+        navigate(`/quiz/${selectedQuizId}`)
     }else {
       toast({
         variant: "none",
@@ -85,15 +83,9 @@ const Homepage = () => {
     }
 
   }
-  function handleLogin() {
-    
-
-      
+  function handleLogin() {      
         navigate("/login")
-      
-      
   }
-  console.log(quizId)
   return (
 
     <Box className="Home">
