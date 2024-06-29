@@ -59,7 +59,7 @@ function App() {
               <Route element={<Signin />} path="/Signin" />
               <Route path="/subadmin/manage-users" element={<ManageUsers />} />
               <Route element={<MainSubAdmin />} path="/subadmin/:id">
-                <Route element={<AccountSettings />} path={"settings"}>
+                <Route element={<AccountSettings />} path={"profile/:userID/settings"}>
                   <Route index element={<ProfileSettings />} />
                   <Route path="password" element={<PasswordSettings />} />
                   <Route path="profile" element={<ProfileSettings />} />

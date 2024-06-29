@@ -94,7 +94,8 @@ function Sidebar() {
   ); // Specify type for data
   const [errorMessage, setErrorMessage] = useState<string>("");
   const loggedInUser = useAppSelector((state) => state.auth.user);
-
+  const quizID=useAppSelector(state=>state.getID.quizId)
+  console.log(quizID)
   const activeSchool = useMemo(() => {
     return schools?.find(school => {
       return location.pathname.includes(school.id)
@@ -296,7 +297,7 @@ function Sidebar() {
                       </Flex>
                     </Heading>
                   </FullReloadLink>
-                  <FullReloadLink to={`/subadmin/${loggedInUser?.id}/settings`}>
+                  <FullReloadLink to={`/subadmin/${quizID}/profile/${loggedInUser?.id}/settings`}>
                     <Heading
                       as={"h5"}
                       sx={{
