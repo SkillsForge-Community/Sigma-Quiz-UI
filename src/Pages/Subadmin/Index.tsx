@@ -17,11 +17,11 @@ function MainSubAdmin() {
       templateAreas={`"sidebar main"
                       "sidebar main"
                       "sidebar main"`}
-      templateColumns="253px 1fr"
+      templateColumns="253px auto"
       color='blackAlpha.700'
       fontWeight='bold'
-      height="100vh" // Adjusted height to fill the viewport
-      width={"100vw"}
+      height="100vh"
+     
     >
       <GridItem bg='#EDEDED'  area={'sidebar'} >
         <Sidebar />

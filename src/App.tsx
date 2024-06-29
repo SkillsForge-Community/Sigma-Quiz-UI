@@ -35,50 +35,65 @@ function App() {
           <ScrollToTop />
           <Routes>
             {/*Public Routes*/}
-            <Route element={<Homepage />} path='/' />
-            <Route element={<Login />} path='/Login' />
+            <Route element={<Homepage />} path="/" />
+            <Route element={<Login />} path="/Login" />
 
-            <Route element={<About />} path='/About' />
-            <Route element={<NotFound />} path='*' />
-            <Route element={<MainSubAdmin />} path="/users/:id">
+            <Route element={<About />} path="/About" />
+            <Route element={<NotFound />} path="*" />
+            <Route element={<MainSubAdmin />} path="/quiz/:id">
               <Route index element={<Scores />} />
 
-              <Route path=':schoolsID' element={<SchoolDetails />} />
+              <Route path="schools/:schoolsID" element={<SchoolDetails />} />
+              <Route element={<Scores />} path="results" />
+              {/* Protected routes*/}
+              <Route element={<RequireAuth />}>
+                <Route path="manage-questions" element={<Questions />} />
+              </Route>
             </Route>
-            <Route element={<TestDetails isAdmin={false} />} path="/users/test-details" />
+            <Route
+              element={<TestDetails isAdmin={false} />}
+              path="/users/test-details"
+            />
             {/* Protected routes*/}
             <Route element={<RequireAuth />}>
-              <Route element={<Signin />} path='/Signin' />
+              <Route element={<Signin />} path="/Signin" />
+              <Route path="/subadmin/manage-users" element={<ManageUsers />} />
               <Route element={<MainSubAdmin />} path="/subadmin/:id">
-                <Route index element={<Scores />} />
-                <Route element={<Scores />} path="all-schools" />
-
-                <Route path="manage-users" element={<ManageUsers />} />
-                <Route path=":schoolsID" element={<SchoolDetails />} />
-                <Route path="manage-questions" element={<Questions />} />
-
-                <Route element={<AccountSettings />} path={"account-settings"}>
+                <Route element={<AccountSettings />} path={"settings"}>
                   <Route index element={<ProfileSettings />} />
-                  <Route path='password-settings' element={<PasswordSettings />} />
-                  <Route path='profile-settings' element={<ProfileSettings />} />
+                  <Route path="password" element={<PasswordSettings />} />
+                  <Route path="profile" element={<ProfileSettings />} />
                 </Route>
               </Route>
               <Route element={<UpdateUser />} path="/subadmin/update-user">
                 <Route index element={<UserProfile />} />
-                <Route path='profile' element={<UserProfile />} />
-                <Route path='user-functions' element={<UserFunctions />} />
+                <Route path="profile" element={<UserProfile />} />
+                <Route path="user-functions" element={<UserFunctions />} />
               </Route>
-              <Route element={<AddSchool quizName="2024 Roseline Etuokwu Quiz Competition" dateCreated="2024 - 05 - 30" />} path="/Addschool" />
-              <Route element={<TestDetails isAdmin={true} />} path="/subadmin/test-details" />
-              <Route element={<SelectQuiz option='select' />} path='/select-quiz' />
-              <Route element={<SelectQuiz option='add' />} path='/add-quiz' />
-              <Route element={<SelectQuiz option='edit' />} path='/edit-quiz' />
+              <Route
+                element={
+                  <AddSchool
+                    quizName="2024 Roseline Etuokwu Quiz Competition"
+                    dateCreated="2024 - 05 - 30"
+                  />
+                }
+                path="/Addschool"
+              />
+              <Route
+                element={<TestDetails isAdmin={true} />}
+                path="/subadmin/test-details"
+              />
+              <Route
+                element={<SelectQuiz option="select" />}
+                path="/select-quiz"
+              />
+              <Route element={<SelectQuiz option="add" />} path="/add-quiz" />
+              <Route element={<SelectQuiz option="edit" />} path="/edit-quiz" />
 
-              <Route element={<Round />} path='/round' />
-              <Route element={<AddEditRound />} path='/round/add' />
-              <Route element={<AddEditRound />} path='/round/edit' />
+              <Route element={<Round />} path="/round" />
+              <Route element={<AddEditRound />} path="/round/add" />
+              <Route element={<AddEditRound />} path="/round/edit" />
             </Route>
-
           </Routes>
         </div>
       </Provider>
