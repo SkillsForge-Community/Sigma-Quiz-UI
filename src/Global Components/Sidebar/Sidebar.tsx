@@ -89,6 +89,7 @@ function Sidebar() {
   const [errorMessage, setErrorMessage]=useState<string>("")
   const quizId = useAppSelector(state => state.getID.quizId)
   const dispatch=useAppDispatch()
+  console.log(data)
   useEffect(() => {
     if (data) {
       const schools = data.schoolRegistrations.map((registration) => registration.school);
