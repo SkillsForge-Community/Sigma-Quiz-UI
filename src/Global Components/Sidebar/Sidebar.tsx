@@ -251,7 +251,7 @@ function Sidebar() {
                 </Heading>
               </FullReloadLink>
               {isLoggedIn && (
-                <FullReloadLink to="manage-questions">
+                <FullReloadLink to={`/subadmin/${quizID}/manage-questions`}>
                   <Heading as={"h5"} sx={linksStyles}>
                     <Flex
                       alignItems={"center"}
