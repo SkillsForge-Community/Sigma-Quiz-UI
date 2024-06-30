@@ -16,14 +16,14 @@ type selectQuizProps = {
 
 // -- define type for each quiz object --
 type QuizType = {
-  id: string, 
-  year: number, 
-  title: string, 
+  id: string,
+  year: number,
+  title: string,
   description: string,
   date: string
 }
 
-const SelectQuiz = ({option} : selectQuizProps) => {
+const SelectQuiz = ({ option }: selectQuizProps) => {
   const navigate = useNavigate();
 
   // -- states for api integration
@@ -33,40 +33,41 @@ const SelectQuiz = ({option} : selectQuizProps) => {
   const [isDataEmpty, setIsDataEmpty] = useState<boolean>(false);
 
   useEffect(() => {
-
-    // -- function to fetch the list of quiz --
-    const fetchQuiz = async() => {
-        setLoading(true);
-        const token : string | null = localStorage.getItem('token');
-
-        try {
-
-          const response = await axios.get('https://sigma-website-backend-51b4af465e71.herokuapp.com/api/sigma-quiz', {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-          });
-
-          // -- check if response is empty or not
-          if (response.data.length === 0){
-            setIsDataEmpty(true);
-          } else {
-            setData(response.data);
-            setIsDataEmpty(false);
-            setError(null);
-          }
-        } catch (error : any) {
-          setError(error.message || 'Unknown error');
-        } finally {
-          setLoading(false);
-        }
-      };
-
-    // -- call fetch function --
+    // -- call fetch function when the page loads --
     fetchQuiz();
 
   }, [])
+
+  // -- function to fetch the list of quiz --
+  const fetchQuiz = async () => {
+    setLoading(true);
+    const token: string | null = localStorage.getItem('token');
+
+    try {
+
+      const response = await axios.get('https://sigma-website-backend-51b4af465e71.herokuapp.com/api/sigma-quiz', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      // -- check if response is empty or not
+      if (response.data.length === 0) {
+        setIsDataEmpty(true);
+      } else {
+        setData(response.data);
+        console.log(response.data)
+        setIsDataEmpty(false);
+        setError(null);
+      }
+    } catch (error: any) {
+      setError(error.message || 'Unknown error');
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   return (
     <div className="select-quiz-page">
@@ -86,16 +87,16 @@ const SelectQuiz = ({option} : selectQuizProps) => {
           <select name="" id="">
             {loading && <option>Loading...</option>}
             {data?.map((quiz, index) => (
-              <option>{quiz.title}</option>
+              <option key={index}>{quiz.title}</option>
             ))}
-            </select>
+          </select>
           <IoIosArrowDown size={30} color="black" className="arrow-down" />
         </div>
 
         {/* DISPLAY ERROR MESSAGE */}
-        {(!loading && error) && <p style={{color: 'red', marginTop: '10px'}}>{error}</p>}
-        {isDataEmpty && <p style={{marginTop: '10px'}}>no quiz available</p>}
-        
+        {(!loading && error) && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+        {isDataEmpty && <p style={{ marginTop: '10px' }}>no quiz available</p>}
+
         {/* ADD AND EDIT BUTTONS  */}
         <div className="add-edit-btns">
           <Link to="/add-quiz">
@@ -121,7 +122,7 @@ const SelectQuiz = ({option} : selectQuizProps) => {
       {option === "add" && (
         <>
           <div className="modal-background"></div>
-          <AddQuiz />
+          <AddQuiz fetchQuiz={fetchQuiz}/>
         </>
       )}
 
