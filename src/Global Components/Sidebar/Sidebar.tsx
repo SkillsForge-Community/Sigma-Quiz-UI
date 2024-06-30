@@ -9,7 +9,7 @@ import { Select } from "@chakra-ui/react";
 import { BsPercent } from "react-icons/bs";
 import { LuSchool } from "react-icons/lu";
 import { SimpleGrid } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { FaPen } from "react-icons/fa6";
 import { IconContext } from "react-icons";
@@ -21,7 +21,6 @@ import { RiGraduationCapFill } from "react-icons/ri";
 import { useAppSelector } from "../../app/Hooks";
 import { useEffect, useMemo, useState } from "react";
 import LoadingIcons from "react-loading-icons";
-import FullReloadLink from "../FullRealoadLink";
 const linkStyles: SystemCSSProperties = {
   textAlign: "center",
   alignItems: "center",
@@ -153,7 +152,7 @@ function Sidebar() {
               {schools && schools.length > 0 ? (
                 schools.map((school, index) => {
                   return (
-                    <FullReloadLink key={index} to={`${school.id}`}>
+                    <NavLink key={index} to={`schools/${school.id}`}>
                       <Flex
                         _hover={{
                           color: "#8F19E7",
@@ -171,7 +170,7 @@ function Sidebar() {
                       >
                         <h5>{school.name}</h5>
                       </Flex>
-                    </FullReloadLink>
+                    </NavLink>
                   );
                 })
               ) : (
@@ -231,7 +230,7 @@ function Sidebar() {
                   </Flex>
                 </Heading>
               </Box>
-              <FullReloadLink to="results">
+              <NavLink to="results">
                 <Heading
                   as={"h5"}
                   sx={{
@@ -249,9 +248,9 @@ function Sidebar() {
                     All Schools
                   </Flex>
                 </Heading>
-              </FullReloadLink>
+              </NavLink>
               {isLoggedIn && (
-                <FullReloadLink to={`/subadmin/${quizID}/manage-questions`}>
+                <NavLink to={`manage-questions`}>
                   <Heading as={"h5"} sx={linksStyles}>
                     <Flex
                       alignItems={"center"}
@@ -262,7 +261,7 @@ function Sidebar() {
                       Manage Questions
                     </Flex>
                   </Heading>
-                </FullReloadLink>
+                </NavLink>
               )}
               {isLoggedIn && (
                 <Flex flexDir={"column"} gap={"20px"}>
@@ -278,7 +277,7 @@ function Sidebar() {
                       </Flex>
                     </Heading>
                   </Box>
-                  <FullReloadLink to="/subadmin/manage-users">
+                  <NavLink to="/subadmin/manage-users">
                     <Heading
                       as={"h5"}
                       sx={{
@@ -296,8 +295,8 @@ function Sidebar() {
                         Manage Users
                       </Flex>
                     </Heading>
-                  </FullReloadLink>
-                  <FullReloadLink to={`/subadmin/${quizID}/profile/${loggedInUser?.id}/settings`}>
+                  </NavLink>
+                  <NavLink to={`profile/${loggedInUser?.id}/settings`}>
                     <Heading
                       as={"h5"}
                       sx={{
@@ -315,7 +314,7 @@ function Sidebar() {
                         My Account
                       </Flex>
                     </Heading>
-                  </FullReloadLink>
+                  </NavLink>
                 </Flex>
               )}
             </SimpleGrid>

@@ -330,7 +330,6 @@ function SchoolDetails() {
   useEffect(() => {
     getSchoolDetails();
   }, [data, error, schoolsID, getSchoolDetails]);
-
   return (
     <>
       {loading ? (
@@ -346,7 +345,7 @@ function SchoolDetails() {
           <SimpleGrid spacing={5} p="20px" fontFamily={"Poppins, sans-serif"}>
             <Flex>
               <Box>
-                <Text fontSize={"20px"}>{schoolDetails?.quiz.title}</Text>
+                <Text fontSize={"20px"}>{schoolDetails?.quiz? schoolDetails?.quiz.title : "Test Details"}</Text>
               </Box>
               <Spacer />
               <Flex align={"center"}>

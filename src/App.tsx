@@ -57,7 +57,10 @@ function App() {
               <Route element={<Signin />} path="/Signin" />
               <Route path="/subadmin/manage-users" element={<ManageUsers />} />
               <Route element={<MainSubAdmin />} path="/subadmin/:id">
-              <Route path="manage-questions" element={<Questions />} />
+              <Route element={<Scores />} path="results" />
+
+              <Route path="schools/:schoolsID" element={<SchoolDetails />} />
+                <Route path="manage-questions" element={<Questions />} />
                 <Route element={<AccountSettings />} path={"profile/:userID/settings"}>
                   <Route index element={<ProfileSettings />} />
                   <Route path="password" element={<PasswordSettings />} />
