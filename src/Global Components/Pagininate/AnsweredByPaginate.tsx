@@ -102,7 +102,6 @@ const AnsweredBy: React.FC<PaginatedItemsProps> = ({
   const startIndex = currentPage * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const displayedQuestions = sortedQuestions?.slice(startIndex, endIndex);
-  console.log(testRound)
   const questions = displayedQuestions?.map((item, index) => {
     const isCurrentPage = item.question_number === page;
     const wasAnsweredIncorrectly = item.answered_by?.id && item.answered_correctly === false;

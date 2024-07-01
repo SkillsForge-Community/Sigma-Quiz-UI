@@ -93,7 +93,6 @@ function Sidebar() {
   ); // Specify type for data
   const [errorMessage, setErrorMessage] = useState<string>("");
   const loggedInUser = useAppSelector((state) => state.auth.user);
-  const quizID=useAppSelector(state=>state.getID.quizId)
   const activeSchool = useMemo(() => {
     return schools?.find(school => {
       return location.pathname.includes(school.id)

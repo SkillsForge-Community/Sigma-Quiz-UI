@@ -65,7 +65,6 @@ const AnsweredQuestions: React.FC<PaginatedItemsProps> = ({
             </GridItem>
         );
     });
-    console.log(answeredQuestion)
 
     return (
         <Flex direction={"row"} sx={question_containerStyles} ref={questionContainerRef}>

@@ -105,7 +105,7 @@ function SchoolDetails() {
     SchoolRegistration | undefined
   >();
   const [roundParticipation, setRoundParticipation] = useState<
-    RoundParticipation | undefined
+    RoundParticipation | undefined 
   >();
   const [rounds, setRounds] = useState<Map<string, Round>>(new Map());
   const [quizRound, setQuizRound] = useState<Round | undefined>();
@@ -115,8 +115,10 @@ function SchoolDetails() {
   const quizId = useAppSelector((state) => state.getID.quizId);
   //   const [schCorrectAnswersInRoundCount, setSchCorrectAnswersInRoundCount] = useState(0)
   useEffect(()=>{
-    dispatch(getQuizResult(quizId))
-  },[dispatch,quizId,schoolsID])
+    setRoundParticipation(undefined)
+    setQuizRound(undefined)
+    
+  },[schoolsID])
   const answeredQuestionsCount =
     roundParticipation?.answered_questions.length || 0;
 
@@ -279,7 +281,6 @@ function SchoolDetails() {
       return
     return roundParticipation?.answered_questions
   },[ roundParticipation?.answered_questions,schoolDetails])
-console.log(RoundansweredQuestions)
   const handleButtonClick = (
     currentRound: RoundParticipation,
     button: string
@@ -296,7 +297,6 @@ console.log(RoundansweredQuestions)
     if (schoolsID && data) {
       const roundMap = new Map<string, Round>();
       const roundParticipationMap = new Map<string, Round>();
-
       data.rounds.forEach((round) => {
         roundMap.set(round.id, round);
       });
@@ -330,7 +330,7 @@ console.log(RoundansweredQuestions)
     } else if (error) {
       setErrorMessage("Error fetching test details. Please try again later!");
     }
-  }, [data, schoolsID, error, roundParticipation, quizRound]);
+  }, [data, schoolsID, error, roundParticipation, quizRound,schoolDetails?.rounds]);
 
   useEffect(() => {
     getSchoolDetails();
@@ -523,7 +523,7 @@ console.log(RoundansweredQuestions)
               <Box w="auto">
                 <h5 className="answer">Answered Questions</h5>
                 {RoundansweredQuestions && RoundansweredQuestions?.length > 0 ?
-                  <AnsweredQuestions answeredQuestion={roundParticipation?.answered_questions} />
+                  <AnsweredQuestions answeredQuestion={RoundansweredQuestions} />
                   : <Text sx={{ color: "rgba(143, 25, 231, 1)" }}>No question has been answered yet</Text>}
               </Box>
               <Box>

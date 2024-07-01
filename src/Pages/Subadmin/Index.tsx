@@ -1,9 +1,6 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import Sidebar from '../../Global Components/Sidebar/Sidebar';
-import { Outlet, useParams } from 'react-router-dom';
-import { useAppDispatch} from '../../app/Hooks';
-import { useEffect } from 'react';
-import { getQuizResult } from '../../features/getQuizResultSlice';
+import { Outlet,  } from 'react-router-dom';
 function MainSubAdmin() {
   
 
