@@ -1,27 +1,19 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import Sidebar from '../../Global Components/Sidebar/Sidebar';
-import { Outlet, useParams } from 'react-router-dom';
-import { useAppDispatch} from '../../app/Hooks';
-import { useEffect } from 'react';
-import { getQuizResult } from '../../features/getQuizResultSlice';
+import { Outlet,  } from 'react-router-dom';
 function MainSubAdmin() {
-  const { id } = useParams();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getQuizResult(id));
-  }, [dispatch, id]);
+  
 
   return (
     <Grid
       templateAreas={`"sidebar main"
                       "sidebar main"
                       "sidebar main"`}
-      templateColumns="253px 1fr"
+      templateColumns="253px auto"
       color='blackAlpha.700'
       fontWeight='bold'
-      height="100vh" // Adjusted height to fill the viewport
-      width={"100vw"}
+      height="100vh"
+     
     >
       <GridItem bg='#EDEDED'  area={'sidebar'} >
         <Sidebar />

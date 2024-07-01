@@ -18,7 +18,7 @@ import { FaUsers } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
-import { useAppSelector } from "../../app/Hooks";
+import {  useAppSelector } from "../../app/Hooks";
 import { useEffect, useMemo, useState } from "react";
 import LoadingIcons from "react-loading-icons";
 const linkStyles: SystemCSSProperties = {
@@ -26,6 +26,7 @@ const linkStyles: SystemCSSProperties = {
   alignItems: "center",
   justifyContent: "center",
 };
+
 const linksStyles: SystemCSSProperties = {
   textAlign: "center",
   alignItems: "center",
@@ -41,6 +42,7 @@ const linksStyles: SystemCSSProperties = {
   color: "rgba(51, 51, 51, 0.6)",
   transition: "10ms",
 };
+
 const activeLinkStyle: SystemCSSProperties = {
   color: "#8F19E7",
   boxShadow: " 2px 2px 15px 1px #00000040",
@@ -49,6 +51,7 @@ const activeLinkStyle: SystemCSSProperties = {
   borderRight: 0,
   borderBottom: 0,
 };
+
 const crudOperationsStyles: SystemCSSProperties = {
   cursor: "pointer",
   transition: "1s",
@@ -65,6 +68,7 @@ const crudStyles: SystemCSSProperties = {
   gap: "8px",
   fontSize: "16px",
 };
+
 const crudIconStyles: SystemCSSProperties = {
   backgroundColor: "rgba(237, 237, 237, 1)",
   padding: "5px",
@@ -78,6 +82,8 @@ type School = {
   address: string;
 };
 
+
+
 function Sidebar() {
   const location = useLocation();
   const isLoggedIn = useAppSelector((state) => !!state.auth.access_token);
@@ -87,7 +93,6 @@ function Sidebar() {
   ); // Specify type for data
   const [errorMessage, setErrorMessage] = useState<string>("");
   const loggedInUser = useAppSelector((state) => state.auth.user);
-
   const activeSchool = useMemo(() => {
     return schools?.find(school => {
       return location.pathname.includes(school.id)
@@ -142,11 +147,10 @@ function Sidebar() {
                   </Flex>
                 </Heading>
               </Box>
-
               {schools && schools.length > 0 ? (
                 schools.map((school, index) => {
                   return (
-                    <NavLink key={index} to={`schools/${school.id}`}>
+                    <NavLink key={index} to={`schools/${school.id}`}  >
                       <Flex
                         _hover={{
                           color: "#8F19E7",
@@ -161,6 +165,7 @@ function Sidebar() {
                           ...(school.id === activeSchool?.id &&
                             activeLinkStyle),
                         }}
+                       
                       >
                         <h5>{school.name}</h5>
                       </Flex>
@@ -244,7 +249,7 @@ function Sidebar() {
                 </Heading>
               </NavLink>
               {isLoggedIn && (
-                <NavLink to="manage-questions">
+                <NavLink to={`manage-questions`}>
                   <Heading as={"h5"} sx={linksStyles}>
                     <Flex
                       alignItems={"center"}
@@ -290,12 +295,12 @@ function Sidebar() {
                       </Flex>
                     </Heading>
                   </NavLink>
-                  <NavLink to={`/subadmin/${loggedInUser?.id}/settings`}>
+                  <NavLink to={`profile/${loggedInUser?.id}/settings`}>
                     <Heading
                       as={"h5"}
                       sx={{
                         ...linksStyles,
-                        ...(location.pathname.endsWith("settings")&&
+                        ...(location.pathname.endsWith("settings") &&
                           activeLinkStyle),
                       }}
                     >

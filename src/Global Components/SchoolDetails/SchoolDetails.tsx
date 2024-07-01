@@ -1,19 +1,20 @@
 import { Link, useParams } from "react-router-dom";
 import { Box, Table, TableContainer, Text, Tbody, Td, Th, Thead, Tr, SimpleGrid, Button, Heading, useTheme, Flex, Spacer, useToast } from '@chakra-ui/react';
 import AnsweredBy from "../Pagininate/AnsweredByPaginate";
+import AnsweredQuestions from "../Pagininate/AnsweredQuestions";
 import { IoIosArrowForward } from "react-icons/io";
 import { RxSlash } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/Hooks";
 import LoadingIcons from "react-loading-icons";
+import { SchoolRegistration, RoundParticipation, Round} from "../Types/Types";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { SchoolRegistration, RoundParticipation, Round } from "../Types/Types";
 import { BsSlashLg } from "react-icons/bs";
 import { FaPen, FaPlus } from "react-icons/fa";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import pfp from "../../assets/Images/Profile picture.svg";
 import axios from "axios";
-import { Error as error } from "../Types/Types";
+import { Error as errors } from "../Types/Types";
 import { getQuizResult } from "../../features/getQuizResultSlice";
 import { useAppDispatch } from "../../app/Hooks";
 import { AppConstants } from "../AppConstants/AppConstants";
@@ -79,6 +80,10 @@ const scoreStyles = {
 };
 
 function SchoolDetails() {
+
+
+  const dispatch = useAppDispatch();
+
   const { schoolsID } = useParams();
   const navigate = useNavigate();
   const toast = useToast();
@@ -94,12 +99,13 @@ function SchoolDetails() {
   const { data, loading, error } = useAppSelector(
     (state) => state.getQuizResult
   );
+  
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [schoolDetails, setSchoolDetails] = useState<
     SchoolRegistration | undefined
   >();
   const [roundParticipation, setRoundParticipation] = useState<
-    RoundParticipation | undefined
+    RoundParticipation | undefined 
   >();
   const [rounds, setRounds] = useState<Map<string, Round>>(new Map());
   const [quizRound, setQuizRound] = useState<Round | undefined>();
@@ -107,7 +113,12 @@ function SchoolDetails() {
   const question_id = useAppSelector((state) => state.getQuestionID.id);
   const [markLoading, setMarkLoading] = useState<boolean>(false);
   const quizId = useAppSelector((state) => state.getID.quizId);
-//   const [schCorrectAnswersInRoundCount, setSchCorrectAnswersInRoundCount] = useState(0)
+  //   const [schCorrectAnswersInRoundCount, setSchCorrectAnswersInRoundCount] = useState(0)
+  useEffect(()=>{
+    setRoundParticipation(undefined)
+    setQuizRound(undefined)
+    
+  },[schoolsID])
   const answeredQuestionsCount =
     roundParticipation?.answered_questions.length || 0;
 
@@ -131,7 +142,7 @@ function SchoolDetails() {
       0
     );
   }, [rounds]);
-
+  
   const schCorrectAnswersInQuizCount = useMemo(() => {
     if (!schoolDetails) return 0;
 
@@ -144,7 +155,6 @@ function SchoolDetails() {
     }, 0);
   }, [schoolDetails]);
 
-  const dispatch = useAppDispatch();
   const markQuestion = async (
     question_id: string,
     data: { school_id: string; answered_correctly: boolean }
@@ -153,8 +163,7 @@ function SchoolDetails() {
       setMarkLoading(true);
       // eslint-disable-next-line
       const response = await axios.put(
-        `${AppConstants.baseUrl}/sigma-quiz/questions/${
-          question_id && question_id
+        `${AppConstants.baseUrl}/sigma-quiz/questions/${question_id && question_id
         }/mark`,
         data,
         {
@@ -169,7 +178,7 @@ function SchoolDetails() {
       getSchoolDetails();
     } catch (error) {
       setMarkLoading(false);
-      const err = error as error;
+      const err = error as errors;
       console.log(err.response.data);
       if (err.response.data.statusCode === 409) {
         toast({
@@ -227,7 +236,7 @@ function SchoolDetails() {
       dispatch(getQuizResult(quizId));
       getSchoolDetails();
     } catch (error) {
-      const err = error as error;
+      const err = error as errors;
       console.log(err.response.data);
       if (err.response.data.statusCode === 409) {
         toast({
@@ -267,7 +276,11 @@ function SchoolDetails() {
       setMarkLoading(false);
     }
   };
-
+  const RoundansweredQuestions=useMemo(()=>{
+    if (!schoolDetails)
+      return
+    return roundParticipation?.answered_questions
+  },[ roundParticipation?.answered_questions,schoolDetails])
   const handleButtonClick = (
     currentRound: RoundParticipation,
     button: string
@@ -275,6 +288,7 @@ function SchoolDetails() {
     setActiveButton(button);
     setRoundParticipation(currentRound);
     setQuizRound(rounds.get(currentRound.roundId));
+
   };
 
   const theme = useTheme();
@@ -283,11 +297,9 @@ function SchoolDetails() {
     if (schoolsID && data) {
       const roundMap = new Map<string, Round>();
       const roundParticipationMap = new Map<string, Round>();
-
       data.rounds.forEach((round) => {
         roundMap.set(round.id, round);
       });
-
       data.schoolRegistrations.forEach((schReg) => {
         schReg.rounds.forEach((roundsParticipation) => {
           const round = roundMap.get(roundsParticipation.roundId);
@@ -309,7 +321,7 @@ function SchoolDetails() {
       }
 
       if (!roundParticipation) {
-        setRoundParticipation(school?.rounds[0]);
+        setRoundParticipation(schoolDetails?.rounds[0]);
       }
 
       if (!quizRound) {
@@ -318,12 +330,11 @@ function SchoolDetails() {
     } else if (error) {
       setErrorMessage("Error fetching test details. Please try again later!");
     }
-  }, [data, schoolsID, error, roundParticipation, quizRound]);
+  }, [data, schoolsID, error, roundParticipation, quizRound,schoolDetails?.rounds]);
 
   useEffect(() => {
     getSchoolDetails();
-  }, [data, error, schoolsID, getSchoolDetails]);
-
+  }, [data, error, schoolsID, getSchoolDetails,roundParticipation,dispatch]);
   return (
     <>
       {loading ? (
@@ -339,7 +350,7 @@ function SchoolDetails() {
           <SimpleGrid spacing={5} p="20px" fontFamily={"Poppins, sans-serif"}>
             <Flex>
               <Box>
-                <Text fontSize={"20px"}>{schoolDetails?.quiz.title}</Text>
+                <Text fontSize={"20px"}>{schoolDetails?.quiz? schoolDetails?.quiz.title : "Test Details"}</Text>
               </Box>
               <Spacer />
               <Flex align={"center"}>
@@ -369,9 +380,8 @@ function SchoolDetails() {
                         activeButton === `Round ${index + 1}` ? "10px" : "none",
                     }}
                     key={index}
-                    className={`round-button ${
-                      activeButton === `Round ${index + 1}` ? "active" : ""
-                    }`}
+                    className={`round-button ${activeButton === `Round ${index + 1}` ? "active" : ""
+                      }`}
                     onClick={() =>
                       handleButtonClick(round, `Round ${index + 1}`)
                     }
@@ -408,13 +418,12 @@ function SchoolDetails() {
               </Heading>
               <Flex direction={"column"} justifyContent="space-between">
                 <Box pr="100px">
-                  <AnsweredBy
-                    testRound={quizRound}
-                    questions={quizRound?.questions}
-                    pageCount={quizRound?.no_of_questions}
-                    numOfPages={30}
-                  />
+                  {quizRound && quizRound?.questions?.length > 0 ?
+                    <AnsweredBy testRound={quizRound} pageCount={quizRound?.no_of_questions} numOfPages={30} />
+                    : <Text sx={{ color: "rgba(143, 25, 231, 1)" }}>No question has been set yet</Text>}
+
                 </Box>
+
                 <br />
                 <Box
                   mt={"55px"}
@@ -499,9 +508,9 @@ function SchoolDetails() {
                         answered_correctly: false,
                       });
                     } else {
-                        errToast({
-                          title: `Question and School Data Should be fetched first`,
-                        });
+                      errToast({
+                        title: `Question and School Data Should be fetched first`,
+                      });
                     }
                   }}
                   sx={filterQuestionsStyles}
@@ -513,10 +522,9 @@ function SchoolDetails() {
             <Flex justifyContent="space-between" alignItems="center">
               <Box w="auto">
                 <h5 className="answer">Answered Questions</h5>
-                <AnsweredBy
-                  numOfPages={20}
-                  pageCount={answeredQuestionsCount}
-                />
+                {RoundansweredQuestions && RoundansweredQuestions?.length > 0 ?
+                  <AnsweredQuestions answeredQuestion={RoundansweredQuestions} />
+                  : <Text sx={{ color: "rgba(143, 25, 231, 1)" }}>No question has been answered yet</Text>}
               </Box>
               <Box>
                 <Flex
@@ -598,7 +606,7 @@ function SchoolDetails() {
               </Table>
             </TableContainer>
           </SimpleGrid>
-        </Box>
+        </Box >
       ) : (
         <Flex alignItems="center" justifyContent="center" color="red">
           No data found
