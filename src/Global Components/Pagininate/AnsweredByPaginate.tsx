@@ -98,7 +98,7 @@ const AnsweredBy: React.FC<PaginatedItemsProps> = ({
   }, [currentPage]);
 
   const sortedQuestions = testRound?.questions?.slice().sort((a, b) => a.question_number - b.question_number);
-
+  
   const startIndex = currentPage * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const displayedQuestions = sortedQuestions?.slice(startIndex, endIndex);

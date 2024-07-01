@@ -7,7 +7,7 @@ import { RxSlash } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/Hooks";
 import LoadingIcons from "react-loading-icons";
-import { SchoolRegistration, RoundParticipation, Round, Question } from "../Types/Types";
+import { SchoolRegistration, RoundParticipation, Round} from "../Types/Types";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { BsSlashLg } from "react-icons/bs";
 import { FaPen, FaPlus } from "react-icons/fa";
@@ -81,7 +81,6 @@ const scoreStyles = {
 
 function SchoolDetails() {
 
-  const [RoundansweredQuestions, setRoundAnsweredQuestions] = useState<Question[]>();
 
 
   const { schoolsID } = useParams();
@@ -137,7 +136,7 @@ function SchoolDetails() {
       0
     );
   }, [rounds]);
-
+  
   const schCorrectAnswersInQuizCount = useMemo(() => {
     if (!schoolDetails) return 0;
 
@@ -272,7 +271,10 @@ function SchoolDetails() {
       setMarkLoading(false);
     }
   };
-
+  const RoundansweredQuestions=useMemo(()=>{
+    return roundParticipation?.answered_questions
+  },[ roundParticipation?.answered_questions])
+console.log(RoundansweredQuestions)
   const handleButtonClick = (
     currentRound: RoundParticipation,
     button: string
@@ -293,8 +295,6 @@ function SchoolDetails() {
       data.rounds.forEach((round) => {
         roundMap.set(round.id, round);
       });
-      const answeredQuestion = roundParticipation?.answered_questions;
-      setRoundAnsweredQuestions(answeredQuestion);
       data.schoolRegistrations.forEach((schReg) => {
         schReg.rounds.forEach((roundsParticipation) => {
           const round = roundMap.get(roundsParticipation.roundId);
@@ -329,7 +329,7 @@ function SchoolDetails() {
 
   useEffect(() => {
     getSchoolDetails();
-  }, [data, error, schoolsID, getSchoolDetails]);
+  }, [data, error, schoolsID, getSchoolDetails,RoundansweredQuestions]);
   return (
     <>
       {loading ? (
@@ -518,7 +518,7 @@ function SchoolDetails() {
               <Box w="auto">
                 <h5 className="answer">Answered Questions</h5>
                 {RoundansweredQuestions && RoundansweredQuestions?.length > 0 ?
-                  <AnsweredQuestions answeredQuestion={RoundansweredQuestions} />
+                  <AnsweredQuestions answeredQuestion={roundParticipation?.answered_questions} />
                   : <Text sx={{ color: "rgba(143, 25, 231, 1)" }}>No question has been answered yet</Text>}
               </Box>
               <Box>
