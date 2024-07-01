@@ -82,6 +82,7 @@ const scoreStyles = {
 function SchoolDetails() {
 
 
+  const dispatch = useAppDispatch();
 
   const { schoolsID } = useParams();
   const navigate = useNavigate();
@@ -98,6 +99,7 @@ function SchoolDetails() {
   const { data, loading, error } = useAppSelector(
     (state) => state.getQuizResult
   );
+  
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [schoolDetails, setSchoolDetails] = useState<
     SchoolRegistration | undefined
@@ -112,7 +114,9 @@ function SchoolDetails() {
   const [markLoading, setMarkLoading] = useState<boolean>(false);
   const quizId = useAppSelector((state) => state.getID.quizId);
   //   const [schCorrectAnswersInRoundCount, setSchCorrectAnswersInRoundCount] = useState(0)
-  
+  useEffect(()=>{
+    dispatch(getQuizResult(quizId))
+  },[dispatch,quizId,schoolsID])
   const answeredQuestionsCount =
     roundParticipation?.answered_questions.length || 0;
 
@@ -149,7 +153,6 @@ function SchoolDetails() {
     }, 0);
   }, [schoolDetails]);
 
-  const dispatch = useAppDispatch();
   const markQuestion = async (
     question_id: string,
     data: { school_id: string; answered_correctly: boolean }
@@ -272,8 +275,10 @@ function SchoolDetails() {
     }
   };
   const RoundansweredQuestions=useMemo(()=>{
+    if (!schoolDetails)
+      return
     return roundParticipation?.answered_questions
-  },[ roundParticipation?.answered_questions])
+  },[ roundParticipation?.answered_questions,schoolDetails])
 console.log(RoundansweredQuestions)
   const handleButtonClick = (
     currentRound: RoundParticipation,
@@ -316,7 +321,7 @@ console.log(RoundansweredQuestions)
       }
 
       if (!roundParticipation) {
-        setRoundParticipation(school?.rounds[0]);
+        setRoundParticipation(schoolDetails?.rounds[0]);
       }
 
       if (!quizRound) {
@@ -329,7 +334,7 @@ console.log(RoundansweredQuestions)
 
   useEffect(() => {
     getSchoolDetails();
-  }, [data, error, schoolsID, getSchoolDetails,RoundansweredQuestions]);
+  }, [data, error, schoolsID, getSchoolDetails,roundParticipation,dispatch]);
   return (
     <>
       {loading ? (

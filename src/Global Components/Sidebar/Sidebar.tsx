@@ -18,10 +18,9 @@ import { FaUsers } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
-import { useAppDispatch, useAppSelector } from "../../app/Hooks";
+import {  useAppSelector } from "../../app/Hooks";
 import { useEffect, useMemo, useState } from "react";
 import LoadingIcons from "react-loading-icons";
-import { getQuizResult } from "../../features/getQuizResultSlice";
 const linkStyles: SystemCSSProperties = {
   textAlign: "center",
   alignItems: "center",
@@ -86,7 +85,6 @@ type School = {
 
 
 function Sidebar() {
-  const dispatch =useAppDispatch()
   const location = useLocation();
   const isLoggedIn = useAppSelector((state) => !!state.auth.access_token);
   const [schools, setSchools] = useState<School[] | null>(null); // Specify initial state as null
@@ -153,7 +151,7 @@ function Sidebar() {
               {schools && schools.length > 0 ? (
                 schools.map((school, index) => {
                   return (
-                    <NavLink key={index} to={`schools/${school.id}`}  onClick={()=>dispatch(getQuizResult(quizID))}>
+                    <NavLink key={index} to={`schools/${school.id}`}  >
                       <Flex
                         _hover={{
                           color: "#8F19E7",

@@ -5,12 +5,7 @@ import { useAppDispatch} from '../../app/Hooks';
 import { useEffect } from 'react';
 import { getQuizResult } from '../../features/getQuizResultSlice';
 function MainSubAdmin() {
-  const { id } = useParams();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getQuizResult(id));
-  }, [dispatch, id]);
+  
 
   return (
     <Grid
