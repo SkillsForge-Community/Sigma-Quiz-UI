@@ -6,15 +6,15 @@ import { RxSlash } from "react-icons/rx";
 
 interface SchoolScoreCardProps {
     schoolName: string;
-    score: number;
+    score: number|undefined;
     totalScore: number;
-    test: string;
+    test: string |undefined;
     timeTaken: string;
-    questionsAttempted: number;
+    questionsAttempted: number |undefined;
     correctAnswers: number;
     wrongAnswers: number;
     overallResult: string;
-    position: string;
+    position: number;
 }
 
 const SchoolScoreCard: React.FC<SchoolScoreCardProps> = ({

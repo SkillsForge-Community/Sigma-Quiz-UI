@@ -26,7 +26,7 @@ export type AnsweredBy = {
   export type Quiz = {
     id: string;
     year: number;
-    title: string | undefined;
+    title: string | null;
     description: string | null;
     date: string;
   };
