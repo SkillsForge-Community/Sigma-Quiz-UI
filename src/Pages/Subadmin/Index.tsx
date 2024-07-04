@@ -1,8 +1,15 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import Sidebar from '../../Global Components/Sidebar/Sidebar';
-import { Outlet,  } from 'react-router-dom';
+import { Outlet, useParams,  } from 'react-router-dom';
+import { useAppDispatch } from '../../app/Hooks';
+import { useEffect } from 'react';
+import { getQuizResult } from '../../features/getQuizResultSlice';
 function MainSubAdmin() {
-  
+  const dispatch = useAppDispatch();
+  const {id}=useParams()
+  useEffect(()=>{
+    dispatch(getQuizResult(id))
+  },[dispatch,id])
 
   return (
     <Grid
