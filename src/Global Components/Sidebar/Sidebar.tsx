@@ -18,15 +18,15 @@ import { FaUsers } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
-import { useAppDispatch, useAppSelector } from "../../app/Hooks";
-import { useEffect, useState } from "react";
+import { useAppSelector } from "../../app/Hooks";
+import { useEffect, useMemo, useState } from "react";
 import LoadingIcons from "react-loading-icons";
-import { getQuizResult } from "../../features/getQuizResultSlice";
 const linkStyles: SystemCSSProperties = {
   textAlign: "center",
   alignItems: "center",
   justifyContent: "center",
 };
+
 const linksStyles: SystemCSSProperties = {
   textAlign: "center",
   alignItems: "center",
@@ -42,6 +42,7 @@ const linksStyles: SystemCSSProperties = {
   color: "rgba(51, 51, 51, 0.6)",
   transition: "10ms",
 };
+
 const activeLinkStyle: SystemCSSProperties = {
   color: "#8F19E7",
   boxShadow: " 2px 2px 15px 1px #00000040",
@@ -50,6 +51,7 @@ const activeLinkStyle: SystemCSSProperties = {
   borderRight: 0,
   borderBottom: 0,
 };
+
 const crudOperationsStyles: SystemCSSProperties = {
   cursor: "pointer",
   transition: "1s",
@@ -66,6 +68,7 @@ const crudStyles: SystemCSSProperties = {
   gap: "8px",
   fontSize: "16px",
 };
+
 const crudIconStyles: SystemCSSProperties = {
   backgroundColor: "rgba(237, 237, 237, 1)",
   padding: "5px",
@@ -83,35 +86,42 @@ type School = {
 
 function Sidebar() {
   const location = useLocation();
-  const token = useAppSelector((state) => state.auth.access_token);
-  const [school, setSchool] = useState< School[] | null>(null); // Specify initial state as null
-  const { data, loading, error } = useAppSelector((state) => state.getQuizResult); // Specify type for data
-  const [errorMessage, setErrorMessage]=useState<string>("")
-  const quizId = useAppSelector(state => state.getID.quizId)
-  const dispatch=useAppDispatch()
+  const isLoggedIn = useAppSelector((state) => !!state.auth.access_token);
+  const [schools, setSchools] = useState<School[] | null>(null); // Specify initial state as null
+  const { data, loading, error } = useAppSelector(
+    (state) => state.getQuizResult
+  ); // Specify type for data
+  console.log(schools)
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const loggedInUser = useAppSelector((state) => state.auth.user);
+  const activeSchool = useMemo(() => {
+    return schools?.find(school => {
+      return location.pathname.includes(school.id)
+    });
+  }, [schools, location.pathname]);
+
   useEffect(() => {
     if (data) {
-      const schools = data.schoolRegistrations.map((registration) => registration.school);
-      setSchool(schools);
+      const schools = data.schoolRegistrations.map(
+        (registration) => registration.school
+      );
+      setSchools(schools);
     }
   }, [data]);
-  const links = school && school.map((item) => ({
-    to: item.id,
-    label: item.name,
-  }));
-    useEffect(()=>{
-        if(error){
-            setErrorMessage("Error fetching test details, try agin later!")
-        }
-    },[error])
-  console.log(links);
+
+  useEffect(() => {
+    if (error) {
+      setErrorMessage("Error fetching test details, try agin later!");
+    }
+  }, [error]);
+
   return (
     <div>
       {loading ? (
-        <Flex alignItems="center" justifyContent="center"  height="100%">
+        <Flex alignItems="center" justifyContent="center" height="100%">
           <LoadingIcons.Bars width={"60px"} height={"60px"} color="grey" />
         </Flex>
-      ) : data?(
+      ) : schools ? (
         <div>
           <SimpleGrid spacing={10}>
             <Box h="40px">
@@ -128,48 +138,58 @@ function Sidebar() {
             <SimpleGrid spacing={5}>
               <Box h="40px">
                 <Heading as={"h5"} className="sidebar-schools">
-                  <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                  <Flex
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                    gap={"10px"}
+                  >
                     <RiGraduationCapFill size={"26px"} />
                     Schools
                   </Flex>
                 </Heading>
               </Box>
+              {schools && schools.length > 0 ? (
+                schools.map((school, index) => {
+                  return (
+                    <NavLink key={index} to={`schools/${school.id}`}  >
+                      <Flex
+                        _hover={{
+                          color: "#8F19E7",
+                          boxShadow: " 2px 2px 15px 1px #00000040",
+                          borderLeft: " 5px solid #8F19E7",
+                          borderTop: 0,
+                          borderRight: 0,
+                          borderBottom: 0,
+                        }}
+                        sx={{
+                          ...linksStyles,
+                          ...(school.id === activeSchool?.id &&
+                            activeLinkStyle),
+                        }}
 
-              {links && links.length > 0 ? (
-                links.map((link, index) => (
-                  <NavLink key={index} to={link.to}>
-                    <Flex
-                      _hover={{
-                        color: "#8F19E7",
-                        boxShadow: " 2px 2px 15px 1px #00000040",
-                        borderLeft: " 5px solid #8F19E7",
-                        borderTop: 0,
-                        borderRight: 0,
-                        borderBottom: 0,
-                      }}
-                      sx={{
-                        ...linksStyles,
-                        ...(location.pathname ===`/${link.to}` && activeLinkStyle),
-                      }}
-                      onClick={()=>dispatch(getQuizResult(quizId))}
-                    >
-                      <h5>{link.label}</h5>
-                    </Flex>
-                  </NavLink>
-                ))
+                      >
+                        <h5>{school.name}</h5>
+                      </Flex>
+                    </NavLink>
+                  );
+                })
               ) : (
                 <Flex color={"red"} sx={linksStyles} align={"center"}>
                   No Data
                 </Flex>
               )}
-              {token && (
+              {isLoggedIn && (
                 <Box w="156px" sx={crudOperationsStyles}>
                   <Flex alignItems={"center"} justifyContent={"center"}>
                     <IconContext.Provider value={{ color: "rgba(0, 0, 0, 1)" }}>
                       <Heading as={"h5"} sx={crudStyles}>
                         <Flex alignItems={"center"} justifyContent={"center"}>
                           Edit
-                          <Text as={"span"} sx={crudIconStyles} _hover={{ backgroundColor: "purple" }}>
+                          <Text
+                            as={"span"}
+                            sx={crudIconStyles}
+                            _hover={{ backgroundColor: "purple" }}
+                          >
                             <FaPen />
                           </Text>
                         </Flex>
@@ -200,70 +220,96 @@ function Sidebar() {
             <SimpleGrid spacing={5}>
               <Box h="40px">
                 <Heading as={"h5"}>
-                  <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                  <Flex
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                    gap={"10px"}
+                  >
                     <BsPercent size={"26px"} />
                     Scores
                   </Flex>
                 </Heading>
               </Box>
-              <NavLink to="all-schools">
+              <NavLink to="results">
                 <Heading
                   as={"h5"}
                   sx={{
                     ...linksStyles,
-                    ...(location.pathname === "all-schools" &&
+                    ...(location.pathname.endsWith("results") &&
                       activeLinkStyle),
                   }}
                 >
-                  <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                  <Flex
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                    gap={"10px"}
+                  >
                     <LuSchool size={"26px"} />
                     All Schools
                   </Flex>
                 </Heading>
               </NavLink>
-              {token && <NavLink to="manage-questions">
-                <Heading as={"h5"} sx={linksStyles}>
-                  <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
-                    <CiCircleQuestion size={"26px"} />
-                    Manage Questions
-                  </Flex>
-                </Heading>
-              </NavLink>}
-              {token && (
+              {isLoggedIn && (
+                <NavLink to={`manage-questions`}>
+                  <Heading as={"h5"} sx={linksStyles}>
+                    <Flex
+                      alignItems={"center"}
+                      justifyContent={"center"}
+                      gap={"10px"}
+                    >
+                      <CiCircleQuestion size={"26px"} />
+                      Manage Questions
+                    </Flex>
+                  </Heading>
+                </NavLink>
+              )}
+              {isLoggedIn && (
                 <Flex flexDir={"column"} gap={"20px"}>
                   <Box h="40px" className="link">
                     <Heading as={"h5"}>
-                      <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                      <Flex
+                        alignItems={"center"}
+                        justifyContent={"center"}
+                        gap={"10px"}
+                      >
                         <MdAccountCircle size={"26px"} />
                         Account
                       </Flex>
                     </Heading>
                   </Box>
-                  <NavLink to="manage-users">
+                  <NavLink to="/subadmin/manage-users">
                     <Heading
                       as={"h5"}
                       sx={{
                         ...linksStyles,
-                        ...(location.pathname === "manage-users" &&
+                        ...(location.pathname.endsWith("manage-users") &&
                           activeLinkStyle),
                       }}
                     >
-                      <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                      <Flex
+                        alignItems={"center"}
+                        justifyContent={"center"}
+                        gap={"10px"}
+                      >
                         <FaUsers size={"26px"} />
                         Manage Users
                       </Flex>
                     </Heading>
                   </NavLink>
-                  <NavLink to="account-settings">
+                  <NavLink to={`profile/${loggedInUser?.id}/settings`}>
                     <Heading
                       as={"h5"}
                       sx={{
                         ...linksStyles,
-                        ...(location.pathname === "account-settings" &&
+                        ...(location.pathname.endsWith("settings") &&
                           activeLinkStyle),
                       }}
                     >
-                      <Flex alignItems={"center"} justifyContent={"center"} gap={"10px"}>
+                      <Flex
+                        alignItems={"center"}
+                        justifyContent={"center"}
+                        gap={"10px"}
+                      >
                         <CiSettings size={"26px"} />
                         My Account
                       </Flex>
@@ -274,14 +320,28 @@ function Sidebar() {
             </SimpleGrid>
           </SimpleGrid>
         </div>
-      ):
-      <Flex alignItems="center" textAlign={"center"} color={"red"} justifyContent="center"  height="100%">
+      ) : error ? (
+        <Flex
+          alignItems="center"
+          textAlign={"center"}
+          color={"red"}
+          justifyContent="center"
+          height="100%"
+        >
           {errorMessage}
         </Flex>
-      }
+      ) : (
+        <Flex
+          alignItems="center"
+          textAlign={"center"}
+          color={"red"}
+          justifyContent="center"
+          height="100%"
+        >
+          No data Found
+        </Flex>)}
     </div>
   );
 }
 
 export default Sidebar;
-

@@ -55,7 +55,6 @@ const AnsweredQuestions: React.FC<PaginatedItemsProps> = ({
     const startIndex = currentPage * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
     const displayedQuestions = answeredQuestion?.slice(startIndex, endIndex);
-
     const answered_questions = displayedQuestions?.map((item, index) => {
         return (
             <GridItem
