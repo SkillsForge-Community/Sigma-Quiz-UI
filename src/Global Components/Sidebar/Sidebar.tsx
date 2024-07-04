@@ -18,7 +18,7 @@ import { FaUsers } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
 import { CiCircleQuestion } from "react-icons/ci";
 import { RiGraduationCapFill } from "react-icons/ri";
-import {  useAppSelector } from "../../app/Hooks";
+import { useAppSelector } from "../../app/Hooks";
 import { useEffect, useMemo, useState } from "react";
 import LoadingIcons from "react-loading-icons";
 const linkStyles: SystemCSSProperties = {
@@ -91,6 +91,7 @@ function Sidebar() {
   const { data, loading, error } = useAppSelector(
     (state) => state.getQuizResult
   ); // Specify type for data
+  console.log(schools)
   const [errorMessage, setErrorMessage] = useState<string>("");
   const loggedInUser = useAppSelector((state) => state.auth.user);
   const activeSchool = useMemo(() => {
@@ -120,7 +121,7 @@ function Sidebar() {
         <Flex alignItems="center" justifyContent="center" height="100%">
           <LoadingIcons.Bars width={"60px"} height={"60px"} color="grey" />
         </Flex>
-      ) : data ? (
+      ) : schools ? (
         <div>
           <SimpleGrid spacing={10}>
             <Box h="40px">
@@ -165,7 +166,7 @@ function Sidebar() {
                           ...(school.id === activeSchool?.id &&
                             activeLinkStyle),
                         }}
-                       
+
                       >
                         <h5>{school.name}</h5>
                       </Flex>
@@ -319,7 +320,7 @@ function Sidebar() {
             </SimpleGrid>
           </SimpleGrid>
         </div>
-      ) : (
+      ) : error ? (
         <Flex
           alignItems="center"
           textAlign={"center"}
@@ -329,7 +330,16 @@ function Sidebar() {
         >
           {errorMessage}
         </Flex>
-      )}
+      ) : (
+        <Flex
+          alignItems="center"
+          textAlign={"center"}
+          color={"red"}
+          justifyContent="center"
+          height="100%"
+        >
+          No data Found
+        </Flex>)}
     </div>
   );
 }
