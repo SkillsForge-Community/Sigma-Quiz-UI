@@ -26,6 +26,7 @@ const linkStyles: SystemCSSProperties = {
   alignItems: "center",
   justifyContent: "center",
 };
+
 const linksStyles: SystemCSSProperties = {
   textAlign: "center",
   alignItems: "center",
@@ -41,6 +42,7 @@ const linksStyles: SystemCSSProperties = {
   color: "rgba(51, 51, 51, 0.6)",
   transition: "10ms",
 };
+
 const activeLinkStyle: SystemCSSProperties = {
   color: "#8F19E7",
   boxShadow: " 2px 2px 15px 1px #00000040",
@@ -49,6 +51,7 @@ const activeLinkStyle: SystemCSSProperties = {
   borderRight: 0,
   borderBottom: 0,
 };
+
 const crudOperationsStyles: SystemCSSProperties = {
   cursor: "pointer",
   transition: "1s",
@@ -65,6 +68,7 @@ const crudStyles: SystemCSSProperties = {
   gap: "8px",
   fontSize: "16px",
 };
+
 const crudIconStyles: SystemCSSProperties = {
   backgroundColor: "rgba(237, 237, 237, 1)",
   padding: "5px",
@@ -78,6 +82,8 @@ type School = {
   address: string;
 };
 
+
+
 function Sidebar() {
   const location = useLocation();
   const isLoggedIn = useAppSelector((state) => !!state.auth.access_token);
@@ -85,9 +91,9 @@ function Sidebar() {
   const { data, loading, error } = useAppSelector(
     (state) => state.getQuizResult
   ); // Specify type for data
+  console.log(schools)
   const [errorMessage, setErrorMessage] = useState<string>("");
   const loggedInUser = useAppSelector((state) => state.auth.user);
-
   const activeSchool = useMemo(() => {
     return schools?.find(school => {
       return location.pathname.includes(school.id)
@@ -115,7 +121,7 @@ function Sidebar() {
         <Flex alignItems="center" justifyContent="center" height="100%">
           <LoadingIcons.Bars width={"60px"} height={"60px"} color="grey" />
         </Flex>
-      ) : data ? (
+      ) : schools ? (
         <div>
           <SimpleGrid spacing={10}>
             <Box h="40px">
@@ -142,11 +148,10 @@ function Sidebar() {
                   </Flex>
                 </Heading>
               </Box>
-
               {schools && schools.length > 0 ? (
                 schools.map((school, index) => {
                   return (
-                    <NavLink key={index} to={`schools/${school.id}`}>
+                    <NavLink key={index} to={`schools/${school.id}`}  >
                       <Flex
                         _hover={{
                           color: "#8F19E7",
@@ -161,6 +166,7 @@ function Sidebar() {
                           ...(school.id === activeSchool?.id &&
                             activeLinkStyle),
                         }}
+
                       >
                         <h5>{school.name}</h5>
                       </Flex>
@@ -244,7 +250,7 @@ function Sidebar() {
                 </Heading>
               </NavLink>
               {isLoggedIn && (
-                <NavLink to="manage-questions">
+                <NavLink to={`manage-questions`}>
                   <Heading as={"h5"} sx={linksStyles}>
                     <Flex
                       alignItems={"center"}
@@ -290,12 +296,12 @@ function Sidebar() {
                       </Flex>
                     </Heading>
                   </NavLink>
-                  <NavLink to={`/subadmin/${loggedInUser?.id}/settings`}>
+                  <NavLink to={`profile/${loggedInUser?.id}/settings`}>
                     <Heading
                       as={"h5"}
                       sx={{
                         ...linksStyles,
-                        ...(location.pathname.endsWith("settings")&&
+                        ...(location.pathname.endsWith("settings") &&
                           activeLinkStyle),
                       }}
                     >
@@ -314,7 +320,7 @@ function Sidebar() {
             </SimpleGrid>
           </SimpleGrid>
         </div>
-      ) : (
+      ) : error ? (
         <Flex
           alignItems="center"
           textAlign={"center"}
@@ -324,7 +330,16 @@ function Sidebar() {
         >
           {errorMessage}
         </Flex>
-      )}
+      ) : (
+        <Flex
+          alignItems="center"
+          textAlign={"center"}
+          color={"red"}
+          justifyContent="center"
+          height="100%"
+        >
+          No data Found
+        </Flex>)}
     </div>
   );
 }
