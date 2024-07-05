@@ -7,7 +7,6 @@ import {
   FormLabel,
   Input,
   Spinner,
-  SystemCSSProperties,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
