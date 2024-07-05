@@ -6,12 +6,49 @@ import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import AddQuiz from './Addquiz/Index';
 import EditQuiz from './Editquiz/EditQuiz';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+type Quiz = {
+  id: string
+  year: number
+  title: string
+  description: string | null
+  date: string
+}
 
 type selectQuizProps = {
   option: string
+  quiz?: Quiz
 }
+
 const SelectQuiz = ({option} : selectQuizProps) => {
+  const [quizList, setQuizList] = useState<Quiz[] | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [err, setErr] = useState<string>("")
   const navigate=useNavigate()
+
+  const getQuiz = async () => {
+    try {
+      setIsLoading(true)
+      const res = await axios.get("https://sigma-website-backend.onrender.com/api/sigma-quiz")
+      setIsLoading(false)
+      setQuizList(res.data)
+      console.log(res)
+    } catch (error) {
+      setIsLoading(false)
+      if (axios.isAxiosError(error)) {
+        setErr(error.message)
+      } else {
+        setErr("Error fetching quizzes. Please try again")
+      }
+    }
+  }
+
+  useEffect(() =>{
+    getQuiz()
+  }, [])
+
   return (
     <div className="select-quiz-page">
       <div className="select-quiz-container">
@@ -22,10 +59,10 @@ const SelectQuiz = ({option} : selectQuizProps) => {
         <p>Select which quiz you choose to operate</p>
 
         <div className="select-field">
-          <select name="" id="">
-            <option value="">2024 Roseline Etuokwu Quiz Competition</option>
-          </select>
-          <IoIosArrowDown size={30} color="black" className="arrow-down" />
+          <select >
+            {isLoading? <option>Loading...</option>: err? <option>{err}</option>:  quizList?.map((quiz, index) => ( <option key={index}>{quiz.title}</option> ))}
+          </select> 
+          <IoIosArrowDown size={30} color="black" className="arrow-down"/>
         </div>
 
         <div className="add-edit-btns">
