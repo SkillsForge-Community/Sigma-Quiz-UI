@@ -46,7 +46,7 @@ function App() {
               <Route path="schools/:schoolsID" element={<SchoolDetails />} />
               <Route element={<Scores />} path="results" />
               {/* Protected routes*/}
-              
+
             </Route>
             <Route
               element={<TestDetails isAdmin={false} />}
@@ -57,9 +57,10 @@ function App() {
               <Route element={<Signin />} path="/Signin" />
               <Route path="/subadmin/manage-users" element={<ManageUsers />} />
               <Route element={<MainSubAdmin />} path="/subadmin/:id">
-              <Route element={<Scores />} path="results" />
+                <Route index element={<Scores />}/>
+                <Route  element={<Scores />} path="results" />
 
-              <Route path="schools/:schoolsID" element={<SchoolDetails />} />
+                <Route path="schools/:schoolsID" element={<SchoolDetails />} />
                 <Route path="manage-questions" element={<Questions />} />
                 <Route element={<AccountSettings />} path={"profile/:userID/settings"}>
                   <Route index element={<ProfileSettings />} />
