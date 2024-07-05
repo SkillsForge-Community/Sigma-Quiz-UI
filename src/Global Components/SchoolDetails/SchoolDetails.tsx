@@ -107,7 +107,7 @@ function SchoolDetails() {
   const [roundParticipation, setRoundParticipation] = useState<
     RoundParticipation | undefined 
   >();
-  const [rounds, setRounds] = useState<Map<string, Round>>(new Map());
+  const [rounds, setRounds] = useState<Map<string|undefined, Round>>(new Map());
   const [quizRound, setQuizRound] = useState<Round | undefined>();
   const [activeButton, setActiveButton] = useState<string>("Round 1");
   const question_id = useAppSelector((state) => state.getQuestionID.id);
@@ -296,7 +296,7 @@ function SchoolDetails() {
   const getSchoolDetails = useCallback(() => {
     if (schoolsID && data) {
       const roundMap = new Map<string, Round>();
-      const roundParticipationMap = new Map<string, Round>();
+      const roundParticipationMap = new Map<string|undefined, Round>();
       data.rounds.forEach((round) => {
         roundMap.set(round.id, round);
       });
@@ -325,7 +325,7 @@ function SchoolDetails() {
       }
 
       if (!quizRound) {
-        setQuizRound(data.rounds[0]);
+        setQuizRound(roundParticipationMap.get(schoolDetails?.rounds[0].roundId));
       }
     } else if (error) {
       setErrorMessage("Error fetching test details. Please try again later!");

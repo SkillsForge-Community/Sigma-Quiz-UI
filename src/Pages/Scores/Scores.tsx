@@ -130,11 +130,11 @@ const Scores = () => {
                 roundParticipation?.answered_questions.filter((item) => item.answered_correctly).length || 0}
             wrongAnswers={
                 roundParticipation?.answered_questions.filter((item) => !item.answered_correctly).length || 0}
-            overallResult={`${(roundParticipation?.score || 0) / (item.score || 0) * 100}%`}
+            overallResult={`${Math.round((roundParticipation?.score || 0) / (item.score || 0) * 100) }%`}
             position={getOrdinal(roundParticipation?.position || 0)}
         />)
     })
-
+   
     return (
         <>
         {

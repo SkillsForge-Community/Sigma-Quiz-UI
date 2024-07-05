@@ -105,7 +105,7 @@ const AnsweredBy: React.FC<PaginatedItemsProps> = ({
   const questions = displayedQuestions?.map((item, index) => {
     const isCurrentPage = item.question_number === page;
     const wasAnsweredIncorrectly = item.answered_by?.id && item.answered_correctly === false;
-  
+    console.log(wasAnsweredIncorrectly)
     return (
       <GridItem
         onClick={() => handlePageClick(item.question_number)}
